@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/jayanthbottu/jayanthbottu.github.io/refs/heads/main/favicon.ico"
+      type="image/x-icon"
+    />
+    <title>Jayanth Bottu - Portfolio</title>
+
+    <style>
+      .name-container {
+        display: flex;
+        font-size: 50px;
+        position: centre;
+        justify-content: center;
+      }
+
+      .letter {
+        opacity: 0;
+        position: relative;
+        transform: translateY(-100px);
+        animation: flyIn 1s forwards, float 3s ease-in-out infinite;
+      }
+
+      .letter:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .letter:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+
+      .letter:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+
+      .letter:nth-child(4) {
+        animation-delay: 0.7s;
+      }
+
+      .letter:nth-child(5) {
+        animation-delay: 0.9s;
+      }
+
+      .letter:nth-child(6) {
+        animation-delay: 1.1s;
+      }
+
+      .letter:nth-child(7) {
+        animation-delay: 1.3s;
+      }
+
+      .letter:nth-child(8) {
+        animation-delay: 1.5s;
+      }
+
+      .letter:nth-child(9) {
+        animation-delay: 1.7s;
+      }
+
+      .letter:nth-child(10) {
+        animation-delay: 1.9s;
+      }
+
+      .letter:nth-child(11) {
+        animation-delay: 2.1s;
+      }
+
+      .letter:nth-child(12) {
+        animation-delay: 2.3s;
+      }
+
+      .letter:nth-child(13) {
+        animation-delay: 2.5s;
+      }
+
+      /* Fly-in effect */
+      @keyframes flyIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Continuous floating effect */
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Adds space between the images */
+        margin-top: 50px;
+      }
+
+      /* Style for individual image links */
+      .icon-container a {
+        display: inline-block;
+      }
+
+      .icon-container img {
+        width: 30px; /* Set the size of the icons */
+        height: 30px;
+        transition: transform 0.3s ease; /* Add smooth transition on hover */
+      }
+
+      .icon-container img:hover {
+        transform: scale(1.2); /* Slightly enlarge icons when hovered */
+      }
+      :root {
+        --bg-color: #f5f5f5;
+        --text-color: #333;
+        --nav-bg: #fff;
+        --box-shadow: rgba(0, 0, 0, 0.1);
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #2c2c2c;
+        --text-color: #fff;
+        --nav-bg: #1a1a1a;
+        --box-shadow: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .home-icon {
+        width: 40px;
+        height: 40px;
+        transition: transform 0.3s;
+      }
+
+      .home-icon:hover {
+        transform: scale(1.1); /* Slightly enlarge the icon on hover */
+      }
+
+      nav {
+        background-color: var(--nav-bg);
+        padding: 1rem;
+        box-shadow: 0 2px 5px var(--box-shadow);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .home-icon {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: var(--text-color);
+        transition: transform 0.3s ease;
+      }
+
+      .home-icon:hover {
+        transform: scale(1.1);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a,
+      .nav-links button {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .nav-links a:hover,
+      .nav-links button:hover {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 6rem auto 2rem;
+        padding: 0 1rem;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        animation: fadeIn 1s ease;
+      }
+
+      .header p {
+        color: #666;
+        font-size: 1.2rem;
+        animation: slideUp 1s ease;
+      }
+
+      /* Enhanced About Section Styles */
+      .about-section {
+        background-color: var(--nav-bg);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px var(--box-shadow);
+        margin-bottom: 2rem;
+        animation: fadeIn 1.5s ease;
+      }
+
+      .about-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-title::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #00c9ff, #92fe9d);
+        animation: shimmer 3s infinite linear;
+      }
+
+      .decorated-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: var(--text-color);
+      }
+
+      .word-container {
+        display: inline-block;
+        position: relative;
+        margin: 0 2px;
+      }
+
+      .word {
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-block;
+        padding: 0 2px;
+        animation: gentle-float 3s ease-in-out infinite;
+        animation-delay: calc(var(--delay) * 0.1s);
+      }
+
+      .word:hover {
+        color: #3498db;
+        transform: translateY(-5px);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .word::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #00c9ff, #92fe9d);
+        transform: scaleX(0);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: left;
+      }
+
+      .word:hover::after {
+        transform: scaleX(1);
+      }
+
+      .paragraph {
+        margin-bottom: 1.5rem;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+        border-top: 1px solid var(--box-shadow);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @keyframes gentle-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-2px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          gap: 1rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="https://jayanthbottu.github.io/" title="Home">
+          <img
+            class="home-icon"
+            src="https://github.com/jayanthbottu/jayanthbottu.github.io/blob/main/house.gif?raw=true"
+            alt="Home Icon"
+          />
+        </a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a
+            href="https://drive.google.com/file/d/12WxE24Qk3bPyxbDGiRzG70JCCrjLkQsy/view?usp=drive_link"
+            id="resume-link"
+            >Resume</a
+          >
+          <button id="theme-toggle">Theme</button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="header">
+        <p>Hi, I am</p>
+        <h1>
+          <div class="name-container">
+            <span class="letter">J</span>
+            <span class="letter">a</span>
+            <span class="letter">y</span>
+            <span class="letter">a</span>
+            <span class="letter">n</span>
+            <span class="letter">t</span>
+            <span class="letter">h</span>
+            <span class="letter"> </span>
+            <span class="letter">B</span>
+            <span class="letter">o</span>
+            <span class="letter">t</span>
+            <span class="letter">t</span>
+            <span class="letter">u</span>
+          </div>
+        </h1>
+        <p>The Joker of Complexities</p>
+        <p>Computer Science Engineering</p>
+        <p>B.Tech SR University</p>
+      </div>
+      <div class="icon-container">
+        <!-- GitHub Icon -->
+        <a href="https://github.com/jayanthbottu" target="_blank">
+          <img
+            src="https://raw.githubusercontent.com/jayanthbottu/jayanthbottu.github.io/main/github.svg"
+            alt="GitHub"
+          />
+        </a>
+
+        <!-- LinkedIn Icon -->
+        <a href="https://www.linkedin.com/in/jayanthbottu" target="_blank">
+          <img
+            src="https://raw.githubusercontent.com/jayanthbottu/jayanthbottu.github.io/main/linkedin.svg"
+            alt="LinkedIn"
+          />
+        </a>
+      </div>
+
+      <div class="about-section" id="about">
+        <h2 class="about-title">About</h2>
+        <div class="decorated-text" id="decoratedText"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© Jayanth Bottu - Portfolio - 2025</p>
+    </footer>
+
+    <script>
+      // Theme Toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+
+      themeToggle.addEventListener("click", () => {
+        if (body.getAttribute("data-theme") === "dark") {
+          body.removeAttribute("data-theme");
+        } else {
+          body.setAttribute("data-theme", "dark");
+        }
+      });
+
+      // Animated Text
+      const paragraphs = [
+        "I'm a passionate and versatile software developer with expertise in web design, UX design, data analysis, and artificial intelligence. With a strong background in computer science and a B.Tech from SR University, I've honed my skills through hands-on projects and real-world experience.",
+        "My curiosity and thirst for knowledge have led me to explore various fields and seek out challenging problems to solve. My goal is to create innovative and efficient solutions that improve the lives of others.",
+      ];
+
+      const decoratedText = document.getElementById("decoratedText");
+
+      paragraphs.forEach((paragraph, pIndex) => {
+        const p = document.createElement("div");
+        p.className = "paragraph";
+
+        paragraph.split(" ").forEach((word, index) => {
+          const wordContainer = document.createElement("span");
+          wordContainer.className = "word-container";
+
+          const wordSpan = document.createElement("span");
+          wordSpan.className = "word";
+          wordSpan.style.setProperty("--delay", index);
+          wordSpan.textContent = word;
+
+          wordContainer.appendChild(wordSpan);
+          p.appendChild(wordContainer);
+          p.appendChild(document.createTextNode(" "));
+        });
+
+        decoratedText.appendChild(p);
+      });
+    </script>
+  </body>
+</html>
