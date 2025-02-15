@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html ng-app="weatherApp">
+<head>
+    <title>Modern Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #4a5568;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #2d3748;
+            transform: translateY(-2px);
+        }
+
+        .weather-info {
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .temperature {
+            font-size: 4rem;
+            font-weight: 300;
+            margin: 1rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .temperature::after {
+            content: '  °C';
+            font-size: 2rem;
+            position: absolute;
+            top: 0;
+            right: -1.5rem;
+        }
+
+        .description {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .error {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 1rem;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body ng-controller="weatherCtrl as vm">
+    <div class="container">
+        <div class="search-box">
+            <input type="text" 
+                   ng-model="vm.city" 
+                   placeholder="Enter city name" 
+                   ng-keyup="$event.keyCode === 13 && vm.getWeather()">
+            <button ng-click="vm.getWeather()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div ng-if="vm.loading" class="loader"></div>
+
+        <div class="weather-info" ng-if="vm.weatherData && !vm.loading">
+            <h2 class="city">{{vm.weatherData.name}}, {{vm.weatherData.sys.country}}</h2>
+            <div class="temperature">{{vm.weatherData.main.temp | number:0}}</div>
+            <div class="description">
+                <i class="fas fa-cloud" ng-if="vm.weatherData.weather[0].main === 'Clouds'"></i>
+                <i class="fas fa-sun" ng-if="vm.weatherData.weather[0].main === 'Clear'"></i>
+                <i class="fas fa-cloud-rain" ng-if="vm.weatherData.weather[0].main === 'Rain'"></i>
+                {{vm.weatherData.weather[0].description}}
+            </div>
+            
+            <div class="details">
+                <div class="detail-item">
+                    <div>Humidity</div>
+                    <div>{{vm.weatherData.main.humidity}}%</div>
+                </div>
+                <div class="detail-item">
+                    <div>Wind Speed</div>
+                    <div>{{vm.weatherData.wind.speed}} m/s</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('weatherApp', [])
+        .controller('weatherCtrl', function($http, $timeout) {
+            const vm = this;
+            vm.city = 'Hyderabad';
+            vm.loading = false;
+            
+            vm.getWeather = function() {
+                vm.loading = true;
+                vm.errorMessage = null;
+                
+                const apiKey = '628d0e98f6808e5cf2756fbaee2dc0b2';
+                const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${vm.city}&appid=${apiKey}&units=metric`;
+                
+                $http.get(apiUrl)
+                .then(function(response) {
+                    if(response.data.cod === 200) {
+                        vm.weatherData = response.data;
+                        $timeout(() => vm.loading = false, 500);
+                    }
+                })
+                .catch(function(error) {
+                    vm.errorMessage = 'City not found. Please try again.';
+                    vm.loading = false;
+                });
+            };
+            
+            // Initial load
+            vm.getWeather();
+        });
+    </script>
+</body>
+</html>
