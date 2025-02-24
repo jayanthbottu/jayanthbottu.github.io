@@ -56,35 +56,49 @@ def decrypt_message(encrypted_message: bytes, password: str) -> str:
     return decrypted_bytes[:-pad_length].decode()
 
 @app.route('/hide', methods=['POST'])
+@app.route('/hide', methods=['POST'])
 def hide_text():
     try:
+        print("Received a request to hide text.")
+        if 'image' not in request.files or 'message' not in request.form or 'password' not in request.form:
+            print("Missing required fields")
+            return jsonify({'error': 'Missing required fields'}), 400
+
         image_file = request.files['image']
         message = request.form['message']
         password = request.form['password']
+
+        print(f"Processing image: {image_file.filename}")
+        print(f"Message length: {len(message)}")
         
-        if not image_file or not message or not password:
-            return jsonify({"error": "Missing data"}), 400
+        # Read image
+        nparr = np.frombuffer(image_file.read(), np.uint8)
+        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-        filename = os.path.join(UPLOAD_FOLDER, "stego_image.png")
-        image_file.save(filename)
+        if image is None:
+            print("Error decoding image")
+            return jsonify({'error': 'Invalid image file'}), 400
 
+        # Encryption process
         encrypted_message = encrypt_message(message, password)
-        encoded_message = base64.b64encode(encrypted_message).decode() + "@@END@@"
+        
+        # Embed the encrypted message in the image
+        stego_image = embed_message(image, encrypted_message)
+        
+        if stego_image is None:
+            print("Error embedding message")
+            return jsonify({'error': 'Error embedding message'}), 500
+        
+        # Save and return image
+        output_path = "stego_image.png"
+        cv2.imwrite(output_path, stego_image)
+        print("Image saved successfully.")
 
-        img = cv2.imread(filename)
-        index = 0
-
-        for char in encoded_message:
-            if index >= img.shape[0] * img.shape[1]:
-                return jsonify({"error": "Message too large"}), 400
-            img[index // img.shape[1], index % img.shape[1], 0] = ord(char)
-            index += 1
-
-        cv2.imwrite(filename, img)
-        return send_file(filename, mimetype='image/png', as_attachment=True, download_name="stego_image.png")
+        return send_file(output_path, mimetype='image/png')
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"Error: {str(e)}")  # Log the error in the Render logs
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/extract', methods=['POST'])
 def extract_text():
