@@ -30,7 +30,7 @@ debugpy==1.8.5
 decorator==5.1.1
 defusedxml==0.7.1
 Deprecated==1.2.14
-dlib @ https://raw.githubusercontent.com/jayanthbottu/jayanthbottu.github.io/main/Steganography/dlib-19.22.99-cp38-cp38-win_amd64.whl
+dlib
 engineering-notation==0.10.0
 exceptiongroup==1.2.2
 execnet==2.1.1
