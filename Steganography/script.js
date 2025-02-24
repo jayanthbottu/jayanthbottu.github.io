@@ -52,7 +52,7 @@ app.controller("MainController", [
       formData.append("password", $scope.extractPassword);
 
       $http
-        .post("http://127.0.0.1:5000/extract", formData, {
+        .post("https://jayanthbottu-steganography.onrender.com", formData, {
           headers: { "Content-Type": undefined },
         })
         .then(function (response) {
