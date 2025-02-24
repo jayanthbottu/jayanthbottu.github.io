@@ -1,4 +1,3 @@
-flask
 flask-cors
 pillow
 numpy
@@ -8,5 +7,8 @@ tensorflow-io
 matplotlib
 scikit-image
 scipy
+flask
+
+cryptography
 gunicorn
 
