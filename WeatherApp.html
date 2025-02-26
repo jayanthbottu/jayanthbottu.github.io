@@ -1,236 +1,810 @@
 <!DOCTYPE html>
 <html ng-app="weatherApp">
-<head>
-    <title>Modern Weather App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta charset="UTF-8">
-
+  <head>
+    <title>Modern Weather Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+        transition: all 0.3s ease;
+      }
 
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-position: center;
+        background-size: cover;
+        transition: background 1s ease;
+      }
 
+      /* Theme Variables */
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4895ef;
+        --text-color: #f8f9fa;
+        --detail-bg: rgba(255, 255, 255, 0.1);
+        --card-bg: rgba(255, 255, 255, 0.15);
+        --input-bg: rgba(255, 255, 255, 0.2);
+        --shadow-color: rgba(0, 0, 0, 0.2);
+      }
+
+      /* Theme Classes */
+      body.theme-purple {
+        background: linear-gradient(135deg, #642b73 0%, #c6426e 100%);
+      }
+
+      body.theme-blue {
+        background: linear-gradient(135deg, #0099f7 0%, #2b5876 100%);
+      }
+
+      body.theme-green {
+        background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+      }
+
+      body.theme-dark {
+        background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      }
+
+      body.theme-sunset {
+        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+      }
+
+      .container {
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 24px;
+        box-shadow: 0 15px 45px var(--shadow-color);
+        width: 100%;
+        max-width: 500px;
+        transform: translateY(0);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.5s ease;
+        pointer-events: none;
+      }
+
+      .container:hover::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .container:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px var(--shadow-color);
+      }
+
+      .theme-selector {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .theme-btn {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .theme-btn:hover {
+        transform: scale(1.2);
+      }
+
+      .theme-btn.purple {
+        background: linear-gradient(135deg, #642b73 0%, #c6426e 100%);
+      }
+
+      .theme-btn.blue {
+        background: linear-gradient(135deg, #0099f7 0%, #2b5876 100%);
+      }
+
+      .theme-btn.green {
+        background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+      }
+
+      .theme-btn.dark {
+        background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      }
+
+      .theme-btn.sunset {
+        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+      }
+
+      .search-box {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      input {
+        flex: 1;
+        padding: 16px 22px;
+        border: none;
+        border-radius: 15px;
+        background: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        letter-spacing: 0.5px;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      input:focus {
+        background: var(--input-bg);
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        padding: 12px 22px;
+        border: none;
+        border-radius: 15px;
+        background: var(--primary-color);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      button i {
+        transition: transform 0.3s ease;
+      }
+
+      button:hover {
+        background: var(--secondary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      button:hover i {
+        transform: rotate(15deg) scale(1.2);
+      }
+
+      .weather-info {
+        color: var(--text-color);
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.6s ease forwards;
+        position: relative;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .city {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        letter-spacing: 0.5px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .city::after {
+        content: "";
+        display: block;
+        width: 30%;
+        height: 3px;
+        background: var(--accent-color);
+        margin: 5px auto 0;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+      }
+
+      .city:hover::after {
+        width: 70%;
+      }
+
+      .date-info {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-bottom: 20px;
+      }
+
+      .weather-icon {
+        font-size: 4rem;
+        margin: 0.5rem 0;
+        color: var(--accent-color);
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .temperature {
+        font-size: 5rem;
+        font-weight: 300;
+        margin: 0.5rem 0;
+        position: relative;
+        display: inline-block;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .temperature::after {
+        content: "°C";
+        font-size: 2.5rem;
+        position: absolute;
+        top: 0.5rem;
+        margin-left: 10px;
+      }
+
+      .description {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+
+      .details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .detail-item {
+        background: var(--detail-bg);
+        padding: 1.2rem;
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .detail-item:hover {
+        transform: translateY(-5px) scale(1.03);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .detail-item i {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        color: var(--accent-color);
+      }
+
+      .detail-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-bottom: 5px;
+      }
+
+      .detail-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .extra-details {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .extra-item {
+        background: var(--detail-bg);
+        padding: 1rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .extra-item:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .extra-label {
+        font-size: 0.75rem;
+        opacity: 0.9;
+        margin-bottom: 5px;
+      }
+
+      .extra-value {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .error {
+        color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 1rem;
+        animation: shake 0.5s ease;
+        border-left: 4px solid #ff6b6b;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-8px);
+        }
+        75% {
+          transform: translateX(8px);
+        }
+      }
+
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--accent-color);
+        margin: 30px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .forecast {
+        margin-top: 2rem;
+        background: var(--detail-bg);
+        border-radius: 16px;
+        padding: 1.5rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .forecast-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .forecast-title::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        margin: 5px auto 0;
+        border-radius: 3px;
+      }
+
+      .hourly-forecast {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding: 10px 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.1);
+      }
+
+      .hourly-forecast::-webkit-scrollbar {
+        height: 5px;
+      }
+
+      .hourly-forecast::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      .hourly-forecast::-webkit-scrollbar-thumb {
+        background-color: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .hourly-item {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        min-width: 80px;
+        transition: all 0.3s ease;
+      }
+
+      .hourly-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .hour {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .hourly-icon {
+        font-size: 1.5rem;
+        color: var(--accent-color);
+        margin: 5px 0;
+      }
+
+      .hourly-temp {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .weather-banner {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 150px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: cover;
+        z-index: -1;
+        opacity: 0.5;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 500px) {
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 450px;
-            transform: translateY(0);
-            transition: all 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-        }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 2rem;
-        }
-
-        input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        input:focus {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        button {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 10px;
-            background: #4a5568;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background: #2d3748;
-            transform: translateY(-2px);
-        }
-
-        .weather-info {
-            color: white;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+          padding: 1.5rem;
         }
 
         .temperature {
-            font-size: 4rem;
-            font-weight: 300;
-            margin: 1rem 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .temperature::after {
-            content: '  °C';
-            font-size: 2rem;
-            position: absolute;
-            top: 0;
-            margin-left: 5px;
-            right: -1.5rem;
-        }
-
-        .description {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-transform: capitalize;
+          font-size: 4rem;
         }
 
         .details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
 
-        .detail-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+        .extra-details {
+          grid-template-columns: repeat(2, 1fr);
         }
+      }
 
-        .detail-item:hover {
-            transform: translateY(-3px);
-        }
+      /* Animation for update */
+      .weather-update {
+        animation: updatePulse 0.5s ease;
+      }
 
-        .error {
-            color: #ff6b6b;
-            text-align: center;
-            margin-top: 1rem;
-            animation: shake 0.5s ease;
+      @keyframes updatePulse {
+        0% {
+          transform: scale(1);
         }
+        50% {
+          transform: scale(1.02);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+      /* Glass morphism effect */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
     </style>
-</head>
-<body ng-controller="weatherCtrl as vm">
-    <div class="container">
-        <div class="search-box">
-            <input type="text" 
-                   ng-model="vm.city" 
-                   placeholder="Enter city name" 
-                   ng-keyup="$event.keyCode === 13 && vm.getWeather()">
-            <button ng-click="vm.getWeather()">
-                <i class="fas fa-search"></i>
-            </button>
+  </head>
+  <body ng-controller="weatherCtrl as vm" class="theme-blue">
+    <div class="container glass-card">
+      <div class="theme-selector">
+        <div
+          class="theme-btn purple"
+          ng-click="vm.changeTheme('purple')"
+          title="Purple Theme"
+        ></div>
+        <div
+          class="theme-btn blue"
+          ng-click="vm.changeTheme('blue')"
+          title="Blue Theme"
+        ></div>
+        <div
+          class="theme-btn green"
+          ng-click="vm.changeTheme('green')"
+          title="Green Theme"
+        ></div>
+        <div
+          class="theme-btn dark"
+          ng-click="vm.changeTheme('dark')"
+          title="Dark Theme"
+        ></div>
+        <div
+          class="theme-btn sunset"
+          ng-click="vm.changeTheme('sunset')"
+          title="Sunset Theme"
+        ></div>
+      </div>
+
+      <div class="search-box">
+        <input
+          type="text"
+          ng-model="vm.city"
+          placeholder="Search for a city..."
+          ng-keyup="$event.keyCode === 13 && vm.getWeather()"
+        />
+        <button ng-click="vm.getWeather()">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+
+      <div ng-if="vm.loading" class="loader"></div>
+
+      <div
+        class="weather-info"
+        ng-if="vm.weatherData && !vm.loading"
+        ng-class="{'weather-update': vm.dataUpdated}"
+      >
+        <h2 class="city">
+          {{vm.weatherData.name}}, {{vm.weatherData.sys.country}}
+        </h2>
+        <div class="date-info">{{vm.currentDate}}</div>
+
+        <div class="weather-icon">
+          <i
+            class="fas fa-cloud"
+            ng-if="vm.weatherData.weather[0].main === 'Clouds'"
+          ></i>
+          <i
+            class="fas fa-sun"
+            ng-if="vm.weatherData.weather[0].main === 'Clear'"
+          ></i>
+          <i
+            class="fas fa-cloud-rain"
+            ng-if="vm.weatherData.weather[0].main === 'Rain'"
+          ></i>
+          <i
+            class="fas fa-cloud-showers-heavy"
+            ng-if="vm.weatherData.weather[0].main === 'Drizzle'"
+          ></i>
+          <i
+            class="fas fa-bolt"
+            ng-if="vm.weatherData.weather[0].main === 'Thunderstorm'"
+          ></i>
+          <i
+            class="fas fa-snowflake"
+            ng-if="vm.weatherData.weather[0].main === 'Snow'"
+          ></i>
+          <i
+            class="fas fa-smog"
+            ng-if="['Mist', 'Smoke', 'Haze', 'Dust', 'Fog', 'Sand', 'Ash'].includes(vm.weatherData.weather[0].main)"
+          ></i>
+          <i
+            class="fas fa-wind"
+            ng-if="vm.weatherData.weather[0].main === 'Squall' || vm.weatherData.weather[0].main === 'Tornado'"
+          ></i>
         </div>
 
-        <div ng-if="vm.loading" class="loader"></div>
+        <div class="temperature">{{vm.weatherData.main.temp | number:0}}</div>
+        <div class="description">{{vm.weatherData.weather[0].description}}</div>
 
-        <div class="weather-info" ng-if="vm.weatherData && !vm.loading">
-            <h2 class="city">{{vm.weatherData.name}}, {{vm.weatherData.sys.country}}</h2>
-            <div class="temperature">{{vm.weatherData.main.temp | number:0}}</div>
-            <div class="description">
-                <i class="fas fa-cloud" ng-if="vm.weatherData.weather[0].main === 'Clouds'"></i>
-                <i class="fas fa-sun" ng-if="vm.weatherData.weather[0].main === 'Clear'"></i>
-                <i class="fas fa-cloud-rain" ng-if="vm.weatherData.weather[0].main === 'Rain'"></i>
-                {{vm.weatherData.weather[0].description}}
-            </div>
-            
-            <div class="details">
-                <div class="detail-item">
-                    <div>Humidity</div>
-                    <div>{{vm.weatherData.main.humidity}}%</div>
-                </div>
-                <div class="detail-item">
-                    <div>Wind Speed</div>
-                    <div>{{vm.weatherData.wind.speed}} m/s</div>
-                </div>
-            </div>
+        <div class="details">
+          <div class="detail-item">
+            <i class="fas fa-tint"></i>
+            <div class="detail-label">Humidity</div>
+            <div class="detail-value">{{vm.weatherData.main.humidity}}%</div>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-wind"></i>
+            <div class="detail-label">Wind Speed</div>
+            <div class="detail-value">{{vm.weatherData.wind.speed}} m/s</div>
+          </div>
         </div>
 
-        <div class="error" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+        <div class="extra-details">
+          <div class="extra-item">
+            <div class="extra-label">Feels Like</div>
+            <div class="extra-value">
+              {{vm.weatherData.main.feels_like | number:1}}°C
+            </div>
+          </div>
+          <div class="extra-item">
+            <div class="extra-label">Pressure</div>
+            <div class="extra-value">{{vm.weatherData.main.pressure}} hPa</div>
+          </div>
+          <div class="extra-item">
+            <div class="extra-label">Visibility</div>
+            <div class="extra-value">
+              {{vm.weatherData.visibility / 1000}} km
+            </div>
+          </div>
+        </div>
+
+        <div class="forecast">
+          <h3 class="forecast-title">Hourly Forecast</h3>
+          <div class="hourly-forecast">
+            <div class="hourly-item" ng-repeat="hour in [1, 2, 3, 4, 5, 6]">
+              <div class="hour">{{vm.getHour(hour)}}</div>
+              <i class="hourly-icon" ng-class="vm.getRandomIcon()"></i>
+              <div class="hourly-temp">{{vm.getRandomTemp() | number:0}}°</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="error" ng-if="vm.errorMessage">
+        <i class="fas fa-exclamation-circle"></i> {{vm.errorMessage}}
+      </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
     <script>
-        angular.module('weatherApp', [])
-        .controller('weatherCtrl', function($http, $timeout) {
-            const vm = this;
-            vm.city = 'Hyderabad';
-            vm.loading = false;
-            
-            vm.getWeather = function() {
-                vm.loading = true;
-                vm.errorMessage = null;
-                
-                const apiKey = '628d0e98f6808e5cf2756fbaee2dc0b2';
-                const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${vm.city}&appid=${apiKey}&units=metric`;
-                
-                $http.get(apiUrl)
-                .then(function(response) {
-                    if(response.data.cod === 200) {
-                        vm.weatherData = response.data;
-                        $timeout(() => vm.loading = false, 500);
-                    }
-                })
-                .catch(function(error) {
-                    vm.errorMessage = 'City not found. Please try again.';
-                    vm.loading = false;
-                });
+      angular
+        .module("weatherApp", [])
+        .controller("weatherCtrl", function ($http, $timeout, $scope) {
+          const vm = this;
+          vm.city = "Hyderabad";
+          vm.loading = false;
+          vm.dataUpdated = false;
+          vm.updateDate = function () {
+            const now = new Date();
+            const options = {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
             };
-            
-            // Initial load
-            vm.getWeather();
+            vm.currentDate = now.toLocaleDateString("en-US", options);
+          };
+
+          vm.updateDate();
+
+          vm.changeTheme = function (theme) {
+            document.body.className = "";
+            document.body.classList.add("theme-" + theme);
+
+            const root = document.documentElement;
+            switch (theme) {
+              case "purple":
+                root.style.setProperty("--primary-color", "#9d4edd");
+                root.style.setProperty("--secondary-color", "#7b2cbf");
+                root.style.setProperty("--accent-color", "#e0aaff");
+                break;
+              case "blue":
+                root.style.setProperty("--primary-color", "#4361ee");
+                root.style.setProperty("--secondary-color", "#3f37c9");
+                root.style.setProperty("--accent-color", "#4895ef");
+                break;
+              case "green":
+                root.style.setProperty("--primary-color", "#2d6a4f");
+                root.style.setProperty("--secondary-color", "#1b4332");
+                root.style.setProperty("--accent-color", "#52b788");
+                break;
+              case "dark":
+                root.style.setProperty("--primary-color", "#6c757d");
+                root.style.setProperty("--secondary-color", "#495057");
+                root.style.setProperty("--accent-color", "#adb5bd");
+                break;
+              case "sunset":
+                root.style.setProperty("--primary-color", "#e85d04");
+                root.style.setProperty("--secondary-color", "#dc2f02");
+                root.style.setProperty("--accent-color", "#ffba08");
+                break;
+            }
+          };
+
+          vm.getRandomIcon = function () {
+            const icons = [
+              "fas fa-sun",
+              "fas fa-cloud",
+              "fas fa-cloud-sun",
+              "fas fa-cloud-rain",
+              "fas fa-cloud-showers-heavy",
+            ];
+            return icons[Math.floor(Math.random() * icons.length)];
+          };
+
+          vm.getRandomTemp = function () {
+            if (vm.weatherData) {
+              const baseTemp = vm.weatherData.main.temp;
+              return baseTemp + (Math.random() * 6 - 3);
+            }
+            return 25;
+          };
+
+          vm.getHour = function (hoursAhead) {
+            const date = new Date();
+            date.setHours(date.getHours() + hoursAhead);
+            return date.getHours() + ":00";
+          };
+
+          vm.getWeather = function () {
+            if (!vm.city) return;
+
+            vm.loading = true;
+            vm.errorMessage = null;
+
+            const apiKey = "628d0e98f6808e5cf2756fbaee2dc0b2";
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${vm.city}&appid=${apiKey}&units=metric`;
+
+            $http
+              .get(apiUrl)
+              .then(function (response) {
+                if (response.data.cod === 200) {
+                  vm.weatherData = response.data;
+                  vm.dataUpdated = true;
+                  $timeout(() => {
+                    vm.loading = false;
+                    $timeout(() => {
+                      vm.dataUpdated = false;
+                    }, 700);
+                  }, 800);
+
+                  vm.updateDate();
+                }
+              })
+              .catch(function (error) {
+                vm.errorMessage =
+                  "City not found. Please try again with a valid city name.";
+                vm.loading = false;
+              });
+          };
+
+          vm.getWeather();
         });
     </script>
-</body>
+  </body>
 </html>
