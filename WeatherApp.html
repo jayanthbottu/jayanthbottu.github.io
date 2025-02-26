@@ -36,7 +36,7 @@
       :root {
         --primary-color: #4361ee;
         --secondary-color: #3f37c9;
-        --accent-color: #4895ef;
+        --accent-color: #ffacc8;
         --text-color: #f8f9fa;
         --detail-bg: rgba(255, 255, 255, 0.1);
         --card-bg: rgba(255, 255, 255, 0.15);
@@ -50,11 +50,11 @@
       }
 
       body.theme-blue {
-        background: linear-gradient(135deg, #0099f7 0%, #2b5876 100%);
+        background: linear-gradient(135deg, #0099f7 0%, #52a9e2 100%);
       }
 
       body.theme-green {
-        background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+        background: linear-gradient(135deg, #134e5e 0%, #a9eeb9 100%);
       }
 
       body.theme-dark {
@@ -549,7 +549,7 @@
       }
     </style>
   </head>
-  <body ng-controller="weatherCtrl as vm" class="theme-blue">
+  <body ng-controller="weatherCtrl as vm" class="theme-purple">
     <div class="container glass-card">
       <div class="theme-selector">
         <div
@@ -726,22 +726,22 @@
               case "blue":
                 root.style.setProperty("--primary-color", "#4361ee");
                 root.style.setProperty("--secondary-color", "#3f37c9");
-                root.style.setProperty("--accent-color", "#4895ef");
+                root.style.setProperty("--accent-color", "#C2C8E5");
                 break;
               case "green":
                 root.style.setProperty("--primary-color", "#2d6a4f");
                 root.style.setProperty("--secondary-color", "#1b4332");
-                root.style.setProperty("--accent-color", "#52b788");
+                root.style.setProperty("--accent-color", "#AAFFA7");
                 break;
               case "dark":
                 root.style.setProperty("--primary-color", "#6c757d");
                 root.style.setProperty("--secondary-color", "#495057");
-                root.style.setProperty("--accent-color", "#adb5bd");
+                root.style.setProperty("--accent-color", "#B5B3B2");
                 break;
               case "sunset":
                 root.style.setProperty("--primary-color", "#e85d04");
                 root.style.setProperty("--secondary-color", "#dc2f02");
-                root.style.setProperty("--accent-color", "#ffba08");
+                root.style.setProperty("--accent-color", "#F8DDC1");
                 break;
             }
           };
