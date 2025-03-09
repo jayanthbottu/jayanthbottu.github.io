@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jayanth Bottu - Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css" />
@@ -189,12 +189,55 @@
           </div>
           <div class="profile-pic">
             <img src="picj.jpg" alt="Jayanth Bottu" />
+            <a href="https://drive.google.com/file/d/12WxE24Qk3bPyxbDGiRzG70JCCrjLkQsy/view?usp=drive_link" download class="resume-btn"
+              >Download Resume</a
+            >
           </div>
         </div>
       </div>
     </section>
 
     <style>
+      .resume-btn {
+        display: inline-block;
+        padding: 20px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: #fff;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 50px;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease-in-out;
+        text-align: center;
+      }
+
+      .resume-btn:hover {
+        background: linear-gradient(135deg, #0056b3, #004099);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+      }
+
+      .resume-btn:active {
+        transform: scale(0.95);
+        box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+      }
+
+      /* Dark Theme Support */
+      .dark-theme .profile-pic {
+        border: 4px solid #28a745;
+        box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+      }
+
+      .dark-theme .resume-btn {
+        background: linear-gradient(135deg, #28a745, #1e7e34);
+        box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+      }
+
+      .dark-theme .resume-btn:hover {
+        background: linear-gradient(135deg, #1e7e34, #155724);
+        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.5);
+      }
       /* Header/Home Section Styles */
       .header {
         display: flex;
