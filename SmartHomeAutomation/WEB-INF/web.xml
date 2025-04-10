@@ -1,0 +1,115 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="3.0">
+    <display-name>Smart Home Automation</display-name>
+
+    <servlet>
+        <servlet-name>DeviceServlet</servlet-name>
+        <servlet-class>DeviceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeviceServlet</servlet-name>
+        <url-pattern>/devices</url-pattern>
+    </servlet-mapping>
+
+<servlet>
+    <servlet-name>ActiveDeviceCountServlet</servlet-name>
+    <servlet-class>ActiveDeviceCountServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ActiveDeviceCountServlet</servlet-name>
+    <url-pattern>/ActiveDeviceCountServlet</url-pattern>
+</servlet-mapping>
+
+
+
+    <servlet>
+  <servlet-name>LoginServlet</servlet-name>
+  <servlet-class>LoginServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>LoginServlet</servlet-name>
+  <url-pattern>/LoginServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>LogoutServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+</servlet-mapping>
+
+
+    <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+    <servlet-name>PasswordRetrievalServlet</servlet-name>
+    <servlet-class>PasswordRetrievalServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+    <servlet-name>PasswordRetrievalServlet</servlet-name>
+    <url-pattern>/PasswordRetrievalServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+    <servlet-name>FetchDevicesServlet</servlet-name>
+    <servlet-class>FetchDevicesServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>FetchDevicesServlet</servlet-name>
+    <url-pattern>/FetchDevicesServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>ToggleDeviceServlet</servlet-name>
+    <servlet-class>ToggleDeviceServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ToggleDeviceServlet</servlet-name>
+    <url-pattern>/ToggleDeviceServlet</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>AddDeviceServlet</servlet-name>
+    <servlet-class>AddDeviceServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>AddDeviceServlet</servlet-name>
+    <url-pattern>/AddDeviceServlet</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>AdminLogoutServlet</servlet-name>
+    <servlet-class>AdminLogoutServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>AdminLogoutServlet</servlet-name>
+    <url-pattern>/AdminLogoutServlet</url-pattern>
+</servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+
+</web-app>
