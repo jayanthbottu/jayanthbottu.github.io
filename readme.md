@@ -209,7 +209,7 @@ const skillMatrix = {
 
 ## 💫 **THE CODE OF HONOR** 
 
-<div align="center">
+<div align="left">
 
 <img src="https://user-images.githubusercontent.com/74038190/212284094-e50ceae2-de86-4dd6-a8dd-cbebce3b3f27.gif" width="200">
 
@@ -234,9 +234,9 @@ public:
 };
 ```
 
-### 🎯 **2024 CONQUEST OBJECTIVES**
+### 🎯 **2025 CONQUEST OBJECTIVES**
 ```python
-objectives_2024 = {
+objectives_2025 = {
     "🧠 Master Advanced AI/ML Algorithms",
     "🏗️ Architect Scalable Cloud Solutions", 
     "🌟 Lead Open Source Revolution",
