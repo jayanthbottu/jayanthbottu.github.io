@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection and Attribution: Project Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style> 
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: black;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .header {
+            background-color: #3b82f6;
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        h1, h2, h3 {
+            font-weight: 600;
+            color: black;
+            margin-bottom: 1rem;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; color: black; }
+        p {
+            margin-bottom: 1rem;
+            color: black;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+            color: black;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="container mx-auto p-8">
+
+        <!-- Title Section -->
+        <div class="bg-blue-600 text-white rounded-xl p-10 text-center mb-8 shadow-lg">
+            <h1 class="text-4xl font-bold mb-2">Deepfake Detection and Attribution</h1>
+            <p class="text-xl font-medium opacity-100">A Temporal and Spectral Analysis Approach</p>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Introduction</h2>
+            <p>The rapid evolution and widespread availability of deepfake technology have created an urgent need for robust methods to verify digital media authenticity. Deepfakes, which are synthetic videos and audio created with machine learning, pose a significant threat to informational integrity, individual privacy, and political stability. These forgeries are now so sophisticated that they can deceive human observers, rendering traditional visual inspection ineffective. Our project directly confronts this challenge by developing a comprehensive framework that transcends conventional detection methods and delves into the intrinsic properties of the media itself to reveal its true origin.</p>
+        </div>
+
+        <!-- Problem Statement Section -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Problem Statement</h2>
+            <p>The core problem is the escalating struggle between people who create deepfakes and those who detect them. Existing detection systems, often reliant on superficial artifacts or limited datasets, are easily bypassed by continuously improving generative models. Furthermore, the issue extends beyond mere detection to a more complex need for the ability to trace a deepfake back to its source algorithm. Without a reliable method to identify the creator, combating the spread of malicious deepfakes is an insurmountable challenge. The current landscape lacks a scalable, multi-modal, and forensically sound solution that can provide both high-accuracy detection and conclusive origin-tracing across various media types.</p>
+        </div>
+
+        <!-- Solution Offered Section -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Solution Offered</h2>
+            <p>We propose a novel framework that integrates temporal and spectral analysis to address the deepfake problem at its root. Our solution is a multi-modal system capable of analyzing video, audio, and images to identify unique, machine-induced fingerprints. This approach moves beyond simple pattern recognition by performing a forensic examination of the data's underlying structure. The solution is designed to be highly resilient to new deepfake techniques, providing a sustainable and powerful tool for media verification and digital forensics.</p>
+        </div>
+        
+        <!-- New Section: Temporal and Spectral Analysis -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Temporal and Spectral Analysis</h2>
+            <p>Our framework is designed to find the definitive, machine-generated fingerprints that are embedded in deepfake media. We do this by analyzing the media across two distinct domains: the time domain and the frequency domain. This dual approach ensures we can detect inconsistencies that are often invisible to the human eye or ear.</p>
+
+            <h3 class="text-xl font-bold text-black mt-6 mb-2">1. Temporal Analysis: Dissecting the Flow of Time</h3>
+            <p>This part of our framework focuses on the <b>coherence of data over time</b>. Generative models often struggle to replicate the subtle, natural flow of human behavior. We examine a deepfake video for these inconsistencies by:</p>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+                <li><b>Physiological Inconsistencies:</b> We analyze the micro-fluctuations in skin color across a subject's face. This is called <b>remote photoplethysmography (rPPG)</b>, which measures the subtle changes in blood flow caused by a heartbeat. A real person's rPPG signal is consistent, while a deepfake's is either absent or erratic, acting as a clear tell.</li>
+                <li><b>Motion and Expression Irregularities:</b> We analyze the continuous flow of a person's movements and expressions. A deepfake may contain subtle inconsistencies in head movements, eye blinking, or micro-expressions that, while imperceptible to a human, are easily detected by our system.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-black mt-6 mb-2">2. Spectral Analysis: Uncovering the Hidden Code</h3>
+            <p>This is where we go a step further and get to the core of <b>attribution</b>. Spectral analysis, a technique from signal processing, examines the <b>frequency components of the data</b>. The algorithms used to create deepfakes often introduce unique, periodic artifacts that become visible in the frequency domain.</p>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+                <li><b>Image and Video Fingerprinting:</b> We use a <b>Discrete Fourier Transform (DFT)</b> to convert video frames into the frequency domain. Here, the up-sampling and blending techniques of generative models leave behind a distinct, high-frequency "fingerprint." Our system is trained to recognize these patterns and use them to identify the specific type of algorithm that created the deepfake.</li>
+                <li><b>Audio Attribution:</b> For deepfake audio, we perform a <b>Short-Time Fourier Transform (STFT)</b> to visualize the sound's spectral density. Just like with video, the synthesis process leaves behind unique spectral artifacts, allowing us to not only detect the audio as fake but to also trace it back to a particular synthesis model.</li>
+            </ul>
+        </div>
+        
+        <!-- Objectives Section -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Objectives</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>To develop a multi-modal deepfake detection system capable of analyzing video, audio, and images.</li>
+                <li>To implement a temporal analysis module that identifies inconsistencies in motion, expression, and physiological signals across a video's timeline.</li>
+                <li>To create a spectral analysis module that uncovers unique, machine-specific fingerprints in the frequency domain of media.</li>
+                <li>To build a robust origin-tracing model that can trace a deepfake back to its generative algorithm.</li>
+                <li>To evaluate the framework's performance on diverse, high-quality datasets and demonstrate its superiority over single-analysis methods.</li>
+                <li>To provide a clear, well-documented, and scalable solution for future research and practical application.</li>
+            </ul>
+        </div>
+
+        <!-- Project Analysis Section -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Project Analysis</h2>
+            <p>Our framework is based on the idea that the creation process leaves a unique, digital fingerprint that cannot be erased by post-production. The Temporal Analysis module will use advanced computer vision techniques like optical flow to track inconsistencies in human movement, while also employing remote photoplethysmography (rPPG) to verify the authenticity of biological signals. For Spectral Analysis, we will apply signal processing transforms (e.g., DFT and STFT) to extract unique frequency artifacts. These features will then be fed into a classification model to not only make a detection decision but also to trace the deepfake to its specific creation model, moving beyond a binary "real/fake" outcome.</p>
+        </div>
+
+        <!-- Technologies Used Section -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Technologies Used</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li><strong>Languages:</strong> Python, TensorFlow, Keras</li>
+                <li><strong>Libraries:</strong> SciPy, NumPy, OpenCV, scikit-learn</li>
+                <li><strong>Data Analysis:</strong> Pandas, Matplotlib</li>
+                <li><strong>Development Tools:</strong> Jupyter Notebooks, Git</li>
+            </ul>
+        </div>
+
+        <!-- Remaining Things -->
+        <div class="bg-white rounded-xl p-8 mb-6 shadow-md">
+            <h2 class="text-2xl font-bold text-black mb-4">Remaining Components</h2>
+            <p>The project's implementation will be organized into a logical file structure to ensure modularity and ease of collaboration. The core components will be the data pipeline for preprocessing, the training and evaluation scripts for each analysis module, and a final, integrated inference script for comprehensive deepfake analysis. This will serve as a valuable resource for the research community and contribute to the ongoing efforts to secure our digital landscape.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
