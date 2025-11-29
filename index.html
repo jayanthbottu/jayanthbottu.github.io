@@ -1353,28 +1353,21 @@
 
     <script>
     /* =========================================
-       1. THEME MANAGEMENT (System Sync + Manual)
+       1. THEME MANAGEMENT
        ========================================= */
     const themeBtn = document.getElementById('theme-btn');
     const themeIcon = themeBtn.querySelector('i');
     const body = document.body;
-    
-    // Check system preference
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-    // Determine which theme to load
     function getPreferredTheme() {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            return savedTheme;
-        }
+        if (savedTheme) return savedTheme;
         return systemTheme.matches ? 'dark' : 'light';
     }
 
-    // Apply theme to DOM and update Icon
     function applyTheme(theme) {
         body.setAttribute('data-theme', theme);
-        
         if (theme === 'dark') {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
@@ -1384,90 +1377,83 @@
         }
     }
 
-    // Initialize Theme
     applyTheme(getPreferredTheme());
 
-    // Manual Toggle Event
     themeBtn.addEventListener('click', () => {
-        const currentTheme = body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
+        const newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
         applyTheme(newTheme);
-        localStorage.setItem('theme', newTheme); // Save preference
+        localStorage.setItem('theme', newTheme);
     });
 
-    // Listen for System Changes (Auto-switch if user hasn't manually overridden)
-    systemTheme.addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            const newSystemTheme = e.matches ? 'dark' : 'light';
-            applyTheme(newSystemTheme);
+    /* =========================================
+       2. MOBILE MENU LOGIC (FIXED)
+       ========================================= */
+    const mobileBtn = document.getElementById('mobile-menu');
+    const navLinksContainer = document.getElementById('nav-links');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    // Toggle Menu on Hamburger Click
+    mobileBtn.addEventListener('click', () => {
+        mobileBtn.classList.toggle('active'); // Animates the hamburger icon
+        navLinksContainer.classList.toggle('active'); // Shows/Hides the menu
+    });
+
+    // Close Menu when a Link is Clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileBtn.classList.remove('active');
+            navLinksContainer.classList.remove('active');
+        });
+    });
+
+    // Close Menu when Clicking Outside
+    document.addEventListener('click', (e) => {
+        if (!navLinksContainer.contains(e.target) && !mobileBtn.contains(e.target)) {
+            mobileBtn.classList.remove('active');
+            navLinksContainer.classList.remove('active');
         }
     });
 
     /* =========================================
-       2. TYPING EFFECT
+       3. TYPING EFFECT
        ========================================= */
     const textToType = "A driven Engineer passionate about AI, Machine Learning, and building scalable tech solutions.";
     const typeEl = document.getElementById('typing-text');
-    const cursor = document.querySelector('.cursor');
     let charIndex = 0;
 
     function typeWriter() {
         if (charIndex < textToType.length) {
             typeEl.innerHTML += textToType.charAt(charIndex);
             charIndex++;
-            setTimeout(typeWriter, 35); // Typing speed
-        } else {
-            // Optional: Stop blinking cursor after typing is done
-            // cursor.style.display = 'none'; 
+            setTimeout(typeWriter, 35);
         }
     }
-
-    // Start typing after a short delay
     setTimeout(typeWriter, 800);
 
     /* =========================================
-       3. SCROLL REVEAL ANIMATION
+       4. SCROLL REVEAL ANIMATION
        ========================================= */
     const revealElements = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                // Optional: Stop observing once revealed
-                // revealObserver.unobserve(entry.target); 
             }
         });
-    }, {
-        threshold: 0.15, // Trigger when 15% of element is visible
-        rootMargin: "0px 0px -50px 0px"
-    });
+    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
     /* =========================================
-       4. MOBILE MENU & ACTIVE LINKS
+       5. ACTIVE LINK HIGHLIGHTING
        ========================================= */
     const nav = document.querySelector('nav');
-    const navLinksContainer = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    // Add mobile menu toggle logic here if you have a hamburger button
-    // Example:
-    // const mobileBtn = document.querySelector('.mobile-menu-btn');
-    // mobileBtn.addEventListener('click', () => navLinksContainer.classList.toggle('active'));
-
-    // Highlight Active Link on Scroll
     const sections = document.querySelectorAll('section');
 
     window.addEventListener('scroll', () => {
         let current = '';
-        
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            // Offset for fixed navbar
             if (pageYOffset >= (sectionTop - 200)) {
                 current = section.getAttribute('id');
             }
@@ -1480,14 +1466,13 @@
             }
         });
 
-        // Add shadow to nav on scroll
+        // Navbar Shadow on Scroll
         if (window.scrollY > 50) {
             nav.style.boxShadow = "var(--shadow-hover)";
         } else {
             nav.style.boxShadow = "var(--shadow)";
         }
     });
-
 </script>
 </body>
 </html>
