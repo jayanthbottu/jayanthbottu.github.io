@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection & Attribution | Capstone Project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --accent: #22d3ee;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 20%);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            animation: fadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tagline {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(34, 211, 238, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        .hero h1 { 
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem; 
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero p { 
+            font-size: clamp(1rem, 2vw, 1.25rem); 
+            color: var(--text-gray); 
+            max-width: 800px; 
+            margin: 0 auto 3rem; 
+            line-height: 1.7; 
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .stat-box {
+            text-align: center; 
+            padding: 2rem;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.4s, border-color 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .team-section-title {
+            color: var(--text-light); 
+            margin-bottom: 2rem; 
+            font-weight: 600;
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .team-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s;
+        }
+
+        .team-card:hover { 
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* --- MODAL / POPUP STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-container {
+            background: #1e293b;
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            border-radius: 1rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1rem 1.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem; flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+            .nav-btn { font-size: 0.85rem; padding: 0.4rem 0.8rem; }
+            .stats-container { grid-template-columns: 1fr; gap: 1rem; }
+            .modal-container { width: 95%; height: 80%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <i data-lucide="shield-alert" color="#6366f1"></i> DFDA System
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="closeAllModals()">Home</button>
+            
+            <button class="nav-btn" onclick="openDocModal('Poster', 'DFDA Poster.pdf')">
+                Poster <i data-lucide="file-text" size="14"></i>
+            </button>
+            
+            <button class="nav-btn" onclick="openDocModal('Presentation', 'Deepfake_Detection_&_Attribution.pptx')">
+                PPT <i data-lucide="presentation" size="14"></i>
+            </button>
+            
+            <button class="nav-btn" onclick="openDocModal('Documentation', 'Defending_Digital_Authenticity.pdf')">
+                DOCS <i data-lucide="book-open" size="14"></i>
+            </button>
+            
+            <button class="nav-btn" onclick="window.location.href='flash.html'">
+                Flashcards <i data-lucide="layers" size="14"></i>
+            </button>
+
+            <button class="nav-btn" onclick="window.open('https://huggingface.co/spaces/jayanthbottu/DFDA', '_blank')">
+                Demo <i data-lucide="external-link" size="14"></i>
+            </button>
+            
+            <button class="nav-btn" onclick="window.open('Deepfake Detection and Attribution Report.pdf', '_blank')">
+                Stuff <i data-lucide="code" size="14"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <span class="tagline">Capstone Project 2025-2026</span>
+            <h1>Deepfake Detection & Attribution</h1>
+            <p>A comprehensive multi-modal platform designed to secure digital authenticity. <br>We leverage advanced AI to detect synthetic media across Audio, Video, and Image formats, providing precise source attribution.</p>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-number" style="color: var(--success);">99%</span>
+                    <div style="color: var(--text-gray); font-size: 0.9rem;">Image Accuracy</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" style="color: var(--secondary);">98%</span>
+                    <div style="color: var(--text-gray); font-size: 0.9rem;">Audio Accuracy</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" style="color: var(--accent);">90%</span>
+                    <div style="color: var(--text-gray); font-size: 0.9rem;">Video Accuracy</div>
+                </div>
+            </div>
+
+            <h3 class="team-section-title">Research Team</h3>
+            <div class="team-grid">
+                <div class="team-card">
+                    <h3 style="color: var(--primary); font-size: 1.1rem;">J. Sri Varsha</h3>
+                    <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 0.25rem;">2303A51L99</p>
+                </div>
+                <div class="team-card">
+                    <h3 style="color: var(--primary); font-size: 1.1rem;">K. Sindhu</h3>
+                    <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 0.25rem;">2303A51LA0</p>
+                </div>
+                <div class="team-card">
+                    <h3 style="color: var(--primary); font-size: 1.1rem;">B. Jayanth</h3>
+                    <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 0.25rem;">2303A51LA7</p>
+                </div>
+                <div class="team-card">
+                    <h3 style="color: var(--primary); font-size: 1.1rem;">G. Mahendra</h3>
+                    <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 0.25rem;">2303A51LA9</p>
+                </div>
+                <div class="team-card">
+                    <h3 style="color: var(--primary); font-size: 1.1rem;">K. Nikhil</h3>
+                    <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 0.25rem;">2303A51LB0</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-gray); font-size: 0.9rem; text-align: center;">
+                Under the expert guidance of <br>
+                <strong style="color: var(--text-light); font-size: 1rem;">Dr. Ramesh Babu A</strong> & <strong style="color: var(--text-light); font-size: 1rem;">Dr. M. Sheshikala</strong><br>
+                <span style="display: inline-block; margin-top: 0.5rem; opacity: 0.7;">SR University, School of CS & AI</span>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="mainModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">
+                    <i data-lucide="file-text"></i> Viewer
+                </div>
+                <button class="close-modal" onclick="closeAllModals()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <iframe src="" class="modal-iframe" id="modalIframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Icons safely
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            // Global references
+            const modalOverlay = document.getElementById('mainModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            // --- CLOSE MODAL ---
+            window.closeAllModals = function() {
+                modalOverlay.classList.remove('active');
+                
+                // Reset content after animation. We rewrite the innerHTML to ensure
+                // we have a clean iframe for next time and no leftover Flashcards.
+                setTimeout(() => {
+                    modalBody.innerHTML = '<iframe src="" class="modal-iframe" id="modalIframe"></iframe>';
+                }, 300);
+            }
+
+            // --- OPEN PDF/DOC MODAL ---
+            window.openDocModal = function(title, url) {
+                modalTitle.innerHTML = `<i data-lucide="file-text"></i> ${title}`;
+                if (window.lucide) lucide.createIcons();
+                
+                // Re-inject the iframe structure just to be safe
+                modalBody.innerHTML = `<iframe src="${url}" class="modal-iframe"></iframe>`;
+                
+                modalOverlay.classList.add('active');
+            }
+
+            // --- OPEN FLASHCARDS MODAL ---
+            window.openFlashcards = function() {
+                modalTitle.innerHTML = `<i data-lucide="layers"></i> Viva Flashcards`;
+                if (window.lucide) lucide.createIcons();
+
+                // Inject Flashcard HTML
+                modalBody.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: white; padding: 2rem; text-align: center;">
+                        <div id="flashcard" style="width: 100%; max-width: 600px; height: 300px; background: #2d3748; border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; padding: 2rem; cursor: pointer; transition: transform 0.6s; transform-style: preserve-3d; border: 1px solid var(--primary);" onclick="flipCard()">
+                            <div id="cardContent">Click to Start Revision</div>
+                        </div>
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                            <button onclick="nextCard()" style="padding: 0.8rem 1.5rem; background: var(--primary); border: none; border-radius: 0.5rem; color: white; cursor: pointer; font-weight: bold;">Next Question</button>
+                        </div>
+                    </div>
+                `;
+                modalOverlay.classList.add('active');
+            }
+
+            // --- FLASHCARD LOGIC ---
+            const qaPairs = [
+                { q: "What is the primary goal of this project?", a: "To detect synthetic media (Audio, Video, Image) and attribute it to the source generator." },
+                { q: "Which format has the highest accuracy in your model?", a: "Image detection at 99%." },
+                { q: "What tools were used for the backend?", a: "Python, TensorFlow/PyTorch, and Flask/FastAPI." },
+                { q: "What is 'Attribution' in this context?", a: "Identifying exactly which AI model (e.g., DALL-E, ElevenLabs) created the fake." }
+            ];
+            
+            let currentCard = 0;
+            let isFlipped = false;
+
+            window.flipCard = function() {
+                const content = document.getElementById('cardContent');
+                const card = document.getElementById('flashcard');
+                
+                if(!card || !content) return;
+
+                card.style.transform = isFlipped ? "rotateX(0deg)" : "rotateX(180deg)";
+                
+                setTimeout(() => {
+                    if (isFlipped) {
+                        content.innerText = qaPairs[currentCard].q;
+                        content.style.transform = "rotateX(0deg)";
+                    } else {
+                        content.innerText = qaPairs[currentCard].a;
+                        content.style.transform = "rotateX(180deg)";
+                    }
+                    isFlipped = !isFlipped;
+                }, 150);
+            }
+
+            window.nextCard = function() {
+                currentCard = (currentCard + 1) % qaPairs.length;
+                isFlipped = false;
+                const card = document.getElementById('flashcard');
+                const content = document.getElementById('cardContent');
+                
+                if(card) card.style.transform = "rotateX(0deg)";
+                if(content) {
+                    content.innerText = qaPairs[currentCard].q;
+                    content.style.transform = "rotateX(0deg)";
+                }
+            }
+
+            // Close listeners
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeAllModals();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeAllModals();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

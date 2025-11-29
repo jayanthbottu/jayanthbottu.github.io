@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Reader</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Animation classes */
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hide scrollbar for cleaner look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-indigo-600 p-1.5 rounded-lg text-white">
+                        <i class="ph-bold ph-list-dashes text-xl"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight">DFDA<span class="text-indigo-600">Reader</span></span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="app.toggleTheme()" class="p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 rounded-full transition-colors">
+                        <i id="theme-icon" class="ph-bold ph-moon text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-container" class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Views will be injected here by JavaScript -->
+    </main>
+
+    <!-- Templates -->
+    
+    <!-- Study View Template (Main View) -->
+    <template id="study-template">
+        <div class="max-w-3xl mx-auto h-full flex flex-col animate-fade-in">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8 sticky top-20 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-sm py-4 z-40 border-b border-slate-200 dark:border-slate-800">
+                
+                <h2 id="study-deck-title" class="font-bold text-lg text-slate-900 dark:text-white">Deck Title</h2>
+                
+                <button onclick="app.shuffleCurrentDeck()" class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 dark:text-indigo-400 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/40 rounded-lg transition-colors" title="Shuffle List">
+                    <i class="ph-bold ph-shuffle"></i> Shuffle
+                </button>
+            </div>
+
+            <!-- List Container -->
+            <div id="card-list" class="space-y-6 pb-20">
+                <!-- Cards will be injected here -->
+            </div>
+            
+        </div>
+    </template>
+
+    <script>
+        // ---------------------------------------------------------
+        // PASTE YOUR CSV CONTENT INSIDE THE BACKTICKS BELOW
+        // Format: Front,Back
+        // ---------------------------------------------------------
+        const CSV_DATA = `
+"What is the core objective of the DFDA system's 'Attribution' component?","To trace the specific AI model or tool (e.g., FaceSwap, StyleGAN) used to generate the deepfake."
+"Which deep learning framework serves as the backbone for the entire DFDA project?","PyTorch"
+"What specific architecture is used for the Image Detection module?","Enhanced XceptionNet with Attention Mechanism"
+"What is the primary input format for the Image Detection model?","Resized and normalized RGB images (typically 299x299)."
+"Which library is used to load the pre-trained Xception model?","TIMM (PyTorch Image Models)"
+"What is the purpose of the 'Attention Mechanism' in the image model?","To focus on specific local artifacts like skin texture inconsistencies and eye abnormalities."
+"What specific facial inconsistencies does the image model look for?","Abnormal blinking, skin texture irregularities, and inconsistent facial expressions."
+"What data augmentation techniques are applied to images during training?","Random horizontal flip, color jitter, and rotation."
+"Which normalization values are used for image preprocessing?","Mean: [0.485, 0.456, 0.406], Std: [0.229, 0.224, 0.225]"
+"What is the classification layer used at the end of the XceptionNet model?","A Softmax layer to output probabilities for Real vs. specific Fake classes."
+"What are the specific generator classes detected by the Image model?","DALL-E, Midjourney, StyleGAN, FaceSwap, and DeepFaceLab."
+"How does the video detection module handle temporal dynamics?","By using temporal fusion layers like GRU or Transformers on extracted frame sequences."
+"What is the first step in the Video Detection pipeline?","Frame Extraction (extracting individual frames from the video file)."
+"How are faces detected within video frames?","Using face detection algorithms like MTCNN or RetinaFace."
+"What is 'Temporal Fusion' in the context of the video model?","Aggregating features from multiple consecutive frames to detect motion inconsistencies."
+"What specific temporal artifacts does the video model detect?","Unstable head gestures, abnormal eye blinking patterns, and lip-sync errors."
+"What is the sampling rate used for audio preprocessing?","16 kHz"
+"What is the primary feature extraction technique for Audio Detection?","Mel-Spectrograms"
+"Why are Mel-Spectrograms used instead of raw waveforms?","They capture both frequency and time-based patterns effectively for CNNs."
+"How many layers does the Audio CNN model consist of?","4 Convolutional Layers"
+"What library is used for audio signal processing and feature extraction?","Librosa or Torchaudio"
+"What transformation converts the Mel-Spectrogram to a decibel scale?","AmplitudeToDB"
+"What are the parameters used for the Mel-Spectrogram transformation?","n_fft=2048, hop_length=512, n_mels=128"
+"What is the purpose of 'trimming' in the audio preprocessing stage?","To remove silent regions from the start and end of the audio clip."
+"What types of audio manipulation does the system specifically attribute?","Voice Cloning, Text-to-Speech (TTS), and Voice Conversion."
+"Which specific tool is detected as a class in the Audio Attribution module?","ElevenLabs"
+"What is the function of the 'Data Ingestion API'?","It verifies file formats and routes the media to the correct processing pipeline."
+"How does the system handle multi-modal inputs?","It uses separate, independent processing pipelines for Audio, Video, and Image."
+"What is the 'Confidence Score' displayed in the dashboard?","The probability percentage associated with the predicted class (Real or specific Fake)."
+"What visualization technique is used to explain Image model decisions?","Saliency Maps or Heatmaps"
+"What visualization is used for Video model results?","A temporal timeline showing anomaly frames."
+"What visualization is generated for Audio analysis?","A visual plot of the Mel-Spectrogram."
+"What hardware component is critical for the training and inference of these models?","GPU (specifically NVIDIA RTX 3050 mentioned in the report)."
+"What CUDA version is used for the project?","Version 12.9"
+"What is the role of the 'Trainer' class in the code architecture?","It manages the training loop, validation, optimizer steps, and checkpoint saving."
+"What loss function is used for training the classification models?","CrossEntropyLoss"
+"What optimizer is preferred for training the models?","Adam or AdamW"
+"What is the 'ReduceLROnPlateau' scheduler used for?","To reduce the learning rate when the validation loss stops improving."
+"What is the validation accuracy achieved by the Enhanced XceptionNet (Image)?","99.54% (approx 99%)"
+"What is the F1-Score for the Image Detection model?","0.995"
+"What validation accuracy was achieved for the Audio model?","98%"
+"What precision score was achieved for the Video model?","0.91"
+"What is the processing speed for analyzing a video file?","3-5 seconds"
+"What is the processing speed for analyzing an image file?","2-3 seconds"
+"How does the system ensure user privacy?","By automatically deleting uploaded files after analysis."
+"Which Python library is used for creating the web interface?","Streamlit"
+"What is 'Transfer Learning' in the context of this project?","Using the pre-trained XceptionNet backbone and fine-tuning it for deepfake detection."
+"What does 'FaceForensics++' provide to the project?","A large-scale dataset of manipulated videos used for training and benchmarking."
+"What constitutes the 'Attribution Engine'?","The logic that maps model predictions to specific generator names (e.g., 'FaceSwap')."
+"What is the purpose of the 'Evaluator' class?","To compute metrics like Accuracy, Precision, Recall, and generate confusion matrices."
+"What does the Confusion Matrix for Image detection reveal?","The model's ability to distinguish between specific generators like DALL-E vs. Midjourney."
+"How are 'key frames' selected in the video pipeline?","Regularly sampled (e.g., 1 per 10 frames) to reduce computational load."
+"What is 'Face Cropping' and why is it used?","Isolating the face from the background to focus the model on relevant features."
+"What is the 'Backbone Network' in the architecture diagrams?","The core feature extractor (e.g., Xception) before the classification head."
+"What does 'Frame-level Attention Weighting' do?","It assigns higher importance to video frames that show stronger signs of manipulation."
+"What is the 'Global Average Pooling' used for?","To reduce spatial dimensions of features before the final classification layer."
+"What is 'Label Smoothing' in the training loss?","A technique to prevent the model from becoming too confident in its predictions."
+"What is the input size for the video frame analysis?","300x300 pixels"
+"What specific artifact does 'FaceShifter' introduce?","Specific inconsistencies in facial reenactment detected by the video model."
+"What is 'NeuralTextures' in the context of the report?","A specific deepfake manipulation technique detected by the system."
+"What is the 'Spectrogram' actually representing?","The intensity of frequencies over time."
+"What does 'MFCC' stand for?","Mel-Frequency Cepstral Coefficients"
+"How is 'Voice Conversion' different from 'Text-to-Speech'?","Voice Conversion modifies an existing voice, while TTS generates voice from text."
+"What is the 'visualizer.py' script used for?","To generate the plots and charts shown on the Streamlit dashboard."
+"What is the 'Config' class responsible for?","Storing constants like MODEL_PATH, CLASS_NAMES, and DEVICE settings."
+"What does 'model.eval()' do in the inference code?","Sets the model to evaluation mode, disabling Dropout and BatchNorm updates."
+"What is the 'grad_scaler' used for in the training loop?","Mixed-precision training to save memory and speed up computation."
+"What does 'torch.no_grad()' do?","Disables gradient calculation to reduce memory usage during inference."
+"What is 'Data Augmentation' used for in this project?","To increase dataset variability and prevent overfitting."
+"What is 'Affine Transformation' in augmentation?","Geometric transformations like rotation, scaling, and shearing."
+"What is 'Masking' in the context of augmentation?","Randomly hiding parts of the input (image or spectrogram) to force the model to learn robust features."
+"What is the 'Softmax' function?","An activation function that converts raw output scores into probabilities summing to 1."
+"What does 'Batch Normalization' do?","Normalizes layer inputs to stabilize and accelerate training."
+"What is 'Dropout'?","A regularization technique that randomly zeros out neurons during training to prevent overfitting."
+"What is the 'learning_rate' typically set to in the code?","0.0001 (1e-4)"
+"What is the 'weight_decay' parameter?","L2 regularization penalty to prevent weights from becoming too large."
+"What is 'Early Stopping'?","Stopping training when validation performance degrades to prevent overfitting."
+"What is the 'patience' parameter in the scheduler?","Number of epochs to wait before reducing the learning rate if no improvement is seen."
+"What is the 'StreamlitApp.main()' function?","The entry point for the web application."
+"How does the audio model handle variable length audio?","It pads or truncates audio to a fixed 'max_length'."
+"What is 'Resampling' in the audio pipeline?","Changing the sample rate of the input audio to match the model's expected rate (16kHz)."
+"What is the 'Confusion Matrix' for Video showing?","Accuracy across classes like Face2Face, FaceSwap, NeuralTextures, and Original."
+"What is the 'Confusion Matrix' for Audio showing?","Accuracy across classes like ElevenLabs, Tacotron, and Real."
+"What is 'Tacotron'?","A text-to-speech architecture detected by the audio model."
+"What is 'DeepFaceLab'?","A popular deepfake software detected by the image model."
+"What is 'Stable Diffusion'?","A latent diffusion model for image generation detected by the system."
+"What does the 'Dataset Provider' actor do in the architecture?","Supplies the initial media files for analysis."
+"What is the 'Feature Extraction Layer' output?","A dense vector representation (embedding) of the input media."
+"What is 'Binary Classification' vs 'Attribution'?","Binary detects Real/Fake; Attribution detects the specific source (FaceSwap, etc.)."
+"What is 'Model Checkpointing'?","Saving the model weights when it achieves the best validation score."
+"What library is used for the dashboard layout?","Streamlit (st.columns, st.sidebar, etc.)"
+"What is the 'st.file_uploader' function?","A Streamlit widget allowing users to upload media files."
+"What is the 'st.image' function used for?","Displaying the uploaded image or video preview."
+"What is the 'st.pyplot' function used for?","Displaying Matplotlib charts (like confusion matrices) in the app."
+"What is 'Mixed Precision Training'?","Using both 16-bit and 32-bit floating point numbers to speed up training."
+"What is the role of 'OpenCV' in the project?","Reading video files and extracting frames."
+"What is 'NumPy' used for?","Numerical operations and array manipulations (e.g., image arrays)."
+"What is 'Pandas' used for?","Handling structured data like CSVs for results reporting."
+"What is a 'Saliency Map'?","A visualization that highlights the pixels most responsible for the model's classification."
+"What is the 'Analysis Configuration' in the dashboard?","Settings that allow users to tweak parameters (though often fixed in demo)."
+"What is the 'Detection Confidence'?","The certainty level of the model (e.g., 99.99%) displayed in the UI."
+"What is 'Gradient Accumulation'?","A technique to simulate larger batch sizes by accumulating gradients over multiple steps."
+"What is 'Inference Time'?","The time taken for the model to process a single input and produce a prediction."
+"What is 'Latency'?","The delay between uploading a file and seeing the result."
+"What is 'Throughput'?","The number of files the system can process per unit of time."
+"What is 'Scalability' in the context of this architecture?","The ability to handle multiple independent requests due to decoupled modules."
+"What is the 'Data Storage' format for temporal features?","A buffer holding sequential frame features before fusion."
+"What is the 'Aggregate to video-level representation' step?","Combining frame-level scores/features into a single score for the whole video."
+"What is 'Ensemble Learning'?","Combining predictions from multiple models to improve accuracy (mentioned as 'Ensemble Agreement Check')."
+"What is 'Robustness'?","The model's ability to perform well on perturbed or augmented data."
+"What is 'Generalization'?","The model's ability to perform well on unseen data from new sources."
+"What is 'Bias' in the dataset?","If the dataset has too many samples of one type, the model might favor that class."
+"How is 'Class Imbalance' handled?","Often through weighted loss functions or balanced sampling (though not explicitly detailed, it's a standard practice)."
+"What is 'Model Quantization'?","Reducing model size for deployment (not explicitly used but related to optimization)."
+"What is 'Onnx'?","An open format for ML models (potential export format, though .pt is used here)."
+"What is the file extension '.pt' or '.pth'?","PyTorch saved model weights."
+"What is the 'requirements.txt' file?","Lists all Python dependencies needed to run the project."
+"What is 'Version Control'?","Using Git to track changes (implied by the GitHub repository link)."
+"What is the 'HuggingFace Spaces' link for?","A live demo deployment of the project."
+"What default dropout rate is defined in the EnhancedXceptionNet class?","0.3"
+"How many neurons are in the first Linear layer of the EnhancedXceptionNet classifier?","512"
+"What activation function is used within the EnhancedXceptionNet classifier block?","ReLU"
+"What specific 'mode' is used for the Image model learning rate scheduler?","'max' (monitoring F1 score)"
+"What specific 'mode' is used for the Audio model learning rate scheduler?","'min' (monitoring loss)"
+"What does the 'reset_classifier(0)' function call do in the code?","It removes the original classification head of the pre-trained model."
+"What is the 'weight_decay' value used for the Image model optimizer?","0.01"
+"What is the 'weight_decay' value used for the Audio model optimizer?","1e-5"
+"What is the starting learning rate ('min_lr') for the ReduceLROnPlateau scheduler?","1e-7"
+"What factor is used to reduce the learning rate in the scheduler?","0.5"
+"How many epochs is the 'patience' set to for the Image model scheduler?","3"
+"How many epochs is the 'patience' set to for the Audio model scheduler?","5"
+"What specific metric is monitored to save the best Image model?","Validation F1-score ('val_f1')"
+"What specific metric is monitored to save the best Audio model?","Validation Accuracy ('val_acc')"
+"What is the 'label_smoothing' parameter set to in the CrossEntropyLoss?","0.1"
+"What is the purpose of 'scaler.scale(loss).backward()' in the training loop?","To perform backpropagation with scaled gradients for mixed precision."
+"What does the 'torch.cuda.amp.autocast' context manager do?","Enables mixed precision training for faster computation on GPUs."
+"What is the 'top_db' parameter set to when converting audio to DB scale?","80"
+"What normalization logic is applied to the MelSpectrogram DB data?","(x - mean) / (std + 1e-8)"
+"What is the 'power' parameter set to for MelSpectrogram generation?","2.0"
+"What is the purpose of the 'Temporal Buffer' in the Video Activity Diagram?","To store features from consecutive frames for temporal processing."
+"What happens if a face is not found during the Image Activity Diagram flow?","The image is either rejected or sent to a full-image processing pipeline."
+"What is the 'Ensemble Agreement Check' in the Image Activity Diagram?","It compares predictions from multiple models to ensure high confidence."
+"What specific noise reduction technique is mentioned as optional for Audio?","Denoise / Enhance"
+"What is the 'Time-Shift' augmentation used for?","Shifting the audio signal in time to improve model robustness."
+"What is the 'Affine' augmentation used for in the pipeline?","Geometric transformations like rotation and scaling."
+"What risk is associated with 'Limited Datasets' in the Risk Analysis?","It may affect training quality and validation checks."
+"How does the project mitigate the 'Privacy' risk?","By automatically deleting files after results are displayed."
+"What solution is proposed for the 'Complex UI' risk?","Keeping the dashboard clean and user-friendly."
+"What does 'Technical Viability' refer to in the Feasibility Analysis?","The successful use of technologies like Python, Streamlit, and OpenCV."
+"What does 'Legal Validity' refer to in the Feasibility Analysis?","Ensuring user data security by not storing uploaded files."
+"What deep learning library is used specifically for computer vision transforms?","Torchvision"
+"What specific 'page_title' is set in the Streamlit config?","Deepfake Model Testing"
+"What layout mode is used in the Streamlit 'set_page_config'?","wide"
+"What specific function is used to load the model weights in the inference code?","torch.load"
+"What logic is applied to the audio waveform if it has more than 1 channel?","It is averaged to mono (mean dim=0)."
+"What specific library is used for calculating the F1 score in the code?","sklearn.metrics"
+"What specific 'average' parameter is used for F1 score?","weighted"
+"What is the 'patience_counter' used for in the training loop?","To track how many epochs have passed without improvement for Early Stopping."
+"What is the 'max_patience' for Early Stopping in the Image training code?","5"
+"What is the 'max_patience' for Early Stopping in the Audio training code?","4"
+"What filename is the best Image model saved as?","best_model_img.pth"
+"What filename is the best Audio model saved as?","best_model.pth"
+"What is the 'running_loss' variable used for?","Accumulating loss values over batches to calculate epoch average."
+"What does 'model.state_dict()' return?","A dictionary containing the model's learnable parameters (weights and biases)."
+"What is the 'optimizer_state_dict' saved for?","To resume training from the same optimizer state if needed."
+"What does 'scaler.update()' do in the training loop?","Updates the scale factor for mixed precision training."
+"What normalization mean values are used for video frame preprocessing?","[0.485, 0.456, 0.406]"
+"What normalization std values are used for video frame preprocessing?","[0.229, 0.224, 0.225]"
+"What happens if 'val_acc > best_val_acc' in the Audio training loop?","The model state is saved to a file."
+`;
+        // ---------------------------------------------------------
+
+        class FlashcardApp {
+            constructor() {
+                this.deck = null;
+                this.isDark = localStorage.getItem('theme') === 'dark';
+                
+                this.initTheme();
+                this.loadData();
+            }
+
+            // --- Theme Management ---
+            initTheme() {
+                if (this.isDark) {
+                    document.documentElement.classList.add('dark');
+                    document.getElementById('theme-icon').classList.replace('ph-moon', 'ph-sun');
+                }
+            }
+
+            toggleTheme() {
+                this.isDark = !this.isDark;
+                localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+                document.documentElement.classList.toggle('dark');
+                const icon = document.getElementById('theme-icon');
+                if (this.isDark) {
+                    icon.classList.replace('ph-moon', 'ph-sun');
+                } else {
+                    icon.classList.replace('ph-sun', 'ph-moon');
+                }
+            }
+
+            // --- Data Loading ---
+            parseCSV(text) {
+                const lines = text.split(/\r\n|\n/);
+                const cards = [];
+                
+                const parseLine = (line) => {
+                    const result = [];
+                    let current = '';
+                    let inQuotes = false;
+                    for (let i = 0; i < line.length; i++) {
+                        const char = line[i];
+                        if (char === '"') inQuotes = !inQuotes;
+                        else if (char === ',' && !inQuotes) {
+                            result.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+                            current = '';
+                        } else current += char;
+                    }
+                    result.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+                    return result;
+                };
+
+                lines.forEach((line, index) => {
+                    if (!line.trim()) return;
+                    if (index === 0 && (line.toLowerCase().includes('front') || line.toLowerCase().includes('question'))) return; // Skip header
+                    
+                    const cols = parseLine(line);
+                    if (cols.length >= 2) {
+                        cards.push({ front: cols[0], back: cols[1], id: index });
+                    }
+                });
+                return cards;
+            }
+
+            loadData() {
+                const cards = this.parseCSV(CSV_DATA);
+                this.deck = {
+                    title: "Q&A List",
+                    cards: cards,
+                    shuffledCards: [...cards]
+                };
+                
+                // Start directly at study view
+                this.renderStudy();
+            }
+
+            renderStudy() {
+                const container = document.getElementById('app-container');
+                const template = document.getElementById('study-template');
+                
+                // Clear container and append template
+                container.innerHTML = '';
+                const content = template.content.cloneNode(true);
+                container.appendChild(content);
+
+                // Set Title
+                document.getElementById('study-deck-title').textContent = this.deck.title;
+                
+                const listContainer = document.getElementById('card-list');
+                
+                if (this.deck.shuffledCards.length === 0) {
+                     listContainer.innerHTML = `<div class="text-center text-slate-500 py-10">No questions found. Please check your CSV data formatting.</div>`;
+                     return;
+                }
+
+                this.deck.shuffledCards.forEach((card, index) => {
+                    const cardEl = document.createElement('div');
+                    cardEl.className = "bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow duration-200";
+                    
+                    cardEl.innerHTML = `
+                        <div class="flex flex-col gap-4">
+                            <!-- Question Section -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-xs font-bold tracking-wider text-indigo-500 uppercase bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-md">
+                                        Question ${index + 1}
+                                    </span>
+                                </div>
+                                <p class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white leading-relaxed">
+                                    ${card.front}
+                                </p>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="h-px bg-slate-100 dark:bg-slate-700 w-full"></div>
+
+                            <!-- Answer Section -->
+                            <div>
+                                <span class="text-xs font-bold tracking-wider text-slate-400 uppercase mb-1 block">
+                                    Answer
+                                </span>
+                                <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                                    ${card.back}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    listContainer.appendChild(cardEl);
+                });
+            }
+
+            shuffleCurrentDeck() {
+                // Shuffle data
+                this.deck.shuffledCards.sort(() => Math.random() - 0.5);
+                // Re-render
+                this.renderStudy();
+            }
+        }
+
+        // Initialize
+        window.app = new FlashcardApp();
+    </script>
+</body>
+</html>
