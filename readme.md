@@ -106,7 +106,7 @@ me.say_hi()
 
 ## 🛠️ **Tech Arsenal**
 
-<div align="center">
+<div align="left">
 
 ### **Languages**
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -433,10 +433,6 @@ Integrates **Binance API** with interactive visualizations to flag suspicious ma
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-<br/>
-
-## 🤝 **Let's Connect & Collaborate**
-
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" width="80" alt="Handshake"/>
@@ -468,6 +464,8 @@ I'm passionate about **AI/ML**, **Computer Vision**, and **Full-Stack Developmen
 </p>
 
 <br/>
+</div>
+<div>
 
 ### 📬 **Get In Touch**
 
@@ -486,21 +484,9 @@ const jayanthbottu = {
 
 <br/>
 
-### ⭐ **Show Some Love**
-
-<sub>If you find my work interesting, consider giving a star ⭐ to my repositories!</sub>
-
-<br/>
-
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="25" height="25" /> **Thank you for visiting!**
 
 </div>
-
-<br/>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-
-<br/>
 
 <div align="center">
 
@@ -512,6 +498,6 @@ const jayanthbottu = {
 
 <br/>
 
-<img src="https://img.shields.io/badge/Made_with-❤️_and_☕-red?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Made_with-❤️_and_☕-black?style=for-the-badge"/>
 
 </div>
