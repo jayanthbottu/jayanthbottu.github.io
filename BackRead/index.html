@@ -72,27 +72,27 @@
 
         /* --- CHAT AREA --- */
         #chat-window { 
-            flex: 1; overflow-y: auto; padding: 0 20px 20px 20px; /* Removed top padding */
+            flex: 1; overflow-y: auto; padding: 0 20px 20px 20px;
             contain: strict; 
         }
 
-        /* --- STICKY DATE DIVIDER (Updated) --- */
+        /* --- STICKY DATE DIVIDER --- */
         .date-divider {
-            position: sticky;  /* THIS LOCKS IT */
-            top: 10px;         /* Distance from top */
-            z-index: 100;      /* Above messages */
+            position: sticky;
+            top: 10px;
+            z-index: 100;
             text-align: center;
             margin: 20px 0;
-            pointer-events: none; /* Let clicks pass through */
+            pointer-events: none;
         }
         
         .date-divider span {
-            background: rgba(33, 37, 43, 0.85); /* Semi-transparent background */
-            backdrop-filter: blur(4px);         /* Blur effect behind the date */
+            background: rgba(33, 37, 43, 0.85);
+            backdrop-filter: blur(4px);
             padding: 5px 14px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);    /* 0.7 Opacity text */
+            color: rgba(255, 255, 255, 0.7);
             font-size: 11px;
             font-family: 'Space Grotesk', monospace;
             letter-spacing: 1px;
@@ -173,8 +173,8 @@
         <h1>BACKUP<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="50" style="margin-right: -4px;">READER</h1>
         <p class="subtitle">Secured Offline WhatsApp Chat Backup File Reader</p>
         <label class="upload-btn">
-            OPEN .TXT FILE
-            <input type="file" id="fileInput" accept=".txt">
+            OPEN .TXT or .ZIP FILE
+            <input type="file" id="fileInput" accept=".txt,.zip">
         </label>
         <p id="loading-text" style="display:none; color: #6200ea; margin-top: 20px;">PARSING DATA...</p>
     </div>
@@ -194,6 +194,9 @@
         <div id="chat-window"></div>
     </div>
 
+    <!-- JSZip Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
     <script>
         let parsedMessages = [];
 
@@ -204,19 +207,60 @@
             document.getElementById('loading-text').style.display = 'block';
 
             setTimeout(() => {
-                const reader = new FileReader();
-                reader.onload = function(e) { parseText(e.target.result); };
-                reader.readAsText(file);
+                if (file.name.endsWith('.zip')) {
+                    handleZipFile(file);
+                } else if (file.name.endsWith('.txt')) {
+                    handleTxtFile(file);
+                } else {
+                    alert('Please upload a .txt or .zip file');
+                    document.getElementById('loading-text').style.display = 'none';
+                }
             }, 50);
         });
 
+        function handleTxtFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) { 
+                parseText(e.target.result); 
+            };
+            reader.readAsText(file);
+        }
+
+        function handleZipFile(file) {
+            JSZip.loadAsync(file)
+                .then(function(zip) {
+                    // Look for .txt files in the zip
+                    let txtFile = null;
+                    
+                    // Search for the chat text file
+                    zip.forEach(function(relativePath, zipEntry) {
+                        if (zipEntry.name.endsWith('.txt') && !zipEntry.dir) {
+                            txtFile = zipEntry;
+                        }
+                    });
+
+                    if (!txtFile) {
+                        alert('No .txt file found in the ZIP archive');
+                        document.getElementById('loading-text').style.display = 'none';
+                        return;
+                    }
+
+                    // Read the txt file content
+                    return txtFile.async('string');
+                })
+                .then(function(content) {
+                    if (content) {
+                        parseText(content);
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error reading ZIP file:', error);
+                    alert('Error reading ZIP file. Please try again.');
+                    document.getElementById('loading-text').style.display = 'none';
+                });
+        }
+
         function parseText(text) {
-            // UPDATED REGEX EXPLANATION:
-            // 1. Date: (\d{1,2}\/\d{1,2}\/\d{2,4}) -> Matches 06/09/2023 or 6/9/23
-            // 2. Separator: ,\s+ -> Matches comma and space
-            // 3. Time: (\d{1,2}:\d{2}(?:[\s\u202F]?[ap]m)?) -> Matches 11:30, 11:30am, 11:30 pm, and 11:30[narrow-space]pm
-            // 4. Separator: \s-\s -> Matches " - "
-            // 5. Content: (.*) -> Captures the rest of the line
             const regex = /^(\d{1,2}\/\d{1,2}\/\d{2,4}),\s+(\d{1,2}:\d{2}(?:[\s\u202F]?[ap]m)?)\s-\s(.*)/i;
             
             const lines = text.split('\n');
@@ -224,33 +268,24 @@
             parsedMessages = [];
 
             lines.forEach(line => {
-                // Remove invisible directional marks that WhatsApp sometimes adds
                 line = line.trim().replace(/[\u200E\u200F]/g, ""); 
                 
                 const match = line.match(regex);
                 
                 if (match) {
-                    // We found a new line starting with a Date/Time
                     if (currentMessage) parsedMessages.push(currentMessage);
                     
                     const fullContent = match[3];
                     let sender = "System"; 
                     let content = fullContent;
 
-                    // CHECK FOR SENDER
-                    // Standard message: "John Doe: Hello there"
-                    // System message: "Messages and calls are end-to-end encrypted..." (No colon)
                     const colonIndex = fullContent.indexOf(': ');
                     
                     if (colonIndex > -1) {
-                        // We found a colon, so split Sender and Message
                         sender = fullContent.substring(0, colonIndex);
                         content = fullContent.substring(colonIndex + 2);
                     } else {
-                        // No sender found. It's a System message.
-                        // OPTIONAL: Filter out the encryption spam
                         if (fullContent.includes('end-to-end encrypted')) {
-                            // Skip adding this message to keep chat clean
                             currentMessage = null; 
                             return; 
                         }
@@ -263,12 +298,10 @@
                         content: content
                     };
                 } else if (currentMessage) {
-                    // This is a continuation of the previous message (multi-line text)
                     currentMessage.content += '<br>' + line;
                 }
             });
             
-            // Push the last message found
             if (currentMessage) parsedMessages.push(currentMessage);
             
             if (parsedMessages.length === 0) {
@@ -282,8 +315,6 @@
 
         function showUserSelection() {
             const senders = [...new Set(parsedMessages.map(m => m.sender))];
-            
-            // Filter out "System" from the buttons if you don't want to log in as "System"
             const userSenders = senders.filter(s => s !== "System");
 
             const list = document.getElementById('name-list');
@@ -311,7 +342,6 @@
             let lastDate = null;
 
             parsedMessages.forEach(msg => {
-                // DATE DIVIDER LOGIC
                 if (msg.date !== lastDate) {
                     const dateDiv = document.createElement('div');
                     dateDiv.className = 'date-divider';
@@ -325,22 +355,18 @@
 
                 const row = document.createElement('div');
                 
-                // Class logic: sent, received, or system-message
                 if (isSystem) {
                     row.className = 'message-row received'; 
-                    // You can add specific CSS for .system-msg if you want centered text
                 } else {
                     row.className = `message-row ${isMe ? 'sent' : 'received'}`;
                 }
                 
                 let content = msg.content;
                 
-                // Handle media placeholder
                 if (content.includes('<Media omitted>')) {
                     content = `<span style="font-style:italic; opacity:0.7">📷 Image/Media omitted</span>`;
                 }
                 
-                // Only show name tag if it's NOT me
                 const nameTag = (!isMe) ? `<span class="sender-name">${msg.sender}</span>` : '';
 
                 row.innerHTML = `
@@ -354,7 +380,6 @@
             });
             
             chatWindow.appendChild(fragment);
-            // Scroll to bottom
             setTimeout(() => {
                 chatWindow.scrollTop = chatWindow.scrollHeight;
             }, 100);
