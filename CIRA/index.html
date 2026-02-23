@@ -31,27 +31,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ── CURSOR: only on true pointer devices ── */
-@media(hover:hover) and (pointer:fine){
-  body{cursor:none}
-  #cursor{display:block}
-}
-#cursor{
-  display:none;
-  position:fixed;top:0;left:0;z-index:99999;pointer-events:none;
-}
-.cursor-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--ink);
-  position:absolute;transform:translate(-50%,-50%);
-}
-.cursor-ring{
-  width:28px;height:28px;border-radius:50%;
-  border:1.5px solid var(--ink-3);
-  position:absolute;transform:translate(-50%,-50%);
-  transition:width .35s cubic-bezier(.16,1,.3,1),height .35s cubic-bezier(.16,1,.3,1),border-color .25s;
-}
-#cursor.hover .cursor-ring{width:46px;height:46px;border-color:var(--accent-indigo)}
+
 
 /* ── BACKGROUND ── */
 .bg-texture{
@@ -371,8 +351,7 @@ h1 em{font-style:italic;color:var(--accent-indigo)}
 </head>
 <body>
 
-<!-- CURSOR (desktop only, shown via CSS @media) -->
-<div id="cursor"><div class="cursor-dot"></div><div class="cursor-ring"></div></div>
+
 
 <div class="bg-texture"></div>
 <div class="bg-dots"></div>
@@ -559,14 +538,14 @@ h1 em{font-style:italic;color:var(--accent-indigo)}
 </div>
 
 <!-- CHAT BUTTON -->
-<div id="assistant-btn" title="C.I.R.A">🧠</div>
+<div id="assistant-btn" title="Campus Assistant">🧠</div>
 
 <!-- CHAT PANEL -->
 <div id="assistant-panel">
   <div id="assistant-header">
     <div class="ha-title">
       <div class="ha-dot"></div>
-      C.I.R.A
+      Campus Assistant
     </div>
     <button id="close-btn" aria-label="Close">✕</button>
   </div>
@@ -587,33 +566,6 @@ h1 em{font-style:italic;color:var(--accent-indigo)}
 </style>
 
 <script>
-/* ─────────────────────────────────────────────
-   CURSOR — mouse-only, skipped on touch devices
-───────────────────────────────────────────── */
-const cursorEl = document.getElementById('cursor');
-const dot = cursorEl.querySelector('.cursor-dot');
-const ring = cursorEl.querySelector('.cursor-ring');
-let rx = 0, ry = 0, mx = -200, my = -200;
-let hasPointer = false;
-
-document.addEventListener('mousemove', e => {
-  if (!hasPointer) { hasPointer = true; cursorEl.style.display = 'block'; }
-  mx = e.clientX; my = e.clientY;
-}, { passive: true });
-
-(function loop() {
-  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(loop);
-})();
-
-document.querySelectorAll('.card,.chip,.flow-node,.tag,.member-card,.arch-layer,#assistant-btn')
-  .forEach(el => {
-    el.addEventListener('mouseenter', () => cursorEl.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursorEl.classList.remove('hover'));
-  });
-
 /* ─────────────────────────────────────────────
    CARD TILT (desktop only)
 ───────────────────────────────────────────── */
