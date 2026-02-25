@@ -730,25 +730,23 @@ function renderResponse(data) {
   if (data.answer) addBotBubble(data.answer);
 
   data.sources.forEach(item => {
-    // ── Unwrap the nested structure from SearchResult.to_dict()
-    const raw         = item.content || item;           // content wrapper
-    const sourceType  = item.source_type || 'faculty';
+    const raw        = item.content || item;
+    const sourceType = item.source_type || 'faculty';
 
     let name = '', designation = '', imageUrl = '', profileUrl = '';
 
     if (sourceType === 'leadership') {
-      // sru_pillars.json structure
-      const person  = raw.person  || {};
-      name          = person.name         || raw.unit_name || '';
-      designation   = raw.role_type       || person.designation || '';
-      imageUrl      = person.image_link   || person.photo || '';
-      profileUrl    = person.profile_link || person.url   || '';
+      const person = raw.person || {};
+      name        = person.name        || raw.unit_name || '';
+      designation = person.designation || raw.role_type || '';
+      imageUrl    = person.image_url   || '';          // ← image_url not image_link
+      profileUrl  = person.profile_url || '';          // ← none in your data, graceful fallback
     } else {
-      // faculty_metadata.json — flat structure
+      // faculty_metadata flat structure — adjust keys to match your actual faculty JSON
       name        = raw.name        || '';
       designation = raw.designation || raw.department || '';
-      imageUrl    = raw.image_link  || raw.photo      || '';
-      profileUrl  = raw.profile_link|| raw.url        || '';
+      imageUrl    = raw.image_url   || raw.image_link || '';
+      profileUrl  = raw.profile_url || raw.profile_link || '';
     }
 
     const card = document.createElement('a');
@@ -757,10 +755,10 @@ function renderResponse(data) {
     card.target    = '_blank';
     card.rel       = 'noopener';
 
-    const img  = document.createElement('img');
-    img.src    = imageUrl;
-    img.alt    = name || 'Profile';
-    img.onerror = () => { img.style.display = 'none'; };
+    const img     = document.createElement('img');
+    img.src       = imageUrl;
+    img.alt       = name || 'Profile';
+    img.onerror   = () => { img.style.display = 'none'; };
     if (!imageUrl) img.style.display = 'none';
 
     const info = document.createElement('div');
