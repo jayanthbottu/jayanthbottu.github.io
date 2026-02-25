@@ -474,8 +474,7 @@
             position: relative;
             z-index: 1;
             box-shadow: var(--nm-inset);
-            transform: rotate(2deg);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
         }
 
         .hero-img-frame:hover img {
@@ -1031,8 +1030,7 @@
             </div>
             <div class="hero-img-wrapper">
                 <div class="hero-img-frame">
-                    <img src="picj.jpg" alt="Jayanth Profile"
-                        onerror="this.src='https://ui-avatars.com/api/?name=Jayanth+Bottu&background=e85d26&color=fff&size=512'">
+                    <img src="lightbg.png" id="profile-img" alt="Jayanth Profile" onerror="this.src='https://ui-avatars.com/api/?name=Jayanth+Bottu&background=e85d26&color=fff&size=512'">
                     <div class="hero-badge hero-badge-1">
                         <i class="fas fa-brain"></i> AI Engineer
                     </div>
@@ -1095,7 +1093,7 @@
         <p class="section-subtitle reveal">Professional experiences that shaped my expertise</p>
         <div class="experience-wrapper">
             <div class="exp-item reveal reveal-stagger" style="--stagger-index: 0">
-                <div class="exp-date">April 2025 – Oct 2025</div>
+                <div class="exp-date">April – Oct 2025</div>
                 <div class="exp-details">
                     <h3>ServiceNow Virtual Intern</h3>
                     <h4>SmartBridge & AICTE</h4>
@@ -1313,6 +1311,7 @@
         const themeIcon = themeBtn.querySelector('i');
         const body = document.body;
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+	const profileImg = document.getElementById('profile-img');
 
         function getPreferredTheme() {
             const saved = localStorage.getItem('theme');
@@ -1322,6 +1321,9 @@
         function applyTheme(theme) {
             body.setAttribute('data-theme', theme);
             themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+		if (profileImg) {
+        profileImg.src = theme === 'dark' ? 'darkbg.jpg' : 'lightbg.png';
+    }
         }
 
         applyTheme(getPreferredTheme());
