@@ -723,35 +723,59 @@ function renderResponse(data) {
 
     /* List of people / profiles */
     case 'image_list':
-      if (!Array.isArray(data.sources) || data.sources.length === 0) {
-        addBotBubble('No results found.');
-        break;
-      }
-      if (data.answer) addBotBubble(data.answer);
-      data.sources.forEach(item => {
-        const card = document.createElement('a');
-        card.className = 'profile-card';
-        card.href = item.profile_link || '#';
-        card.target = '_blank';
-        card.rel = 'noopener';
+  if (!Array.isArray(data.sources) || data.sources.length === 0) {
+    addBotBubble('No results found.');
+    break;
+  }
+  if (data.answer) addBotBubble(data.answer);
 
-        const img = document.createElement('img');
-        img.src = item.image_link || '';
-        img.alt = item.name || 'Profile';
-        img.onerror = () => { img.style.display='none'; };
+  data.sources.forEach(item => {
+    // ── Unwrap the nested structure from SearchResult.to_dict()
+    const raw         = item.content || item;           // content wrapper
+    const sourceType  = item.source_type || 'faculty';
 
-        const info = document.createElement('div');
-        info.className = 'profile-info';
-        info.innerHTML = `
-          <div class="profile-name">${escHtml(item.name || '')}</div>
-          <div class="profile-role">${escHtml(item.designation || '')}</div>
-          ${item.profile_link ? `<span class="profile-link">View Profile →</span>` : ''}
-        `;
-        card.appendChild(img);
-        card.appendChild(info);
-        addEl(card);
-      });
-      break;
+    let name = '', designation = '', imageUrl = '', profileUrl = '';
+
+    if (sourceType === 'leadership') {
+      // sru_pillars.json structure
+      const person  = raw.person  || {};
+      name          = person.name         || raw.unit_name || '';
+      designation   = raw.role_type       || person.designation || '';
+      imageUrl      = person.image_link   || person.photo || '';
+      profileUrl    = person.profile_link || person.url   || '';
+    } else {
+      // faculty_metadata.json — flat structure
+      name        = raw.name        || '';
+      designation = raw.designation || raw.department || '';
+      imageUrl    = raw.image_link  || raw.photo      || '';
+      profileUrl  = raw.profile_link|| raw.url        || '';
+    }
+
+    const card = document.createElement('a');
+    card.className = 'profile-card';
+    card.href      = profileUrl || '#';
+    card.target    = '_blank';
+    card.rel       = 'noopener';
+
+    const img  = document.createElement('img');
+    img.src    = imageUrl;
+    img.alt    = name || 'Profile';
+    img.onerror = () => { img.style.display = 'none'; };
+    if (!imageUrl) img.style.display = 'none';
+
+    const info = document.createElement('div');
+    info.className = 'profile-info';
+    info.innerHTML = `
+      <div class="profile-name">${escHtml(name)}</div>
+      <div class="profile-role">${escHtml(designation)}</div>
+      ${profileUrl ? `<span class="profile-link">View Profile →</span>` : ''}
+    `;
+
+    card.appendChild(img);
+    card.appendChild(info);
+    addEl(card);
+  });
+  break;
 
     /* Interactive campus map */
     case 'campus_map':
