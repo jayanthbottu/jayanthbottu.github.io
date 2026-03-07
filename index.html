@@ -822,6 +822,75 @@
         }
 
         /* ====================================================
+           8.5 CERTIFICATIONS SECTION
+           ==================================================== */
+        #certifications { padding: 110px 0; }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+            max-width: 1160px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .cert-card {
+            background: var(--bg);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--nm-raised);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cert-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: var(--nm-raised-lg); 
+        }
+
+        .cert-img-wrapper {
+            width: 100%;
+            height: 220px; /* Slightly taller to accommodate certificate ratios */
+            border-radius: var(--radius-md);
+            background: rgb(246, 244, 244);
+            box-shadow: var(--nm-inse   t);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px; /* Gives the certificate breathing room inside the box */
+            overflow: hidden;
+        }
+
+        .cert-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* CRITICAL: Ensures the whole image fits without cropping */
+            transition: transform 0.5s ease;
+            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.1)); /* Adds a subtle realistic shadow to the document */
+        }
+
+        .cert-card:hover .cert-img-wrapper img {
+            transform: scale(1.06);
+        }
+        
+        .cert-content {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .cert-content h3 {
+            margin-bottom: 0;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+        }
+
+        
+        /* ====================================================
            9. CONTACT SECTION
            ==================================================== */
         #contact {
@@ -1205,7 +1274,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal reveal-stagger" style="--stagger-index: 4">
+            <!-- <div class="project-card reveal reveal-stagger" style="--stagger-index: 4">
                 <div class="img-container">
                     <i class="fas fa-home img-fallback"></i>
                     <img src="proj/smarthome.png" alt="Smart Home" class="project-img"
@@ -1227,7 +1296,70 @@
                             class="btn-sm btn-fill"><i class="fas fa-external-link-alt"></i> Live</a>
                     </div>
                 </div>
+            </div> -->
+        </div>
+    </section>
+
+    <section id="certifications">
+        <h2 class="section-title reveal">Certifications</h2>
+        <p class="section-subtitle reveal">Professional credentials and continuous learning</p>
+        
+        <div class="cert-grid">
+            
+            <div class="cert-card reveal reveal-stagger" style="--stagger-index: 0;">
+                <div class="cert-img-wrapper">
+                    <img src="certs/AI-for-Fintech-Security.svg" alt="AI for Fintech Security Certificate">
+                </div>
+                <div class="cert-content">
+                    <h3>AI for Fintech Security</h3>
+                </div>
             </div>
+
+            <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
+                <div class="cert-img-wrapper">
+                    <img src="certs/Prompt-Engineering-Research-and-Integration-Remote-Internship.svg" alt="Prompt Engineering Certificate">
+                </div>
+                <div class="cert-content">
+                    <h3>Prompt Engineering - Excelerate</h3>
+                </div>
+            </div>
+
+            <div class="cert-card reveal reveal-stagger" style="--stagger-index: 1;">
+                <div class="cert-img-wrapper">
+                    <img src="certs/Zero-Trust-Cyber-Associate-_ZTCA.svg" alt="ZTCA Certificate">
+                </div>
+                <div class="cert-content">
+                    <h3>Zero Trust Cyber Associate (ZTCA)</h3>
+                </div>
+            </div>
+
+            <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
+                <div class="cert-img-wrapper">
+                    <img src="certs/AIML Learning Track – GenAI Academy 2.0.png" alt="GenAI Academy Certificate">
+                </div>
+                <div class="cert-content">
+                    <h3>GenAI Academy 2.0 (AIML)</h3>
+                </div>
+            </div>
+
+            <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
+                <div class="cert-img-wrapper">
+                    <img src="certs/Security Learning Track – GenAI Academy 2.0.png" alt="GenAI Academy Certificate">
+                </div>
+                <div class="cert-content">
+                    <h3>GenAI Academy 2.0 (SECURITY)</h3>
+                </div>
+            </div>
+
+            <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
+                <div class="cert-img-wrapper">
+                    <img src="certs/ServiceNow-Certified-System-Administrator.svg" alt="ServiceNow CSA Certificate">
+                </div>
+                <div class="cert-content">
+                    <h3>ServiceNow Certified System Administrator</h3>
+                </div>
+            </div>
+
         </div>
     </section>
 
