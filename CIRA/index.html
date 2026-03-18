@@ -885,7 +885,7 @@
     <footer>
       <div class="foot-l">
         <div class="foot-word">C<span>I</span>RA</div>
-        <div class="foot-sub">Designed &amp; Developed by <a href="#team" style="color:var(--accent5);text-decoration:none;"> ● TEAM</a> © 2026</div>
+        <div class="foot-sub">Designed &amp; Developed by <a href="#team" style="color:var(--accent5);text-decoration:none;">   ● TEAM</a>   © 2026</div>
       </div>
       <div class="foot-r">
         <span>Campus Information Retrieval System</span>
@@ -1209,7 +1209,7 @@
      MAP WIDGET
   ══════════════════════════════════════════════ */
   function renderMapWidget(data) {
-    const mapSrc = 'https://github.com/jayanthbottu/jayanthbottu.github.io/blob/main/CIRA/SRUniversity.png?raw=true';
+    const mapSrc = 'SRUniversity.png';
     const pinX   = data.x ?? 0;
     const pinY   = data.y ?? 0;
     const name   = data.name || 'Location';
@@ -1374,7 +1374,7 @@
 
     document.getElementById('popupLocationName').textContent = name;
     const popupImg = document.getElementById('popupMapImg');
-    popupImg.src = 'https://github.com/jayanthbottu/jayanthbottu.github.io/blob/main/CIRA/SRUniversity.png?raw=true';
+    popupImg.src = 'SRUniversity.png';
 
     const canvas = document.getElementById('popupCanvas');
     [...canvas.querySelectorAll('.map-pin-primary,.map-pin-ripple,.map-label-primary,.map-pin-nearby,.map-label-nearby')].forEach(el=>el.remove());
