@@ -1209,7 +1209,7 @@
      MAP WIDGET
   ══════════════════════════════════════════════ */
   function renderMapWidget(data) {
-    const mapSrc = data.map_image || 'SRUniversity.png';
+    const mapSrc = data.map_image || 'https://github.com/jayanthbottu/jayanthbottu.github.io/blob/main/CIRA/SRUniversity.png?raw=true';
     const pinX   = data.x ?? 0;
     const pinY   = data.y ?? 0;
     const name   = data.name || 'Location';
@@ -1374,7 +1374,7 @@
 
     document.getElementById('popupLocationName').textContent = name;
     const popupImg = document.getElementById('popupMapImg');
-    popupImg.src = data.map_image || 'SRUniversity.png';
+    popupImg.src = data.map_image || 'https://github.com/jayanthbottu/jayanthbottu.github.io/blob/main/CIRA/SRUniversity.png?raw=true';
 
     const canvas = document.getElementById('popupCanvas');
     [...canvas.querySelectorAll('.map-pin-primary,.map-pin-ripple,.map-label-primary,.map-pin-nearby,.map-label-nearby')].forEach(el=>el.remove());
