@@ -12,7 +12,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* ── Lighter Backgrounds ── */
       --bg:   #f0f5fb;
       --bg2:  #d4dce8;
       --surface: #e8edf5;
@@ -24,7 +23,6 @@
       --nm-inset:  inset 4px 4px 10px var(--nm-dark), inset -4px -4px 10px var(--nm-light);
       --nm-sm:     4px 4px 10px var(--nm-dark), -4px -4px 10px var(--nm-light);
 
-      /* ── Accent palette ── */
       --accent:      #4a40c4;
       --accent-soft: rgba(74,64,196,0.10);
       --accent-mid:  rgba(74,64,196,0.28);
@@ -35,17 +33,14 @@
       --accent4:     #c4870a;
       --accent5:     #7c1a6e;
 
-      /* ── Ink ── */
       --ink:  #111318;
       --ink2: #1e2128;
       --ink3: #2d3240;
       --ink4: #4a5068;
 
-      /* ── Borders ── */
       --border:  rgba(74,64,196,0.13);
       --border2: rgba(74,64,196,0.26);
 
-      /* ── Chat ── */
       --chat-bg:       #dfe5f0;
       --chat-panel-bg: rgba(238,242,252,0.98);
     }
@@ -76,9 +71,7 @@
 
     .page { position: relative; z-index: 1; max-width: 1250px; margin: 0 auto; padding: 0 44px; }
 
-    /* ═══════════════════════════════
-       NAV
-    ═══════════════════════════════ */
+    /* NAV */
     nav {
       display: flex; align-items: center; gap: 12px;
       padding: 20px 0; justify-content: space-between;
@@ -115,9 +108,7 @@
     }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.82)} }
 
-    /* ═══════════════════════════════
-       HERO
-    ═══════════════════════════════ */
+    /* HERO */
     .hero {
       display: grid;
       grid-template-columns: 1fr 640px;
@@ -174,9 +165,7 @@
     }
     .btn-sec:hover { color: var(--accent); box-shadow: 5px 5px 12px var(--nm-dark), -5px -5px 12px var(--nm-light); }
 
-    /* ═══════════════════════════════
-       RAG CARD
-    ═══════════════════════════════ */
+    /* RAG CARD */
     .rag-card {
       background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255,255,255,0.88); border-radius: 26px; padding: 34px 30px;
@@ -243,9 +232,7 @@
     .rtag.r { color: var(--accent2); border-color: rgba(194,59,88,0.22); }
     .rtag.v { color: #7c1a6e;        border-color: rgba(124,26,110,0.38); }
 
-    /* ═══════════════════════════════
-       FEATURES
-    ═══════════════════════════════ */
+    /* FEATURES */
     .feats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; padding: 20px 0 30px; }
     .feat {
       background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -266,14 +253,10 @@
     .feat-tag.g { color: var(--accent3); }
     .feat-tag.r { color: var(--accent2); }
 
-    /* ═══════════════════════════════
-       DIVIDER
-    ═══════════════════════════════ */
+    /* DIVIDER */
     .div { height: 1px; background: rgba(74,64,196,0.10); }
 
-    /* ═══════════════════════════════
-       TEAM
-    ═══════════════════════════════ */
+    /* TEAM */
     .section { padding: 30px 0 18px; }
     .sec-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
     .sec-title { font-family: "Cormorant Garamond", serif; font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 600; color: var(--ink); }
@@ -317,9 +300,7 @@
     .guide-role { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
     .guide-dept { font-size: 0.83rem; color: var(--ink3); }
 
-    /* ═══════════════════════════════
-       FOOTER
-    ═══════════════════════════════ */
+    /* FOOTER */
     footer {
       padding: 22px 0 28px; margin-top: 28px;
       border-top: 1px solid rgba(74,64,196,0.10);
@@ -331,9 +312,7 @@
     .foot-sub { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--ink3); display: flex; align-items: center; }
     .foot-r { display: flex; align-items: center; gap: 14px; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); }
 
-    /* ═══════════════════════════════
-       FAB
-    ═══════════════════════════════ */
+    /* FAB */
     .fab {
       position: fixed; bottom: 24px; right: 24px; z-index: 1000;
       width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
@@ -347,9 +326,7 @@
     .fab.is-open { border-radius: 16px; }
     .fab-ring { position: absolute; top:-3px; right:-3px; width:14px; height:14px; border-radius:50%; background:var(--accent3); border:2.5px solid var(--bg); box-shadow:0 0 6px var(--accent3); animation:pulse 2s ease-in-out infinite; }
 
-    /* ═══════════════════════════════
-       ANIMATIONS
-    ═══════════════════════════════ */
+    /* ANIMATIONS */
     .fu { opacity:0; transform:translateY(20px); animation:fadeUp 0.65s cubic-bezier(.16,1,.3,1) forwards; }
     @keyframes fadeUp { to { opacity:1; transform:none; } }
     .d1{animation-delay:.09s} .d2{animation-delay:.18s} .d3{animation-delay:.27s} .d4{animation-delay:.36s}
@@ -376,7 +353,7 @@
     }
     @keyframes panelIn { from{opacity:0;transform:translateY(16px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
 
-    /* ─ Header ─ */
+    /* Header */
     #assistant-header {
       padding: 12px 16px 10px;
       border-bottom: 1px solid rgba(74,64,196,0.10);
@@ -418,7 +395,7 @@
     }
     #close-btn:hover { background: rgba(194,59,88,0.20); }
 
-    /* ─ Quick Prompts ─ */
+    /* Quick Prompts */
     #quick-prompts {
       display: flex; gap: 6px; padding: 9px 12px 6px; overflow-x: auto;
       scrollbar-width: none; flex-shrink: 0;
@@ -435,7 +412,7 @@
     .qp-chip:hover { background: var(--accent-soft); color: var(--accent); border-color: rgba(74,64,196,0.28); }
     .qp-chip span { font-size: 0.78rem; }
 
-    /* ─ Messages ─ */
+    /* Messages */
     #assistant-messages {
       flex: 1; padding: 10px 12px; overflow-y: auto;
       display: flex; flex-direction: column; gap: 9px;
@@ -501,7 +478,7 @@
       font-size: 0.78rem; text-align: center; max-width: 92%;
     }
 
-    /* ─ Input area ─ */
+    /* Input area */
     #assistant-input-area {
       display: flex; border-top: 1px solid rgba(74,64,196,0.09);
       background: rgba(255,255,255,0.75); backdrop-filter: blur(12px);
@@ -525,7 +502,7 @@
     #send-btn:active { transform: scale(0.94); }
     #send-btn svg { width: 16px; height: 16px; }
 
-    /* ─ Profile cards ─ */
+    /* Profile cards */
     .profile-cards-wrap { display: flex; flex-direction: column; gap: 7px; align-self: flex-start; max-width: 93%; }
     .profile-card {
       background: rgba(255,255,255,0.98); border: 1px solid rgba(91,82,168,0.18);
@@ -540,14 +517,28 @@
     .profile-role { font-size: 0.68rem; font-weight: 600; color: var(--ink4); line-height: 1.4; }
     .profile-link-tag { display:inline-flex;align-items:center;gap:3px; margin-top:4px; font-size:.68rem; font-weight:600; color:var(--accent); background:var(--accent-soft); padding:2px 7px; border-radius:5px; }
 
-    /* ═══════════════════════════════
+    /* ═══════════════════════════════════════════════
        MAP WIDGET (inline in chat)
-    ═══════════════════════════════ */
-    .map-widget { position:relative; width:100%; border-radius:15px; overflow:hidden; border:1px solid rgba(74,64,196,0.18); background:#eaeff5; box-shadow:0 4px 16px rgba(0,0,0,0.07); align-self:flex-start; max-width:97%; }
-    .map-viewport { width:100%; height:300px; overflow:hidden; position:relative; cursor:grab; user-select:none; }
-    .map-viewport:active { cursor:grabbing; }
-    .map-canvas { position:absolute; top:0; left:0; transform-origin:0 0; will-change:transform; }
-    .map-canvas img { display:block; user-select:none; -webkit-user-drag:none; pointer-events:none; max-width:none; }
+       FIX: viewport uses aspect-ratio so height is always
+            proportional to the actual rendered width.
+            80% of width = aspect-ratio 10/8 → 10:8
+    ═══════════════════════════════════════════════ */
+    .map-widget {
+      position: relative; width: 96%; border-radius: 15px; overflow: hidden;
+      border: 1px solid rgba(74,64,196,0.18); background: #eaeff5;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07); align-self: flex-start;
+    }
+    /* FIX 1: Use aspect-ratio so height is always 80% of width, regardless of prior messages */
+    .map-viewport {
+      width: 100%;
+      aspect-ratio: 10 / 8;   /* height = 80% of width */
+      min-height: 200px;       /* floor so tiny panels don't collapse it */
+      max-height: 340px;       /* ceiling so it's never taller than width */
+      overflow: hidden; position: relative; cursor: grab; user-select: none;
+    }
+    .map-viewport:active { cursor: grabbing; }
+    .map-canvas { position: absolute; top: 0; left: 0; transform-origin: 0 0; will-change: transform; }
+    .map-canvas img { display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; max-width: none; }
     .map-pin-primary { position:absolute; width:30px; height:30px; transform:translate(-50%,-100%); pointer-events:none; filter:drop-shadow(0 3px 6px rgba(194,59,88,0.68)); animation:pin-drop .4s cubic-bezier(.34,1.56,.64,1) both, pin-bob 2.5s .5s ease-in-out infinite; z-index:10; }
     @keyframes pin-drop { from{transform:translate(-50%,-200%);opacity:0} to{transform:translate(-50%,-100%);opacity:1} }
     @keyframes pin-bob  { 0%,100%{transform:translate(-50%,-100%)} 50%{transform:translate(-50%,-108%)} }
@@ -570,9 +561,7 @@
     .map-nearby-chip { font-size:10px; font-weight:700; padding:3px 9px; border-radius:100px; background:var(--accent-soft); color:var(--accent); border:1px solid rgba(91,82,168,0.20); cursor:pointer; transition:all .15s; }
     .map-nearby-chip:hover { background:var(--accent); color:white; }
 
-    /* ═══════════════════════════════
-       MAP FULLSCREEN POPUP
-    ═══════════════════════════════ */
+    /* MAP FULLSCREEN POPUP */
     .map-popup { position:fixed; inset:0; background:rgba(10,8,20,.92); display:none; align-items:center; justify-content:center; z-index:20000; backdrop-filter:blur(4px); }
     .map-popup.open { display:flex; animation:popupFadeIn .2s ease both; }
     @keyframes popupFadeIn { from{opacity:0} to{opacity:1} }
@@ -597,34 +586,22 @@
     .legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
     .map-popup-footer { padding:9px 16px; background:rgba(255,255,255,.04); border-top:1px solid rgba(255,255,255,.08); font-size:9px; color:rgba(255,255,255,.4); text-align:center; flex-shrink:0; }
 
-    /* ═══════════════════════════════════════════════
-       RESPONSIVE — ALL BREAKPOINTS
-    ═══════════════════════════════════════════════ */
-
-    /* ── ≤ 1180px : hero stacks ── */
+    /* RESPONSIVE */
     @media (max-width: 1180px) {
       .hero { grid-template-columns: 1fr; gap: 40px; padding: 36px 0 22px; }
       .hero-visual { max-width: 720px; margin: 0 auto; width: 100%; }
     }
-
-    /* ── ≤ 900px : features 2-col ── */
     @media (max-width: 900px) {
       .feats { grid-template-columns: repeat(2,1fr); }
     }
-
-    /* ── ≤ 850px : team 2-col ── */
     @media (max-width: 850px) {
       .team-grid { grid-template-columns: repeat(2,1fr); }
     }
-
-    /* ── ≤ 700px : nav compact, reduce page pad ── */
     @media (max-width: 700px) {
       .page { padding: 0 20px; }
       nav { gap: 10px; padding: 16px 0; }
       .nav-badge { padding: 7px 14px; font-size: 0.65rem; gap: 5px; }
       .nav-badge .dot-live { display: none; }
-
-      /* hero text */
       .hero { padding: 28px 0 18px; gap: 32px; }
       .hero-h1 { font-size: clamp(2.4rem, 9vw, 3.5rem); margin-bottom: 22px; }
       .pill-row { gap: 8px; margin-bottom: 26px; }
@@ -632,8 +609,6 @@
       .cta-row { gap: 10px; }
       .btn-main { padding: 13px 24px; font-size: 0.95rem; }
       .btn-sec  { padding: 12px 20px; font-size: 0.95rem; }
-
-      /* RAG card */
       .rag-card { padding: 24px 20px; border-radius: 20px; }
       .rn { padding: 16px 10px; min-width: 68px; }
       .rn-ico { width: 42px; height: 42px; font-size: 1.1rem; }
@@ -641,20 +616,12 @@
       .rag-conn { width: 24px; }
       .rag-tags { gap: 6px; margin-top: 16px; }
       .rtag { font-size: 0.68rem; padding: 5px 11px; }
-
-      /* features */
       .feats { grid-template-columns: 1fr; gap: 10px; padding: 16px 0 22px; }
       .feat { padding: 14px; }
-
-      /* team */
       .team-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
       .guide { padding: 18px 20px; gap: 16px; }
-
-      /* footer */
       .foot-r { display: none; }
       footer  { padding: 18px 0 24px; }
-
-      /* fab & chat panel full-width on mobile */
       .fab { bottom: 18px; right: 18px; width: 52px; height: 52px; }
       #assistant-panel {
         bottom: 0; right: 0; left: 0;
@@ -662,40 +629,31 @@
         height: min(88vh, 620px);
       }
     }
-
-    /* ── ≤ 480px : tightest mobile ── */
     @media (max-width: 480px) {
       .page { padding: 0 14px; }
       .logo-mark { width: 44px; height: 44px; border-radius: 12px; }
       .logo-mark svg { width: 22px; height: 22px; }
       .logo-word { font-size: 1.7rem; }
       .nav-badge { font-size: 0.6rem; padding: 6px 12px; }
-
       .hero-h1 { font-size: clamp(2rem, 10vw, 3rem); }
       .cta-row { flex-direction: column; align-items: flex-start; }
       .btn-main, .btn-sec { width: 100%; justify-content: center; }
-
       .rag-card { padding: 18px 14px; border-radius: 16px; }
       .rn { min-width: 58px; padding: 12px 6px; gap: 8px; }
       .rn-ico { width: 36px; height: 36px; font-size: 1rem; border-radius: 10px; }
       .rn-name { font-size: 0.66rem; }
       .rn-badge { font-size: 0.52rem; padding: 4px 7px; }
       .rag-conn { width: 18px; }
-
       .team-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
       .tm { padding: 16px 10px; }
       .tm-av { width: 56px; height: 56px; }
       .guide { flex-direction: column; text-align: center; gap: 14px; align-items: center; }
       .guide-av { width: 64px; height: 86px; }
-
       .sec-title { font-size: 1.7rem; }
-
       #quick-prompts { padding: 7px 10px 5px; }
       .qp-chip { font-size: 0.66rem; padding: 4px 9px; }
       #assistant-input { font-size: 0.82rem; }
     }
-
-    /* ── ≤ 360px : very small ── */
     @media (max-width: 360px) {
       .page { padding: 0 10px; }
       .nav-badge { display: none; }
@@ -787,7 +745,7 @@
             <div class="rtag a">Privacy-First</div>
             <div class="rtag g">RRF Fusion</div>
             <div class="rtag r">No Hallucinations</div>
-            <div class="rtag v">Zero Cloud</div>
+            <div class="rtag v">Zero Cloud Involved</div>
           </div>
         </div>
       </div>
@@ -885,7 +843,7 @@
     <footer>
       <div class="foot-l">
         <div class="foot-word">C<span>I</span>RA</div>
-        <div class="foot-sub">Designed &amp; Developed by <a href="#team" style="color:var(--accent5);text-decoration:none;">   ● TEAM</a>   © 2026</div>
+        <div class="foot-sub">Designed &amp; Developed by <a href="#team" style="color:var(--accent5);text-decoration:none;">  ● TEAM</a>  © 2026</div>
       </div>
       <div class="foot-r">
         <span>Campus Information Retrieval System</span>
@@ -985,7 +943,28 @@
   ══════════════════════════════════════════════ */
   const API_URL    = 'https://jayanthbottu-cira.hf.space/chat';
   const STATUS_URL = 'https://jayanthbottu-cira.hf.space/slm-status';
+  const MAP_SRC    = 'SRUniversity.png';
+
   let hasShownWelcome = false;
+
+  /* ══════════════════════════════════════════════
+     FIX 2: Pre-load map image once, cache the
+     HTMLImageElement so subsequent widgets reuse
+     the already-decoded bitmap — onload fires
+     immediately via the cached path.
+  ══════════════════════════════════════════════ */
+  const _mapImageCache = {};
+
+  function getMapImage(src) {
+    if (_mapImageCache[src]) return _mapImageCache[src];
+    const img = new Image();
+    img.src = src;
+    _mapImageCache[src] = img;
+    return img;
+  }
+
+  // Kick off the preload immediately
+  getMapImage(MAP_SRC);
 
   /* ══════════════════════════════════════════════
      SLM STATUS POLL
@@ -1207,9 +1186,13 @@
 
   /* ══════════════════════════════════════════════
      MAP WIDGET
+     FIX 2 (continued): use cached image element
+     and manually trigger the layout once the image
+     is confirmed loaded — handles both fresh load
+     and already-cached (complete) cases so the map
+     renders correctly on every query, not just the first.
   ══════════════════════════════════════════════ */
   function renderMapWidget(data) {
-    const mapSrc = 'SRUniversity.png';
     const pinX   = data.x ?? 0;
     const pinY   = data.y ?? 0;
     const name   = data.name || 'Location';
@@ -1220,12 +1203,15 @@
     const canvas   = document.createElement('div');   canvas.className   = 'map-canvas';
     canvas.dataset.pinx = pinX; canvas.dataset.piny = pinY;
 
+    // Create a NEW img element per widget (so each has independent src & layout)
     const img = document.createElement('img');
     img.alt = 'Campus map'; img.draggable = false;
     canvas.appendChild(img);
 
-    const pin    = document.createElement('img');    pin.className    = 'map-pin-primary';
-    pin.src = 'https://img.icons8.com/?size=100&id=Sk4BAluINF9y&format=png&color=e8758a'; pin.alt = '';
+    const pin    = document.createElement('img');
+    pin.className = 'map-pin-primary';
+    pin.src = 'https://img.icons8.com/?size=100&id=Sk4BAluINF9y&format=png&color=e8758a';
+    pin.alt = '';
     const ripple = document.createElement('div');   ripple.className = 'map-pin-ripple';
     const label  = document.createElement('div');   label.className  = 'map-label-primary'; label.textContent = name;
 
@@ -1267,10 +1253,13 @@
 
     addEl(widget);
 
+    // Pan/zoom state
     let scale = 1, posX = 0, posY = 0;
     let isDragging = false, startX = 0, startY = 0;
 
-    function applyTransform() { canvas.style.transform = `translate(${posX}px,${posY}px) scale(${scale})`; }
+    function applyTransform() {
+      canvas.style.transform = `translate(${posX}px,${posY}px) scale(${scale})`;
+    }
 
     widget._map = {
       canvas, viewport, applyTransform,
@@ -1279,80 +1268,91 @@
     };
     widget._mapData = data;
 
-    img.onload = () => {
-      pin.style.left = pinX+'px'; pin.style.top = pinY+'px';
-      ripple.style.left = pinX+'px'; ripple.style.top = pinY+'px';
-      label.style.left = pinX+'px'; label.style.top = pinY+'px';
+    // Pin placement — runs after image dimensions are known
+    function placePinsAndCenter() {
+      pin.style.left    = pinX + 'px'; pin.style.top    = pinY + 'px';
+      ripple.style.left = pinX + 'px'; ripple.style.top = pinY + 'px';
+      label.style.left  = pinX + 'px'; label.style.top  = pinY + 'px';
 
-      /* Use offsetWidth/offsetHeight (layout dimensions, unaffected by scroll position).
-         Retry up to 10 rAF ticks — cached images fire onload before first paint,
-         so dimensions can be 0 on the first few frames. */
+      // Retry until viewport has layout dimensions (cached images can fire
+      // before first paint so offsetWidth may still be 0)
       function centerOnPin(tries) {
         tries = tries || 0;
         const w = viewport.offsetWidth;
         const h = viewport.offsetHeight;
-        if ((w === 0 || h === 0) && tries < 10) {
+        if ((w === 0 || h === 0) && tries < 15) {
           return requestAnimationFrame(() => centerOnPin(tries + 1));
         }
         scale = 0.55;
         posX = (w || 360) / 2 - pinX * scale;
-        posY = (h || 300) / 2 - pinY * scale - 80;
+        posY = (h || 290) / 2 - pinY * scale - 80;
         applyTransform();
-        /* Re-scroll so the newly-rendered map is visible */
         const msgs = document.getElementById('assistant-messages');
         if (msgs) requestAnimationFrame(() => { msgs.scrollTop = msgs.scrollHeight; });
       }
       requestAnimationFrame(() => centerOnPin(0));
-    };
-    img.src = mapSrc;
+    }
 
+    // FIX 2 core: always attach onload, then check complete flag.
+    // If the browser already has the image decoded, set src fires
+    // onload synchronously in some browsers but not others —
+    // so we normalise: set onload first, then set src, then check complete.
+    img.onload = placePinsAndCenter;
+    img.src = MAP_SRC;
+    // If already cached/complete, onload may not fire — call manually.
+    if (img.complete && img.naturalWidth > 0) {
+      placePinsAndCenter();
+    }
+
+    // ── Interaction: wheel zoom ──
     viewport.addEventListener('wheel', e => {
       e.preventDefault();
       const rect = viewport.getBoundingClientRect();
-      const mx = e.clientX-rect.left, my = e.clientY-rect.top;
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
       const delta = e.deltaY > 0 ? -0.08 : 0.08;
-      const ns = Math.min(5, Math.max(0.3, scale+delta));
-      const r = ns/scale; posX = mx-r*(mx-posX); posY = my-r*(my-posY); scale=ns; applyTransform();
+      const ns = Math.min(5, Math.max(0.3, scale + delta));
+      const r = ns / scale; posX = mx - r*(mx - posX); posY = my - r*(my - posY); scale = ns; applyTransform();
     }, { passive: false });
 
-    viewport.addEventListener('mousedown', e => { e.preventDefault(); isDragging=true; startX=e.clientX-posX; startY=e.clientY-posY; });
-    viewport.addEventListener('mouseup',   () => { isDragging=false; });
-    viewport.addEventListener('mouseleave',() => { isDragging=false; });
-    viewport.addEventListener('mousemove', e => { if (!isDragging) return; posX=e.clientX-startX; posY=e.clientY-startY; applyTransform(); });
+    viewport.addEventListener('mousedown',  e => { e.preventDefault(); isDragging = true; startX = e.clientX - posX; startY = e.clientY - posY; });
+    viewport.addEventListener('mouseup',    ()  => { isDragging = false; });
+    viewport.addEventListener('mouseleave', ()  => { isDragging = false; });
+    viewport.addEventListener('mousemove',  e   => { if (!isDragging) return; posX = e.clientX - startX; posY = e.clientY - startY; applyTransform(); });
 
+    // ── Interaction: touch ──
     let lastTouchDist = null;
     viewport.addEventListener('touchstart', e => {
-      if (e.touches.length===1) { isDragging=true; startX=e.touches[0].clientX-posX; startY=e.touches[0].clientY-posY; }
-      if (e.touches.length===2) lastTouchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+      if (e.touches.length === 1) { isDragging = true; startX = e.touches[0].clientX - posX; startY = e.touches[0].clientY - posY; }
+      if (e.touches.length === 2) lastTouchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
     }, { passive: true });
     viewport.addEventListener('touchmove', e => {
       e.preventDefault();
-      if (e.touches.length===1 && isDragging) { posX=e.touches[0].clientX-startX; posY=e.touches[0].clientY-startY; applyTransform(); }
-      if (e.touches.length===2 && lastTouchDist) {
-        const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-        scale=Math.min(5,Math.max(0.3,scale*(d/lastTouchDist))); lastTouchDist=d; applyTransform();
+      if (e.touches.length === 1 && isDragging) { posX = e.touches[0].clientX - startX; posY = e.touches[0].clientY - startY; applyTransform(); }
+      if (e.touches.length === 2 && lastTouchDist) {
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        scale = Math.min(5, Math.max(0.3, scale * (d / lastTouchDist))); lastTouchDist = d; applyTransform();
       }
     }, { passive: false });
-    viewport.addEventListener('touchend', () => { isDragging=false; lastTouchDist=null; });
+    viewport.addEventListener('touchend', () => { isDragging = false; lastTouchDist = null; });
   }
 
-  function getMapFromBtn(btn) { let el=btn; while(el&&!el._map) el=el.parentElement; return el?._map??null; }
+  function getMapFromBtn(btn) { let el = btn; while (el && !el._map) el = el.parentElement; return el?._map ?? null; }
 
   function inlineZoom(btn, delta) {
     const m = getMapFromBtn(btn); if (!m) return;
-    const {scale,posX,posY} = m.getState();
-    const ns = Math.min(5,Math.max(0.3,scale+delta));
+    const {scale, posX, posY} = m.getState();
+    const ns = Math.min(5, Math.max(0.3, scale + delta));
     const vr = m.viewport.getBoundingClientRect();
-    const cx=vr.width/2, cy=vr.height/2, r=ns/scale;
-    m.setState(ns, cx-r*(cx-posX), cy-r*(cy-posY));
+    const cx = vr.width/2, cy = vr.height/2, r = ns/scale;
+    m.setState(ns, cx - r*(cx - posX), cy - r*(cy - posY));
   }
 
   function inlineReset(btn) {
     const m = getMapFromBtn(btn); if (!m) return;
     const vr = m.viewport.getBoundingClientRect();
-    const px = parseFloat(m.canvas.dataset.pinx||0), py = parseFloat(m.canvas.dataset.piny||0);
+    const px = parseFloat(m.canvas.dataset.pinx || 0), py = parseFloat(m.canvas.dataset.piny || 0);
     const s = 0.55;
-    m.setState(s, vr.width/2-px*s, vr.height/2-py*s);
+    m.setState(s, vr.width/2 - px*s, vr.height/2 - py*s - 80);
   }
 
   /* ══════════════════════════════════════════════
@@ -1369,62 +1369,64 @@
     let el = btn;
     while (el && !el._mapData) el = el.parentElement;
     const data = el ? el._mapData : null; if (!data) return;
-    const pinX=data.x??0, pinY=data.y??0, name=data.name||'Campus Map';
+    const pinX = data.x ?? 0, pinY = data.y ?? 0, name = data.name || 'Campus Map';
     const nearby = Array.isArray(data.nearby) ? data.nearby : [];
 
     document.getElementById('popupLocationName').textContent = name;
     const popupImg = document.getElementById('popupMapImg');
-    popupImg.src = 'SRUniversity.png';
 
     const canvas = document.getElementById('popupCanvas');
-    [...canvas.querySelectorAll('.map-pin-primary,.map-pin-ripple,.map-label-primary,.map-pin-nearby,.map-label-nearby')].forEach(el=>el.remove());
+    [...canvas.querySelectorAll('.map-pin-primary,.map-pin-ripple,.map-label-primary,.map-pin-nearby,.map-label-nearby')].forEach(el => el.remove());
 
-    const pin=document.createElement('img'); pin.className='map-pin-primary';
-    pin.src='https://img.icons8.com/?size=100&id=Sk4BAluINF9y&format=png&color=e8758a';
-    pin.style.left=pinX+'px'; pin.style.top=pinY+'px';
-    const ripple=document.createElement('div'); ripple.className='map-pin-ripple';
-    ripple.style.left=pinX+'px'; ripple.style.top=pinY+'px';
-    const lbl=document.createElement('div'); lbl.className='map-label-primary'; lbl.textContent=name;
-    lbl.style.left=pinX+'px'; lbl.style.top=pinY+'px';
+    const pin = document.createElement('img'); pin.className = 'map-pin-primary';
+    pin.src = 'https://img.icons8.com/?size=100&id=Sk4BAluINF9y&format=png&color=e8758a';
+    pin.style.left = pinX + 'px'; pin.style.top = pinY + 'px';
+    const ripple = document.createElement('div'); ripple.className = 'map-pin-ripple';
+    ripple.style.left = pinX + 'px'; ripple.style.top = pinY + 'px';
+    const lbl = document.createElement('div'); lbl.className = 'map-label-primary'; lbl.textContent = name;
+    lbl.style.left = pinX + 'px'; lbl.style.top = pinY + 'px';
     canvas.appendChild(ripple); canvas.appendChild(pin); canvas.appendChild(lbl);
 
     nearby.forEach(place => {
-      const np=document.createElement('div'); np.className='map-pin-nearby'; np.style.left=place.x+'px'; np.style.top=place.y+'px';
-      const nl=document.createElement('div'); nl.className='map-label-nearby'; nl.textContent=place.name; nl.style.left=place.x+'px'; nl.style.top=place.y+'px';
-      np.addEventListener('mouseenter',()=>nl.classList.add('visible')); np.addEventListener('mouseleave',()=>nl.classList.remove('visible'));
+      const np = document.createElement('div'); np.className = 'map-pin-nearby'; np.style.left = place.x + 'px'; np.style.top = place.y + 'px';
+      const nl = document.createElement('div'); nl.className = 'map-label-nearby'; nl.textContent = place.name; nl.style.left = place.x + 'px'; nl.style.top = place.y + 'px';
+      np.addEventListener('mouseenter', () => nl.classList.add('visible')); np.addEventListener('mouseleave', () => nl.classList.remove('visible'));
       canvas.appendChild(np); canvas.appendChild(nl);
     });
 
-    popupImg.onload = () => {
-      const vp=document.getElementById('popupViewport'); const vr=vp.getBoundingClientRect();
-      popup.scale=Math.min(vr.width/popupImg.naturalWidth, vr.height/popupImg.naturalHeight)*1.6;
-      popup.posX=vr.width/2-pinX*popup.scale; popup.posY=vr.height/2-pinY*popup.scale;
+    function doPopupCenter() {
+      const vp = document.getElementById('popupViewport'); const vr = vp.getBoundingClientRect();
+      popup.scale = Math.min(vr.width / popupImg.naturalWidth, vr.height / popupImg.naturalHeight) * 1.6;
+      popup.posX = vr.width/2 - pinX * popup.scale; popup.posY = vr.height/2 - pinY * popup.scale;
       popupApplyTransform();
-    };
-    if (popupImg.complete && popupImg.naturalWidth>0) popupImg.onload();
+    }
+
+    popupImg.onload = doPopupCenter;
+    popupImg.src = MAP_SRC;
+    if (popupImg.complete && popupImg.naturalWidth > 0) doPopupCenter();
 
     document.getElementById('mapPopup').classList.add('open');
     document.getElementById('mapPopup')._activeData = data;
     document.body.style.overflow = 'hidden';
   }
 
-  function closeMapPopup() { document.getElementById('mapPopup').classList.remove('open'); document.body.style.overflow=''; }
+  function closeMapPopup() { document.getElementById('mapPopup').classList.remove('open'); document.body.style.overflow = ''; }
 
   function popupResetView() {
-    const vp=document.getElementById('popupViewport'); const img=document.getElementById('popupMapImg');
-    const ad=document.getElementById('mapPopup')._activeData;
-    if (!img.naturalWidth||!ad) return;
-    const vr=vp.getBoundingClientRect(); const px=ad.x??0, py=ad.y??0;
-    popup.scale=Math.min(vr.width/img.naturalWidth,vr.height/img.naturalHeight)*1.6;
-    popup.posX=vr.width/2-px*popup.scale; popup.posY=vr.height/2-py*popup.scale;
+    const vp = document.getElementById('popupViewport'); const img = document.getElementById('popupMapImg');
+    const ad = document.getElementById('mapPopup')._activeData;
+    if (!img.naturalWidth || !ad) return;
+    const vr = vp.getBoundingClientRect(); const px = ad.x ?? 0, py = ad.y ?? 0;
+    popup.scale = Math.min(vr.width / img.naturalWidth, vr.height / img.naturalHeight) * 1.6;
+    popup.posX = vr.width/2 - px * popup.scale; popup.posY = vr.height/2 - py * popup.scale;
     popupApplyTransform();
   }
 
   function popupZoom(delta) {
-    const vp=document.getElementById('popupViewport'); const vr=vp.getBoundingClientRect();
-    const cx=vr.width/2, cy=vr.height/2;
-    const ns=Math.min(6,Math.max(0.2,popup.scale+delta)); const r=ns/popup.scale;
-    popup.posX=cx-r*(cx-popup.posX); popup.posY=cy-r*(cy-popup.posY); popup.scale=ns;
+    const vp = document.getElementById('popupViewport'); const vr = vp.getBoundingClientRect();
+    const cx = vr.width/2, cy = vr.height/2;
+    const ns = Math.min(6, Math.max(0.2, popup.scale + delta)); const r = ns / popup.scale;
+    popup.posX = cx - r*(cx - popup.posX); popup.posY = cy - r*(cy - popup.posY); popup.scale = ns;
     popupApplyTransform();
   }
 
@@ -1433,28 +1435,28 @@
 
     vp.addEventListener('wheel', e => {
       e.preventDefault();
-      const rect=vp.getBoundingClientRect(); const mx=e.clientX-rect.left, my=e.clientY-rect.top;
-      const delta=e.deltaY>0?-0.1:0.1; const ns=Math.min(6,Math.max(0.2,popup.scale+delta)); const r=ns/popup.scale;
-      popup.posX=mx-r*(mx-popup.posX); popup.posY=my-r*(my-popup.posY); popup.scale=ns; popupApplyTransform();
+      const rect = vp.getBoundingClientRect(); const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      const delta = e.deltaY > 0 ? -0.1 : 0.1; const ns = Math.min(6, Math.max(0.2, popup.scale + delta)); const r = ns / popup.scale;
+      popup.posX = mx - r*(mx - popup.posX); popup.posY = my - r*(my - popup.posY); popup.scale = ns; popupApplyTransform();
     }, { passive: false });
 
-    vp.addEventListener('mousedown', e => { popup.isDragging=true; popup.startX=e.clientX-popup.posX; popup.startY=e.clientY-popup.posY; });
-    window.addEventListener('mouseup', ()=>{ popup.isDragging=false; });
-    window.addEventListener('mousemove', e => { if (!popup.isDragging) return; popup.posX=e.clientX-popup.startX; popup.posY=e.clientY-popup.startY; popupApplyTransform(); });
+    vp.addEventListener('mousedown', e => { popup.isDragging = true; popup.startX = e.clientX - popup.posX; popup.startY = e.clientY - popup.posY; });
+    window.addEventListener('mouseup',    () => { popup.isDragging = false; });
+    window.addEventListener('mousemove',  e  => { if (!popup.isDragging) return; popup.posX = e.clientX - popup.startX; popup.posY = e.clientY - popup.startY; popupApplyTransform(); });
 
     vp.addEventListener('touchstart', e => {
-      if (e.touches.length===1) { popup.isDragging=true; popup.startX=e.touches[0].clientX-popup.posX; popup.startY=e.touches[0].clientY-popup.posY; }
-      if (e.touches.length===2) popup.lastDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      if (e.touches.length === 1) { popup.isDragging = true; popup.startX = e.touches[0].clientX - popup.posX; popup.startY = e.touches[0].clientY - popup.posY; }
+      if (e.touches.length === 2) popup.lastDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
     }, { passive: true });
     vp.addEventListener('touchmove', e => {
       e.preventDefault();
-      if (e.touches.length===1&&popup.isDragging) { popup.posX=e.touches[0].clientX-popup.startX; popup.posY=e.touches[0].clientY-popup.startY; popupApplyTransform(); }
-      if (e.touches.length===2&&popup.lastDist) {
-        const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-        popup.scale=Math.min(6,Math.max(0.2,popup.scale*(d/popup.lastDist))); popup.lastDist=d; popupApplyTransform();
+      if (e.touches.length === 1 && popup.isDragging) { popup.posX = e.touches[0].clientX - popup.startX; popup.posY = e.touches[0].clientY - popup.startY; popupApplyTransform(); }
+      if (e.touches.length === 2 && popup.lastDist) {
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        popup.scale = Math.min(6, Math.max(0.2, popup.scale * (d / popup.lastDist))); popup.lastDist = d; popupApplyTransform();
       }
     }, { passive: false });
-    vp.addEventListener('touchend', ()=>{ popup.isDragging=false; popup.lastDist=null; });
+    vp.addEventListener('touchend', () => { popup.isDragging = false; popup.lastDist = null; });
   });
   </script>
 </body>
