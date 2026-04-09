@@ -1054,6 +1054,89 @@
             .social-btn { width: 62px; height: 62px; font-size: 1.4rem; }
             .scroll-top { width: 46px; height: 46px; bottom: 22px; right: 22px; }
         }
+
+		/* ====================================================
+   14. MODAL POPUP
+   ==================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--bg);
+    width: 90%;
+    max-width: 900px;
+    height: 85vh;
+    border-radius: var(--radius-card);
+    box-shadow: var(--nm-raised-lg);
+    position: relative;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px; /* Creates an inner border effect */
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: var(--bg);
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--nm-raised);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    color: var(--accent);
+    box-shadow: var(--nm-raised-lg);
+    transform: rotate(90deg);
+}
+
+.modal-close:active {
+    box-shadow: var(--nm-inset-sm);
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--radius-md);
+    box-shadow: var(--nm-inset); /* Neumorphic inset for the document window */
+    background: #fff; /* Keeps the PDF background clean */
+}
     </style>
 </head>
 
@@ -1087,10 +1170,9 @@
                     <span id="typing-text"></span><span class="cursor"></span>
                 </div>
                 <div class="hero-buttons">
-                    <a href="https://drive.google.com/file/d/111odT9A7d7lMOpGxl-5zvMtEG_mN7HeS/view?usp=sharing"
-                        target="_blank" class="btn-main">
-                        <i class="fas fa-cloud-download-alt"></i> Download Resume
-                    </a>
+                    <a href="#" id="open-resume-btn" class="btn-main">
+    <i class="fas fa-cloud-download-alt"></i> View Resume
+</a>
                     <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=jayanthbottu"
                         class="btn-secondary">
                         <i class="fas fa-envelope"></i> Get in Touch
@@ -1483,7 +1565,40 @@
         scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         document.getElementById('year').textContent = new Date().getFullYear();
+
+		/* ── 6. RESUME MODAL ── */
+const resumeBtn = document.getElementById('open-resume-btn');
+const resumeModal = document.getElementById('resume-modal');
+const closeResumeBtn = document.getElementById('close-resume-btn');
+
+// Open Modal
+resumeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    resumeModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Stop background scrolling
+});
+
+// Close Modal (Clicking X)
+closeResumeBtn.addEventListener('click', () => {
+    resumeModal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore background scrolling
+});
+
+// Close Modal (Clicking outside the box)
+resumeModal.addEventListener('click', (e) => {
+    if (e.target === resumeModal) {
+        resumeModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
     </script>
+
+	<div id="resume-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="close-resume-btn" aria-label="Close modal">&times;</button>
+        <iframe src="https://drive.google.com/file/d/111odT9A7d7lMOpGxl-5zvMtEG_mN7HeS/preview" allow="autoplay"></iframe>
+    </div>
+</div>
 </body>
 
 </html>
