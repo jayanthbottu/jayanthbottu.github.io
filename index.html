@@ -17,36 +17,28 @@
            1. DESIGN TOKENS — Neumorphic Light & Dark
            ==================================================== */
         :root {
-            /* ─── Light Palette ─── */
             --bg:            #e4e9f0;
             --bg-raised:     #edf2f9;
             --shadow-out-d:  #bcc3ce;
             --shadow-out-l:  #ffffff;
             --shadow-in-d:   #c5ccd6;
             --shadow-in-l:   #f7fbff;
-
             --text-primary:  #1e2b3c;
             --text-secondary:#5a6a7e;
             --text-muted:    #8a97a6;
-
             --accent:        #e85d26;
             --accent-2:      #c23866;
             --accent-3:      #3a86ff;
             --accent-glow:   rgba(232, 93, 38, 0.20);
-
             --tag-bg:        rgba(232, 93, 38, 0.08);
             --tag-border:    rgba(232, 93, 38, 0.18);
-
             --gradient:      linear-gradient(135deg, #e85d26 0%, #c23866 100%);
             --gradient-blue: linear-gradient(135deg, #3a86ff 0%, #7c4dff 100%);
-
-            /* Neumorphic Shadows */
             --nm-raised:     8px 8px 18px var(--shadow-out-d), -8px -8px 18px var(--shadow-out-l);
             --nm-raised-lg:  14px 14px 30px var(--shadow-out-d), -14px -14px 30px var(--shadow-out-l);
             --nm-inset:      inset 5px 5px 12px var(--shadow-in-d), inset -5px -5px 12px var(--shadow-in-l);
             --nm-inset-sm:   inset 3px 3px 8px var(--shadow-in-d), inset -3px -3px 8px var(--shadow-in-l);
             --nm-flat:       3px 3px 8px var(--shadow-out-d), -3px -3px 8px var(--shadow-out-l);
-
             --border-subtle: rgba(255,255,255,0.65);
             --radius-card:   28px;
             --radius-pill:   100px;
@@ -60,38 +52,27 @@
             --shadow-out-l:  #21253e80;
             --shadow-in-d:   #13162380;
             --shadow-in-l:   #22263d80;
-
             --text-primary:  #e8eef8;
             --text-secondary:#8fa3c0;
             --text-muted:    #5c7090;
-
             --accent:        #ff7a4a;
             --accent-2:      #e0506e;
             --accent-3:      #5b9fff;
             --accent-glow:   rgba(255, 122, 74, 0.18);
-
             --tag-bg:        rgba(255, 122, 74, 0.10);
             --tag-border:    rgba(255, 122, 74, 0.22);
-
             --gradient:      linear-gradient(135deg, #ff7a4a 0%, #e0506e 100%);
             --gradient-blue: linear-gradient(135deg, #5b9fff 0%, #9c78ff 100%);
-
             --nm-raised:     8px 8px 20px #111423, -8px -8px 20px #21253a;
             --nm-raised-lg:  14px 14px 36px #10131f, -14px -14px 36px #232843;
             --nm-inset:      inset 5px 5px 14px #111423, inset -5px -5px 14px #21253a;
             --nm-inset-sm:   inset 3px 3px 9px #111423, inset -3px -3px 9px #21253a;
             --nm-flat:       3px 3px 9px #111423, -3px -3px 9px #21253a;
-
             --border-subtle: rgba(255,255,255,0.05);
         }
 
-        /* ====================================================
-           2. RESET & BASE
-           ==================================================== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; scroll-padding-top: 110px; }
-
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg);
@@ -100,8 +81,6 @@
             overflow-x: hidden;
             line-height: 1.65;
         }
-
-        /* Subtle noise texture overlay */
         body::after {
             content: '';
             position: fixed;
@@ -112,19 +91,8 @@
             opacity: 0.4;
         }
 
-        /* ====================================================
-           3. TYPOGRAPHY
-           ==================================================== */
-        h1, h2, h3, h4 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            line-height: 1.15;
-        }
-
-        .display-font {
-            font-family: 'Fraunces', serif;
-            font-weight: 700;
-        }
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 700; line-height: 1.15; }
+        .display-font { font-family: 'Fraunces', serif; font-weight: 700; }
 
         .section-title {
             font-size: 2.8rem;
@@ -138,7 +106,6 @@
             font-family: 'Fraunces', serif;
             letter-spacing: -0.5px;
         }
-
         .section-subtitle {
             text-align: center;
             color: var(--text-muted);
@@ -150,9 +117,7 @@
             font-weight: 400;
         }
 
-        /* ====================================================
-           4. NAVIGATION
-           ==================================================== */
+        /* NAV */
         nav {
             position: fixed;
             top: 18px;
@@ -170,13 +135,7 @@
             box-shadow: var(--nm-raised);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        nav.scrolled {
-            top: 10px;
-            padding: 11px 24px;
-            box-shadow: var(--nm-raised-lg);
-        }
-
+        nav.scrolled { top: 10px; padding: 11px 24px; box-shadow: var(--nm-raised-lg); }
         .nav-logo {
             font-weight: 800;
             font-size: 1.25rem;
@@ -189,13 +148,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-
+        .nav-links { display: flex; gap: 6px; align-items: center; }
         .nav-links a {
             text-decoration: none;
             color: var(--text-secondary);
@@ -205,15 +158,11 @@
             padding: 8px 16px;
             border-radius: var(--radius-md);
         }
-
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--accent);
             background: var(--tag-bg);
             box-shadow: var(--nm-inset-sm);
         }
-
-        /* Theme Toggle */
         .theme-toggle {
             cursor: pointer;
             font-size: 1.1rem;
@@ -231,19 +180,8 @@
             transition: all 0.3s ease;
             flex-shrink: 0;
         }
-
-        .theme-toggle:hover {
-            color: var(--accent);
-            box-shadow: var(--nm-raised-lg);
-            transform: rotate(22deg);
-        }
-
-        .theme-toggle:active {
-            box-shadow: var(--nm-inset-sm);
-            transform: rotate(0deg);
-        }
-
-        /* Mobile Menu Btn */
+        .theme-toggle:hover { color: var(--accent); box-shadow: var(--nm-raised-lg); transform: rotate(22deg); }
+        .theme-toggle:active { box-shadow: var(--nm-inset-sm); transform: rotate(0deg); }
         .mobile-menu-btn {
             display: none;
             flex-direction: column;
@@ -255,38 +193,14 @@
             box-shadow: var(--nm-flat);
             transition: all 0.3s ease;
         }
-        .mobile-menu-btn span {
-            width: 22px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: all 0.3s ease;
-            border-radius: 4px;
-            display: block;
-        }
+        .mobile-menu-btn span { width: 22px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; border-radius: 4px; display: block; }
         .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .mobile-menu-btn.active span:nth-child(2) { opacity: 0; width: 0; }
         .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-        /* ====================================================
-           5. HERO SECTION
-           ==================================================== */
-        #home {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 130px 0 80px;
-        }
-
-        .hero-container {
-            display: grid;
-            grid-template-columns: 1.35fr 0.65fr;
-            gap: 70px;
-            max-width: 1160px;
-            width: 90%;
-            align-items: center;
-        }
-
+        /* HERO */
+        #home { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 130px 0 80px; }
+        .hero-container { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 70px; max-width: 1160px; width: 90%; align-items: center; }
         .hero-label {
             display: inline-flex;
             align-items: center;
@@ -303,72 +217,14 @@
             margin-bottom: 22px;
             animation: fadeInUp 0.6s ease;
         }
-
-        .hero-label::before {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
-            50% { box-shadow: 0 0 0 6px transparent; }
-        }
-
-        .hero-text h1 {
-            font-size: 4.8rem;
-            line-height: 1.08;
-            margin-bottom: 22px;
-            letter-spacing: -2.5px;
-            font-family: 'Fraunces', serif;
-            animation: fadeInUp 0.7s ease 0.1s backwards;
-        }
-
-        .hero-text h1 .name-highlight {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-style: italic;
-        }
-
-        .typing-container {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.75;
-            margin-bottom: 40px;
-            min-height: 88px;
-            font-weight: 400;
-            animation: fadeInUp 0.7s ease 0.2s backwards;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 2.5px;
-            height: 1.2em;
-            background: var(--accent);
-            animation: blink 0.9s step-end infinite;
-            vertical-align: middle;
-            margin-left: 2px;
-            border-radius: 2px;
-        }
-
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.7s ease 0.35s backwards;
-        }
-
-        /* ─── Neumorphic Buttons ─── */
+        .hero-label::before { content: ''; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+        @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); } 50% { box-shadow: 0 0 0 6px transparent; } }
+        .hero-text h1 { font-size: 4.8rem; line-height: 1.08; margin-bottom: 22px; letter-spacing: -2.5px; font-family: 'Fraunces', serif; animation: fadeInUp 0.7s ease 0.1s backwards; }
+        .hero-text h1 .name-highlight { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
+        .typing-container { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 40px; min-height: 88px; font-weight: 400; animation: fadeInUp 0.7s ease 0.2s backwards; }
+        .cursor { display: inline-block; width: 2.5px; height: 1.2em; background: var(--accent); animation: blink 0.9s step-end infinite; vertical-align: middle; margin-left: 2px; border-radius: 2px; }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeInUp 0.7s ease 0.35s backwards; }
         .btn-main {
             display: inline-flex;
             align-items: center;
@@ -387,25 +243,9 @@
             position: relative;
             overflow: hidden;
         }
-
-        .btn-main::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-            border-radius: inherit;
-        }
-
-        .btn-main:hover {
-            transform: translateY(-4px);
-            box-shadow: 8px 12px 25px var(--accent-glow), var(--nm-raised);
-        }
-
-        .btn-main:active {
-            transform: translateY(0);
-            box-shadow: var(--nm-inset-sm);
-        }
-
+        .btn-main::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent); border-radius: inherit; }
+        .btn-main:hover { transform: translateY(-4px); box-shadow: 8px 12px 25px var(--accent-glow), var(--nm-raised); }
+        .btn-main:active { transform: translateY(0); box-shadow: var(--nm-inset-sm); }
         .btn-secondary {
             display: inline-flex;
             align-items: center;
@@ -422,502 +262,97 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--nm-raised);
         }
-
-        .btn-secondary:hover {
-            transform: translateY(-4px);
-            color: var(--accent);
-            box-shadow: var(--nm-raised-lg);
-        }
-
-        .btn-secondary:active {
-            transform: translateY(0);
-            box-shadow: var(--nm-inset-sm);
-        }
-
-        /* ─── Hero Image ─── */
-        .hero-img-wrapper {
-            display: flex;
-            justify-content: center;
-            animation: fadeInUp 0.7s ease 0.25s backwards;
-        }
-
-        .hero-img-frame {
-            position: relative;
-            width: 320px;
-            height: 320px;
-        }
-
-        .hero-img-frame::before {
-            content: '';
-            position: absolute;
-            inset: -12px;
-            border-radius: 40px;
-            background: var(--bg);
-            box-shadow: var(--nm-raised-lg);
-        }
-
-        .hero-img-frame::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 30px;
-            background: var(--gradient);
-            opacity: 0.12;
-            z-index: 0;
-        }
-
-        .hero-img-frame img {
-            width: 100%;
-            height: 100%;
-            border-radius: 30px;
-            object-fit: cover;
-            position: relative;
-            z-index: 1;
-            box-shadow: var(--nm-inset);
-
-        }
-
-        .hero-img-frame:hover img {
-            transform: rotate(0deg) scale(1.02);
-        }
-
-        /* Floating badges */
-        .hero-badge {
-            position: absolute;
-            background: var(--bg);
-            box-shadow: var(--nm-raised);
-            border-radius: 18px;
-            padding: 12px 18px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 2;
-            animation: float 4s ease-in-out infinite;
-        }
-
+        .btn-secondary:hover { transform: translateY(-4px); color: var(--accent); box-shadow: var(--nm-raised-lg); }
+        .btn-secondary:active { transform: translateY(0); box-shadow: var(--nm-inset-sm); }
+        .hero-img-wrapper { display: flex; justify-content: center; animation: fadeInUp 0.7s ease 0.25s backwards; }
+        .hero-img-frame { position: relative; width: 320px; height: 320px; }
+        .hero-img-frame::before { content: ''; position: absolute; inset: -12px; border-radius: 40px; background: var(--bg); box-shadow: var(--nm-raised-lg); }
+        .hero-img-frame::after { content: ''; position: absolute; inset: 0; border-radius: 30px; background: var(--gradient); opacity: 0.12; z-index: 0; }
+        .hero-img-frame img { width: 100%; height: 100%; border-radius: 30px; object-fit: cover; position: relative; z-index: 1; box-shadow: var(--nm-inset); }
+        .hero-badge { position: absolute; background: var(--bg); box-shadow: var(--nm-raised); border-radius: 18px; padding: 12px 18px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; z-index: 2; animation: float 4s ease-in-out infinite; }
         .hero-badge i { color: var(--accent); }
-
         .hero-badge-1 { top: -18px; right: -30px; animation-delay: 0s; }
         .hero-badge-2 { bottom: -10px; left: -40px; animation-delay: 1.5s; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(28px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ====================================================
-           6. SKILLS SECTION
-           ==================================================== */
+        /* SKILLS */
         #skills { padding: 110px 0; }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 28px;
-            max-width: 1160px;
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .skill-card {
-            background: var(--bg);
-            padding: 36px 32px;
-            border-radius: var(--radius-card);
-            box-shadow: var(--nm-raised);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-            border-radius: 0 0 4px 4px;
-        }
-
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 28px; max-width: 1160px; width: 90%; margin: 0 auto; }
+        .skill-card { background: var(--bg); padding: 36px 32px; border-radius: var(--radius-card); box-shadow: var(--nm-raised); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; border-radius: 0 0 4px 4px; }
         .skill-card:hover { transform: translateY(-8px); box-shadow: var(--nm-raised-lg); }
         .skill-card:hover::before { transform: scaleX(1); }
-
-        .skill-card h3 {
-            margin-bottom: 26px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-primary);
-        }
-
-        .skill-icon-wrap {
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            background: var(--bg);
-            box-shadow: var(--nm-raised);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        .skill-card h3 { margin-bottom: 26px; font-size: 1.3rem; display: flex; align-items: center; gap: 12px; color: var(--text-primary); }
+        .skill-icon-wrap { width: 48px; height: 48px; border-radius: 16px; background: var(--bg); box-shadow: var(--nm-raised); display: flex; align-items: center; justify-content: center; }
         .skill-icon-wrap i { color: var(--accent); font-size: 1.3rem; }
-
         .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-
-        .tag {
-            background: var(--bg);
-            color: var(--text-secondary);
-            padding: 9px 16px;
-            border-radius: 14px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            box-shadow: var(--nm-flat);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .tag:hover {
-            box-shadow: var(--nm-inset-sm);
-            color: var(--accent);
-        }
-
+        .tag { background: var(--bg); color: var(--text-secondary); padding: 9px 16px; border-radius: 14px; font-size: 0.88rem; font-weight: 500; display: flex; align-items: center; gap: 7px; box-shadow: var(--nm-flat); transition: all 0.3s ease; cursor: default; }
+        .tag:hover { box-shadow: var(--nm-inset-sm); color: var(--accent); }
         .tag i { font-size: 0.95rem; color: var(--accent); opacity: 0.8; }
 
-        /* ====================================================
-           7. EXPERIENCE SECTION
-           ==================================================== */
-        #experience {
-            padding: 110px 0;
-        }
-
-        .experience-wrapper {
-            max-width: 1000px;
-            width: 90%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-            position: relative;
-        }
-
-        /* Timeline vertical line */
-        .experience-wrapper::before {
-            content: '';
-            position: absolute;
-            left: 194px;
-            top: 28px;
-            bottom: 28px;
-            width: 2px;
-            background: linear-gradient(180deg, var(--accent), var(--accent-2));
-            opacity: 0.25;
-        }
-
-        .exp-item {
-            background: var(--bg);
-            padding: 32px;
-            border-radius: var(--radius-card);
-            display: grid;
-            grid-template-columns: 190px 1fr;
-            gap: 32px;
-            align-items: start;
-            box-shadow: var(--nm-raised);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        /* Timeline dot */
-        .exp-item::after {
-            content: '';
-            position: absolute;
-            left: 184px;
-            top: 36px;
-            width: 14px;
-            height: 14px;
-            background: var(--bg);
-            border-radius: 50%;
-            box-shadow: var(--nm-flat), 0 0 0 3px var(--accent);
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
+        /* EXPERIENCE */
+        #experience { padding: 110px 0; }
+        .experience-wrapper { max-width: 1000px; width: 90%; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; position: relative; }
+        .experience-wrapper::before { content: ''; position: absolute; left: 194px; top: 28px; bottom: 28px; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-2)); opacity: 0.25; }
+        .exp-item { background: var(--bg); padding: 32px; border-radius: var(--radius-card); display: grid; grid-template-columns: 190px 1fr; gap: 32px; align-items: start; box-shadow: var(--nm-raised); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .exp-item::after { content: ''; position: absolute; left: 184px; top: 36px; width: 14px; height: 14px; background: var(--bg); border-radius: 50%; box-shadow: var(--nm-flat), 0 0 0 3px var(--accent); z-index: 2; transition: all 0.3s ease; }
         .exp-item:hover { transform: translateX(10px); box-shadow: var(--nm-raised-lg); }
         .exp-item:hover::after { box-shadow: var(--nm-raised), 0 0 0 4px var(--accent), 0 0 12px var(--accent-glow); }
-
-        .exp-date {
-            font-weight: 600;
-            color: var(--accent);
-            font-size: 0.84rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            padding-top: 4px;
-            line-height: 1.5;
-        }
-
-        .exp-details h3 {
-            font-size: 1.45rem;
-            margin-bottom: 6px;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .exp-details h4 {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 14px;
-            font-weight: 500;
-        }
-
+        .exp-date { font-weight: 600; color: var(--accent); font-size: 0.84rem; text-transform: uppercase; letter-spacing: 1.2px; padding-top: 4px; line-height: 1.5; }
+        .exp-details h3 { font-size: 1.45rem; margin-bottom: 6px; color: var(--text-primary); font-weight: 700; }
+        .exp-details h4 { color: var(--text-muted); font-size: 1rem; margin-bottom: 14px; font-weight: 500; }
         .exp-details p { color: var(--text-secondary); line-height: 1.75; font-size: 0.95rem; }
 
-        /* ====================================================
-           8. PROJECTS SECTION
-           ==================================================== */
+        /* PROJECTS */
         #projects { padding: 110px 0; }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 28px;
-            max-width: 1160px;
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: var(--bg);
-            border-radius: var(--radius-card);
-            overflow: hidden;
-            box-shadow: var(--nm-raised);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; max-width: 1160px; width: 90%; margin: 0 auto; }
+        .project-card { background: var(--bg); border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--nm-raised); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; position: relative; }
         .project-card:hover { transform: translateY(-12px); box-shadow: var(--nm-raised-lg); }
-
-        .img-container {
-            height: 210px;
-            width: 100%;
-            overflow: hidden;
-            background: var(--bg);
-            position: relative;
-            box-shadow: var(--nm-inset);
-        }
-
-        .img-fallback {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            z-index: 0;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0.35;
-        }
-
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 1;
-        }
-
+        .img-container { height: 210px; width: 100%; overflow: hidden; background: var(--bg); position: relative; box-shadow: var(--nm-inset); }
+        .img-fallback { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 4rem; z-index: 0; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.35; }
+        .project-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 1; }
         .project-card:hover .project-img { transform: scale(1.1); }
-
-        .card-content {
-            padding: 28px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-content h3 {
-            font-size: 1.35rem;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
+        .card-content { padding: 28px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-content h3 { font-size: 1.35rem; margin-bottom: 12px; color: var(--text-primary); font-weight: 700; }
         .tech-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
-
-        .tech-badge {
-            font-size: 0.74rem;
-            padding: 5px 12px;
-            border-radius: 10px;
-            background: var(--bg);
-            color: var(--text-muted);
-            box-shadow: var(--nm-flat);
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            transition: all 0.3s ease;
-        }
-
-        .tech-badge:hover {
-            color: var(--accent);
-            box-shadow: var(--nm-inset-sm);
-        }
-
-        .card-content p {
-            color: var(--text-secondary);
-            font-size: 0.93rem;
-            line-height: 1.75;
-            margin-bottom: 22px;
-            flex-grow: 1;
-        }
-
+        .tech-badge { font-size: 0.74rem; padding: 5px 12px; border-radius: 10px; background: var(--bg); color: var(--text-muted); box-shadow: var(--nm-flat); font-weight: 600; letter-spacing: 0.3px; transition: all 0.3s ease; }
+        .tech-badge:hover { color: var(--accent); box-shadow: var(--nm-inset-sm); }
+        .card-content p { color: var(--text-secondary); font-size: 0.93rem; line-height: 1.75; margin-bottom: 22px; flex-grow: 1; }
         .card-links { display: flex; gap: 12px; }
-
-        .btn-sm {
-            padding: 10px 20px;
-            font-size: 0.88rem;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: var(--bg);
-            box-shadow: var(--nm-flat);
-            transition: all 0.3s ease;
-        }
-
+        .btn-sm { padding: 10px 20px; font-size: 0.88rem; border-radius: 14px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 7px; background: var(--bg); box-shadow: var(--nm-flat); transition: all 0.3s ease; }
         .btn-outline { color: var(--text-secondary); }
-        .btn-outline:hover {
-            color: var(--text-primary);
-            box-shadow: var(--nm-raised);
-            transform: translateY(-3px);
-        }
+        .btn-outline:hover { color: var(--text-primary); box-shadow: var(--nm-raised); transform: translateY(-3px); }
+        .btn-fill { background: var(--gradient); color: #fff; box-shadow: 4px 4px 12px var(--accent-glow); }
+        .btn-fill:hover { transform: translateY(-3px); box-shadow: 6px 8px 20px var(--accent-glow), var(--nm-flat); }
 
-        .btn-fill {
-            background: var(--gradient);
-            color: #fff;
-            box-shadow: 4px 4px 12px var(--accent-glow);
-        }
-        .btn-fill:hover {
-            transform: translateY(-3px);
-            box-shadow: 6px 8px 20px var(--accent-glow), var(--nm-flat);
-        }
-
-        /* ====================================================
-           8.5 CERTIFICATIONS SECTION
-           ==================================================== */
+        /* CERTIFICATIONS */
         #certifications { padding: 110px 0; }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; max-width: 1160px; width: 90%; margin: 0 auto; }
+        .cert-card { background: var(--bg); border-radius: var(--radius-card); padding: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: var(--nm-raised); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cert-card:hover { transform: translateY(-8px); box-shadow: var(--nm-raised-lg); }
+        .cert-img-wrapper { width: 100%; height: 220px; border-radius: var(--radius-md); background: rgb(246, 244, 244); box-shadow: var(--nm-inset); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; padding: 12px; overflow: hidden; }
+        .cert-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.1)); }
+        .cert-card:hover .cert-img-wrapper img { transform: scale(1.06); }
+        .cert-content { width: 100%; text-align: center; }
+        .cert-content h3 { margin-bottom: 0; font-size: 1.15rem; color: var(--text-primary); }
 
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 28px;
-            max-width: 1160px;
-            width: 90%;
-            margin: 0 auto;
-        }
+        /* CONTACT */
+        #contact { padding: 110px 0; text-align: center; }
+        .contact-content { max-width: 640px; margin: 0 auto 44px; }
+        .contact-content p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.85; }
+        .contact-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin-top: 50px; }
 
-        .cert-card {
-            background: var(--bg);
-            border-radius: var(--radius-card);
-            padding: 24px;
+        /* ── Social Buttons with labels ── */
+        .social-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            box-shadow: var(--nm-raised);
+            gap: 8px;
+            text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .cert-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: var(--nm-raised-lg); 
-        }
-
-        .cert-img-wrapper {
-            width: 100%;
-            height: 220px; /* Slightly taller to accommodate certificate ratios */
-            border-radius: var(--radius-md);
-            background: rgb(246, 244, 244);
-            box-shadow: var(--nm-inse   t);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px; /* Gives the certificate breathing room inside the box */
-            overflow: hidden;
-        }
-
-        .cert-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* CRITICAL: Ensures the whole image fits without cropping */
-            transition: transform 0.5s ease;
-            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.1)); /* Adds a subtle realistic shadow to the document */
-        }
-
-        .cert-card:hover .cert-img-wrapper img {
-            transform: scale(1.06);
-        }
-        
-        .cert-content {
-            width: 100%;
-            text-align: center;
-        }
-        
-        .cert-content h3 {
-            margin-bottom: 0;
-            font-size: 1.15rem;
-            color: var(--text-primary);
-        }
-
-        
-        /* ====================================================
-           9. CONTACT SECTION
-           ==================================================== */
-        #contact {
-            padding: 110px 0;
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 640px;
-            margin: 0 auto 44px;
-        }
-
-        .contact-content p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.85;
-        }
-
-        .contact-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 22px;
-            margin-top: 50px;
-        }
-
-        .social-btn {
+        .social-btn-icon {
             width: 72px;
             height: 72px;
             border-radius: 50%;
@@ -928,111 +363,97 @@
             justify-content: center;
             color: var(--text-secondary);
             font-size: 1.6rem;
-            text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .social-btn:hover {
-            color: var(--accent);
-            transform: translateY(-8px);
-            box-shadow: var(--nm-raised-lg);
-        }
-
-        .social-btn:active { box-shadow: var(--nm-inset); transform: translateY(0); }
-
-        /* ====================================================
-           10. FOOTER
-           ==================================================== */
-        footer {
-            text-align: center;
-            padding: 48px 24px;
+        .social-btn-label {
+            font-size: 0.78rem;
+            font-weight: 600;
             color: var(--text-muted);
-            font-size: 0.93rem;
-            background: var(--bg);
-            box-shadow: 0 -4px 24px rgba(0,0,0,0.04);
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
+        .social-btn:hover .social-btn-icon { color: var(--accent); transform: translateY(-8px); box-shadow: var(--nm-raised-lg); }
+        .social-btn:hover .social-btn-label { color: var(--accent); }
+        .social-btn:active .social-btn-icon { box-shadow: var(--nm-inset); transform: translateY(0); }
 
-        footer p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
+        /* FOOTER */
+        footer { text-align: center; padding: 48px 24px; color: var(--text-muted); font-size: 0.93rem; background: var(--bg); box-shadow: 0 -4px 24px rgba(0,0,0,0.04); }
+        footer p { display: flex; align-items: center; justify-content: center; gap: 8px; }
         footer strong { color: var(--accent); }
 
-        /* ====================================================
-           11. SCROLL ANIMATIONS
-           ==================================================== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(36px);
-            transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* SCROLL ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(36px); transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .reveal-stagger { transition-delay: calc(var(--stagger-index, 0) * 0.1s); }
 
-        /* ====================================================
-           12. SCROLL TO TOP
-           ==================================================== */
-        .scroll-top {
+        /* SCROLL TO TOP */
+        .scroll-top { position: fixed; bottom: 32px; right: 32px; width: 52px; height: 52px; background: var(--gradient); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 5px 5px 16px var(--accent-glow), var(--nm-flat); z-index: 999; }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-5px); box-shadow: 8px 12px 24px var(--accent-glow); }
+
+        /* ── MODAL POPUP ── */
+        .modal-overlay {
             position: fixed;
-            bottom: 32px;
-            right: 32px;
-            width: 52px;
-            height: 52px;
-            background: var(--gradient);
-            color: #fff;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--bg);
+            width: 90%;
+            max-width: 900px;
+            height: 85vh;
+            border-radius: var(--radius-card);
+            box-shadow: var(--nm-raised-lg);
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+        .modal-close {
+            position: absolute;
+            top: -15px; right: -15px;
+            background: var(--bg);
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 44px; height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.15rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
+            box-shadow: var(--nm-raised);
             transition: all 0.3s ease;
-            box-shadow: 5px 5px 16px var(--accent-glow), var(--nm-flat);
-            z-index: 999;
+            z-index: 10;
         }
+        .modal-close:hover { color: var(--accent); box-shadow: var(--nm-raised-lg); transform: rotate(90deg); }
+        .modal-close:active { box-shadow: var(--nm-inset-sm); }
+        .modal-content iframe { width: 100%; height: 100%; border: none; border-radius: var(--radius-md); box-shadow: var(--nm-inset); background: #fff; }
 
-        .scroll-top.visible { opacity: 1; visibility: visible; }
-        .scroll-top:hover { transform: translateY(-5px); box-shadow: 8px 12px 24px var(--accent-glow); }
-
-        /* ====================================================
-           13. RESPONSIVE
-           ==================================================== */
+        /* RESPONSIVE */
         @media (max-width: 968px) {
-            .nav-links {
-                position: fixed;
-                top: 84px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 88%;
-                max-width: 400px;
-                background: var(--bg);
-                border-radius: 24px;
-                flex-direction: column;
-                padding: 18px;
-                gap: 6px;
-                opacity: 0;
-                visibility: hidden;
-                box-shadow: var(--nm-raised-lg);
-                transition: all 0.3s ease;
-            }
+            .nav-links { position: fixed; top: 84px; left: 50%; transform: translateX(-50%); width: 88%; max-width: 400px; background: var(--bg); border-radius: 24px; flex-direction: column; padding: 18px; gap: 6px; opacity: 0; visibility: hidden; box-shadow: var(--nm-raised-lg); transition: all 0.3s ease; }
             .nav-links.active { opacity: 1; visibility: visible; }
             .nav-links a { width: 100%; text-align: center; padding: 12px; }
             .mobile-menu-btn { display: flex; }
             .experience-wrapper::before { display: none; }
             .exp-item::after { display: none; }
         }
-
         @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 50px;
-            }
+            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 50px; }
             .hero-img-wrapper { order: -1; justify-content: center; }
             .hero-img-frame { width: 260px; height: 260px; }
             .hero-badge-1 { top: -14px; right: -14px; }
@@ -1046,97 +467,13 @@
             .projects-grid { grid-template-columns: 1fr; }
             .hero-label { margin: 0 auto 20px; }
         }
-
         @media (max-width: 480px) {
             nav { padding: 12px 18px; }
             .hero-text h1 { font-size: 2.6rem; }
             .btn-main, .btn-secondary { padding: 13px 24px; font-size: 0.92rem; }
-            .social-btn { width: 62px; height: 62px; font-size: 1.4rem; }
+            .social-btn-icon { width: 62px; height: 62px; font-size: 1.4rem; }
             .scroll-top { width: 46px; height: 46px; bottom: 22px; right: 22px; }
         }
-
-		/* ====================================================
-   14. MODAL POPUP
-   ==================================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: var(--bg);
-    width: 90%;
-    max-width: 900px;
-    height: 85vh;
-    border-radius: var(--radius-card);
-    box-shadow: var(--nm-raised-lg);
-    position: relative;
-    transform: translateY(30px) scale(0.95);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    padding: 15px; /* Creates an inner border effect */
-}
-
-.modal-overlay.active .modal-content {
-    transform: translateY(0) scale(1);
-}
-
-.modal-close {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background: var(--bg);
-    border: none;
-    color: var(--text-primary);
-    font-size: 1.8rem;
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--nm-raised);
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.modal-close:hover {
-    color: var(--accent);
-    box-shadow: var(--nm-raised-lg);
-    transform: rotate(90deg);
-}
-
-.modal-close:active {
-    box-shadow: var(--nm-inset-sm);
-}
-
-.modal-content iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: var(--radius-md);
-    box-shadow: var(--nm-inset); /* Neumorphic inset for the document window */
-    background: #fff; /* Keeps the PDF background clean */
-}
     </style>
 </head>
 
@@ -1152,14 +489,20 @@
             <a href="#contact">Contact</a>
         </div>
         <div class="mobile-menu-btn" id="mobile-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
         <button class="theme-toggle" id="theme-btn" aria-label="Toggle theme">
             <i class="fas fa-moon"></i>
         </button>
     </nav>
+
+    <!-- ── RESUME MODAL (placed BEFORE the script so JS can find it) ── -->
+    <div id="resume-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="close-resume-btn" aria-label="Close modal">&times;</button>
+            <iframe src="https://drive.google.com/file/d/111odT9A7d7lMOpGxl-5zvMtEG_mN7HeS/preview" allow="autoplay"></iframe>
+        </div>
+    </div>
 
     <section id="home">
         <div class="hero-container reveal">
@@ -1170,24 +513,19 @@
                     <span id="typing-text"></span><span class="cursor"></span>
                 </div>
                 <div class="hero-buttons">
-                    <a href="https://drive.google.com/file/d/111odT9A7d7lMOpGxl-5zvMtEG_mN7HeS/preview" id="open-resume-btn" class="btn-main">
-    <i class="fas fa-cloud-download-alt"></i> View Resume
-</a>
-                    <a href="https://www.linkedin.com/in/jayanthbottu"
-                        class="btn-secondary">
-                        <i class="fas fa-envelope"></i> Get in Touch
+                    <button id="open-resume-btn" class="btn-main">
+                        <i class="fas fa-cloud-download-alt"></i> View Resume
+                    </button>
+                    <a href="https://www.linkedin.com/in/jayanthbottu" target="_blank" class="btn-secondary">
+                        <i class="fab fa-linkedin-in"></i> Get in Touch
                     </a>
                 </div>
             </div>
             <div class="hero-img-wrapper">
                 <div class="hero-img-frame">
                     <img src="lightbg.png" id="profile-img" alt="Jayanth Profile" onerror="this.src='https://ui-avatars.com/api/?name=Jayanth+Bottu&background=e85d26&color=fff&size=512'">
-                    <div class="hero-badge hero-badge-1">
-                        <i class="fas fa-brain"></i> AI Engineer
-                    </div>
-                    <div class="hero-badge hero-badge-2">
-                        <i class="fas fa-code"></i> Full Stack Dev
-                    </div>
+                    <div class="hero-badge hero-badge-1"><i class="fas fa-brain"></i> AI Engineer</div>
+                    <div class="hero-badge hero-badge-2"><i class="fas fa-code"></i> Full Stack Dev</div>
                 </div>
             </div>
         </div>
@@ -1198,10 +536,7 @@
         <p class="section-subtitle reveal">The tools and technologies I use to bring ideas to life</p>
         <div class="skills-grid">
             <div class="skill-card reveal reveal-stagger" style="--stagger-index: 0">
-                <h3>
-                    <div class="skill-icon-wrap"><i class="fas fa-code"></i></div>
-                    Languages
-                </h3>
+                <h3><div class="skill-icon-wrap"><i class="fas fa-code"></i></div>Languages</h3>
                 <div class="skill-tags">
                     <span class="tag"><i class="fab fa-python"></i> Python</span>
                     <span class="tag"><i class="fab fa-java"></i> Java</span>
@@ -1211,10 +546,7 @@
                 </div>
             </div>
             <div class="skill-card reveal reveal-stagger" style="--stagger-index: 1">
-                <h3>
-                    <div class="skill-icon-wrap"><i class="fas fa-brain"></i></div>
-                    AI & ML
-                </h3>
+                <h3><div class="skill-icon-wrap"><i class="fas fa-brain"></i></div>AI & ML</h3>
                 <div class="skill-tags">
                     <span class="tag"><i class="fas fa-network-wired"></i> TensorFlow</span>
                     <span class="tag"><i class="fas fa-fire"></i> PyTorch</span>
@@ -1224,10 +556,7 @@
                 </div>
             </div>
             <div class="skill-card reveal reveal-stagger" style="--stagger-index: 2">
-                <h3>
-                    <div class="skill-icon-wrap"><i class="fas fa-tools"></i></div>
-                    Tools & Frameworks
-                </h3>
+                <h3><div class="skill-icon-wrap"><i class="fas fa-tools"></i></div>Tools & Frameworks</h3>
                 <div class="skill-tags">
                     <span class="tag"><i class="fas fa-stream"></i> Streamlit</span>
                     <span class="tag"><i class="fas fa-chart-bar"></i> MS Office</span>
@@ -1248,9 +577,7 @@
                 <div class="exp-details">
                     <h3>Prompt Engineering Intern</h3>
                     <h4>Excelerate</h4>
-                    <p>Researched Prompt Engineering and evaluated large language model performance. 
-                        Recommended AI integration strategies for automation and virtual learning.
-                    </p>
+                    <p>Researched Prompt Engineering and evaluated large language model performance. Recommended AI integration strategies for automation and virtual learning.</p>
                 </div>
             </div>
             <div class="exp-item reveal reveal-stagger" style="--stagger-index: 0">
@@ -1258,8 +585,7 @@
                 <div class="exp-details">
                     <h3>ServiceNow Virtual Intern</h3>
                     <h4>SmartBridge & AICTE</h4>
-                    <p>Applied ServiceNow Administration fundamentals to manage test instances, configure user
-                        permissions, and ensure the health of the automated processes.</p>
+                    <p>Applied ServiceNow Administration fundamentals to manage test instances, configure user permissions, and ensure the health of the automated processes.</p>
                 </div>
             </div>
             <div class="exp-item reveal reveal-stagger" style="--stagger-index: 1">
@@ -1267,8 +593,7 @@
                 <div class="exp-details">
                     <h3>Generative AI Intern</h3>
                     <h4>Google Cloud – AICTE Eduskills</h4>
-                    <p>Specialized in NLP and Image Recognition. Developed and deployed scalable AI models using
-                        TensorFlow, Keras, and PyTorch, gaining deep insights into Generative AI workflows.</p>
+                    <p>Specialized in NLP and Image Recognition. Developed and deployed scalable AI models using TensorFlow, Keras, and PyTorch, gaining deep insights into Generative AI workflows.</p>
                 </div>
             </div>
             <div class="exp-item reveal reveal-stagger" style="--stagger-index: 3">
@@ -1276,8 +601,7 @@
                 <div class="exp-details">
                     <h3>Cybersecurity Intern</h3>
                     <h4>Palo Alto – AICTE Eduskills</h4>
-                    <p>Analyzed simulated security threats and investigated incidents. Enhanced understanding of network
-                        security protocols and threat mitigation strategies.</p>
+                    <p>Analyzed simulated security threats and investigated incidents. Enhanced understanding of network security protocols and threat mitigation strategies.</p>
                 </div>
             </div>
         </div>
@@ -1287,7 +611,6 @@
         <h2 class="section-title reveal">Featured Projects</h2>
         <p class="section-subtitle reveal">Innovative solutions showcasing technical expertise</p>
         <div class="projects-grid">
-
             <div class="project-card reveal reveal-stagger" style="--stagger-index: 0">
                 <div class="img-container">
                     <i class="fas fa-user-secret img-fallback"></i>
@@ -1300,22 +623,17 @@
                         <span class="tech-badge">PyTorch</span>
                         <span class="tech-badge">Streamlit</span>
                     </div>
-                    <p>A Capstone project for detecting manipulated media. Analyzes images, videos, and audio using
-                        advanced deep learning ensembles to attribute deepfakes.</p>
+                    <p>A Capstone project for detecting manipulated media. Analyzes images, videos, and audio using advanced deep learning ensembles to attribute deepfakes.</p>
                     <div class="card-links">
-                        <a href="https://github.com/jayanthbottu/Deepfake-Detection-And-Attribution" target="_blank"
-                            class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
-                        <a href="https://huggingface.co/spaces/jayanthbottu/DFDA" target="_blank"
-                            class="btn-sm btn-fill"><i class="fas fa-external-link-alt"></i> Live</a>
+                        <a href="https://github.com/jayanthbottu/Deepfake-Detection-And-Attribution" target="_blank" class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+                        <a href="https://huggingface.co/spaces/jayanthbottu/DFDA" target="_blank" class="btn-sm btn-fill"><i class="fas fa-external-link-alt"></i> Live</a>
                     </div>
                 </div>
             </div>
-
             <div class="project-card reveal reveal-stagger" style="--stagger-index: 1">
                 <div class="img-container">
                     <i class="fas fa-bitcoin img-fallback"></i>
-                    <img src="proj/lcad.png" alt="Crypto Dashboard" class="project-img"
-                        onerror="this.style.display='none'">
+                    <img src="proj/lcad.png" alt="Crypto Dashboard" class="project-img" onerror="this.style.display='none'">
                 </div>
                 <div class="card-content">
                     <h3>Live Crypto Anomaly Detection</h3>
@@ -1324,21 +642,16 @@
                         <span class="tech-badge">Dash</span>
                         <span class="tech-badge">Plotly</span>
                     </div>
-                    <p>Real-time cryptocurrency analytics platform. Visualizes market trends and price fluctuations with
-                        interactive graphs using the Dash framework.</p>
+                    <p>Real-time cryptocurrency analytics platform. Visualizes market trends and price fluctuations with interactive graphs using the Dash framework.</p>
                     <div class="card-links">
-                        <a href="https://github.com/jayanthbottu/Live-Cryptocurrency-Anomaly-Detection" target="_blank"
-                            class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
-                        
+                        <a href="https://github.com/jayanthbottu/Live-Cryptocurrency-Anomaly-Detection" target="_blank" class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
             </div>
-
             <div class="project-card reveal reveal-stagger" style="--stagger-index: 2">
                 <div class="img-container">
                     <i class="fas fa-id-badge img-fallback"></i>
-                    <img src="proj/facerec.png" alt="Face Recognition" class="project-img"
-                        onerror="this.style.display='none'">
+                    <img src="proj/facerec.png" alt="Face Recognition" class="project-img" onerror="this.style.display='none'">
                 </div>
                 <div class="card-content">
                     <h3>Face Recognition & Attendance</h3>
@@ -1347,131 +660,85 @@
                         <span class="tech-badge">LBPH</span>
                         <span class="tech-badge">Python</span>
                     </div>
-                    <p>Automated attendance system using real-time face detection. Eliminates manual entry by
-                        recognizing registered faces instantly via webcam.</p>
+                    <p>Automated attendance system using real-time face detection. Eliminates manual entry by recognizing registered faces instantly via webcam.</p>
                     <div class="card-links">
-                        <a href="https://github.com/jayanthbottu/AIML-PROJECT" target="_blank"
-                            class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+                        <a href="https://github.com/jayanthbottu/AIML-PROJECT" target="_blank" class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="project-card reveal reveal-stagger" style="--stagger-index: 4">
-                <div class="img-container">
-                    <i class="fas fa-home img-fallback"></i>
-                    <img src="proj/smarthome.png" alt="Smart Home" class="project-img"
-                        onerror="this.style.display='none'">
-                </div>
-                <div class="card-content">
-                    <h3>IoT Smart Home</h3>
-                    <div class="tech-stack">
-                        <span class="tech-badge">IoT</span>
-                        <span class="tech-badge">Java</span>
-                        <span class="tech-badge">Web</span>
-                    </div>
-                    <p>Control lighting, climate, and security via a web dashboard. Integrates hardware sensors for a
-                        complete home automation experience.</p>
-                    <div class="card-links">
-                        <a href="https://github.com/jayanthbottu/SMART-HOME-AUTOMATION-SYSTEM" target="_blank"
-                            class="btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
-                        <a href="https://jayanthbottu.github.io/SmartHomeAutomation/index.html" target="_blank"
-                            class="btn-sm btn-fill"><i class="fas fa-external-link-alt"></i> Live</a>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </section>
 
     <section id="certifications">
         <h2 class="section-title reveal">Certifications</h2>
         <p class="section-subtitle reveal">Professional credentials and continuous learning</p>
-        
         <div class="cert-grid">
-            
             <div class="cert-card reveal reveal-stagger" style="--stagger-index: 0;">
-                <div class="cert-img-wrapper">
-                    <img src="certs/AI-for-Fintech-Security.svg" alt="AI for Fintech Security Certificate">
-                </div>
-                <div class="cert-content">
-                    <h3>AI for Fintech Security</h3>
-                </div>
+                <div class="cert-img-wrapper"><img src="certs/AI-for-Fintech-Security.svg" alt="AI for Fintech Security Certificate"></div>
+                <div class="cert-content"><h3>AI for Fintech Security</h3></div>
             </div>
-
             <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
-                <div class="cert-img-wrapper">
-                    <img src="certs/Prompt-Engineering-Research-and-Integration-Remote-Internship.svg" alt="Prompt Engineering Certificate">
-                </div>
-                <div class="cert-content">
-                    <h3>Prompt Engineering - Excelerate</h3>
-                </div>
+                <div class="cert-img-wrapper"><img src="certs/Prompt-Engineering-Research-and-Integration-Remote-Internship.svg" alt="Prompt Engineering Certificate"></div>
+                <div class="cert-content"><h3>Prompt Engineering - Excelerate</h3></div>
             </div>
-
             <div class="cert-card reveal reveal-stagger" style="--stagger-index: 1;">
-                <div class="cert-img-wrapper">
-                    <img src="certs/Zero-Trust-Cyber-Associate-_ZTCA.svg" alt="ZTCA Certificate">
-                </div>
-                <div class="cert-content">
-                    <h3>Zero Trust Cyber Associate (ZTCA)</h3>
-                </div>
+                <div class="cert-img-wrapper"><img src="certs/Zero-Trust-Cyber-Associate-_ZTCA.svg" alt="ZTCA Certificate"></div>
+                <div class="cert-content"><h3>Zero Trust Cyber Associate (ZTCA)</h3></div>
             </div>
-
             <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
-                <div class="cert-img-wrapper">
-                    <img src="certs/AIML Learning Track – GenAI Academy 2.0.png" alt="GenAI Academy Certificate">
-                </div>
-                <div class="cert-content">
-                    <h3>GenAI Academy 2.0 (AIML)</h3>
-                </div>
+                <div class="cert-img-wrapper"><img src="certs/AIML Learning Track – GenAI Academy 2.0.png" alt="GenAI Academy Certificate"></div>
+                <div class="cert-content"><h3>GenAI Academy 2.0 (AIML)</h3></div>
             </div>
-
             <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
-                <div class="cert-img-wrapper">
-                    <img src="certs/Security Learning Track – GenAI Academy 2.0.png" alt="GenAI Academy Certificate">
-                </div>
-                <div class="cert-content">
-                    <h3>GenAI Academy 2.0 (SECURITY)</h3>
-                </div>
+                <div class="cert-img-wrapper"><img src="certs/Security Learning Track – GenAI Academy 2.0.png" alt="GenAI Academy Certificate"></div>
+                <div class="cert-content"><h3>GenAI Academy 2.0 (SECURITY)</h3></div>
             </div>
-
             <div class="cert-card reveal reveal-stagger" style="--stagger-index: 2;">
-                <div class="cert-img-wrapper">
-                    <img src="certs/ServiceNow-Certified-System-Administrator.svg" alt="ServiceNow CSA Certificate">
-                </div>
-                <div class="cert-content">
-                    <h3>ServiceNow Certified System Administrator</h3>
-                </div>
+                <div class="cert-img-wrapper"><img src="certs/ServiceNow-Certified-System-Administrator.svg" alt="ServiceNow CSA Certificate"></div>
+                <div class="cert-content"><h3>ServiceNow Certified System Administrator</h3></div>
             </div>
-
         </div>
     </section>
 
     <section id="contact">
         <h2 class="section-title reveal">Let's Connect</h2>
         <div class="contact-content reveal">
-            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-                Feel free to reach out through any of these channels.</p>
+            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out through any of these channels.</p>
         </div>
         <div class="contact-grid reveal">
-            <a href="mailto:talktojayanth@gmail.com" class="social-btn" title="Email Me"><i
-                    class="fas fa-envelope"></i></a>
-            <a href="https://github.com/jayanthbottu" target="_blank" class="social-btn" title="GitHub"><i
-                    class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/jayanthbottu" target="_blank" class="social-btn" title="LinkedIn"><i
-                    class="fab fa-linkedin-in"></i></a>
-            <a href="https://instagram.com/jayanthbottu" target="_blank" class="social-btn" title="Instagram"><i
-                    class="fab fa-instagram"></i></a>
+
+            <!-- Email -->
+            <a href="mailto:talktojayanth@gmail.com" class="social-btn" title="Email Me">
+                <div class="social-btn-icon"><i class="fas fa-envelope"></i></div>
+                <span class="social-btn-label">Email</span>
+            </a>
+
+            <!-- GitHub — opens profile; click Follow there -->
+            <a href="https://github.com/jayanthbottu" target="_blank" rel="noopener" class="social-btn" title="Follow on GitHub">
+                <div class="social-btn-icon"><i class="fab fa-github"></i></div>
+                <span class="social-btn-label">Follow</span>
+            </a>
+
+            <!-- LinkedIn — deep-link to Follow action -->
+            <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=jayanthbottu" target="_blank" rel="noopener" class="social-btn" title="Follow on LinkedIn">
+                <div class="social-btn-icon"><i class="fab fa-linkedin-in"></i></div>
+                <span class="social-btn-label">Follow</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/jayanthbottu" target="_blank" rel="noopener" class="social-btn" title="Instagram">
+                <div class="social-btn-icon"><i class="fab fa-instagram"></i></div>
+                <span class="social-btn-label">Instagram</span>
+            </a>
+
         </div>
     </section>
 
     <footer>
-        <p>
-            Designed & Developed by <strong>Jayanth Bottu</strong> &copy; <span id="year"></span>.
-        </p>
+        <p>Designed & Developed by <strong>Jayanth Bottu</strong> &copy; <span id="year"></span>.</p>
     </footer>
 
-    <div class="scroll-top" id="scroll-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
+    <div class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></div>
 
     <script>
         /* ── 1. THEME ── */
@@ -1479,7 +746,7 @@
         const themeIcon = themeBtn.querySelector('i');
         const body = document.body;
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-	const profileImg = document.getElementById('profile-img');
+        const profileImg = document.getElementById('profile-img');
 
         function getPreferredTheme() {
             const saved = localStorage.getItem('theme');
@@ -1489,9 +756,9 @@
         function applyTheme(theme) {
             body.setAttribute('data-theme', theme);
             themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-		if (profileImg) {
-        profileImg.src = theme === 'dark' ? 'darkbg.jpg' : 'lightbg.png';
-    }
+            if (profileImg) {
+                profileImg.src = theme === 'dark' ? 'darkbg.jpg' : 'lightbg.png';
+            }
         }
 
         applyTheme(getPreferredTheme());
@@ -1566,39 +833,36 @@
 
         document.getElementById('year').textContent = new Date().getFullYear();
 
-		/* ── 6. RESUME MODAL ── */
-const resumeBtn = document.getElementById('open-resume-btn');
-const resumeModal = document.getElementById('resume-modal');
-const closeResumeBtn = document.getElementById('close-resume-btn');
+        /* ── 6. RESUME MODAL ── */
+        const resumeBtn = document.getElementById('open-resume-btn');
+        const resumeModal = document.getElementById('resume-modal');
+        const closeResumeBtn = document.getElementById('close-resume-btn');
 
-// Open Modal
-resumeBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    resumeModal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Stop background scrolling
-});
+        resumeBtn.addEventListener('click', () => {
+            resumeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
 
-// Close Modal (Clicking X)
-closeResumeBtn.addEventListener('click', () => {
-    resumeModal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore background scrolling
-});
+        closeResumeBtn.addEventListener('click', () => {
+            resumeModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
 
-// Close Modal (Clicking outside the box)
-resumeModal.addEventListener('click', (e) => {
-    if (e.target === resumeModal) {
-        resumeModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                resumeModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+                resumeModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     </script>
 
-	<div id="resume-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="modal-close" id="close-resume-btn" aria-label="Close modal">&times;</button>
-        <iframe src="https://drive.google.com/file/d/111odT9A7d7lMOpGxl-5zvMtEG_mN7HeS/preview" allow="autoplay"></iframe>
-    </div>
-</div>
 </body>
-
 </html>
