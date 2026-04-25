@@ -26,13 +26,11 @@
     overflow: hidden;
   }
 
-  
   #stars {
     position: fixed; inset: 0; z-index: 0;
     pointer-events: none;
   }
 
-  
   .petal {
     position: fixed;
     width: 10px; height: 14px;
@@ -50,7 +48,6 @@
     100% { transform: translateY(110vh) rotate(720deg) scale(1.1); opacity: 0; }
   }
 
-  
   .page {
     position: fixed; inset: 0;
     display: flex; flex-direction: column;
@@ -62,7 +59,6 @@
     opacity: 0; pointer-events: none; transform: translateY(30px);
   }
 
-  
   #p1 .seal {
     width: 110px; height: 110px;
     border: 1.5px solid var(--gold);
@@ -117,7 +113,6 @@
     color: var(--gold);
   }
 
-  
   #p2 { padding: 0 20px; gap: 32px; }
   #p2 .label {
     font-family: 'Jost', sans-serif;
@@ -189,7 +184,6 @@
   }
   .dot.on { background: var(--gold); transform: scale(1.3); }
 
-  
   #p3 {
     padding: 40px 24px;
     text-align: center;
@@ -253,7 +247,6 @@
   }
   #p3 .again-btn:hover { color: rgba(245,236,226,0.5); }
 
-  
   #progress {
     position: fixed;
     bottom: 0; left: 0;
@@ -264,7 +257,6 @@
     transition: width 0.6s ease;
   }
 
-  
   .swipe-hint {
     font-size: 0.62rem;
     letter-spacing: 0.25em;
@@ -283,16 +275,11 @@
 
 <canvas id="stars"></canvas>
 
-
-
-
 <div id="progress"></div>
-
 
 <div class="page" id="p1">
   <div class="seal" onclick="goto(2)">
     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      
       <path d="M32 52 C32 52 8 36 8 20 A12 12 0 0 1 32 16 A12 12 0 0 1 56 20 C56 36 32 52 32 52Z"/>
     </svg>
   </div>
@@ -301,7 +288,6 @@
   <button class="open-btn" onclick="goto(2)">Open</button>
 </div>
 
-
 <div class="page hidden" id="p2">
   <p class="label">memories</p>
 
@@ -309,7 +295,6 @@
     <span class="corner2 tr"></span>
     <span class="corner2 bl"></span>
     <div class="gallery" id="gallery">
-      
       <div class="slide active"><img src="img1.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 1 goes here'"/></div>
       <div class="slide"><img src="img2.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 2 goes here'"/></div>
       <div class="slide"><img src="img3.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 3 goes here'"/></div>
@@ -322,7 +307,6 @@
   <div class="nav-dots" id="dots"></div>
   <p class="swipe-hint" style="margin-top:4px;">tap to continue</p>
 </div>
-
 
 <div class="page hidden" id="p3">
   <p class="eyebrow">with all my heart</p>
@@ -338,8 +322,11 @@
   <button class="again-btn" onclick="restart()">← play again</button>
 </div>
 
-<script>
+<audio id="bg-music" loop>
+    <source src="moonu.mp3" type="audio/mpeg">
+</audio>
 
+<script>
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 let W, H, stars = [];
@@ -365,7 +352,6 @@ function drawStars() {
 }
 drawStars();
 
-
 function spawnPetal() {
   const p = document.createElement('div');
   p.className = 'petal';
@@ -384,7 +370,6 @@ function spawnPetal() {
   setTimeout(() => p.remove(), 13000);
 }
 let petalTimer;
-
 
 const TOTAL = 5;
 const dotsEl = document.getElementById('dots');
@@ -408,7 +393,6 @@ function showSlide(n) {
   numEl.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
 }
 
-
 let currentPage = 1;
 const pages = { 1: document.getElementById('p1'), 2: document.getElementById('p2'), 3: document.getElementById('p3') };
 const prog = document.getElementById('progress');
@@ -419,6 +403,10 @@ function goto(n) {
   currentPage = n;
 
   if (n === 2) {
+    // Play the music here on the first interaction
+    const music = document.getElementById('bg-music');
+    music.play().catch(error => console.log("Audio play failed:", error));
+
     prog.style.width = '50%';
     petalTimer = setInterval(spawnPetal, 800);
     slideTimer = setInterval(() => {
