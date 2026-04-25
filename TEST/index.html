@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0d0a12;
+    --gold: #c9a84c;
+    --gold-light: #e8cc88;
+    --rose: #c47a9b;
+    --cream: #f5ece2;
+    --mist: rgba(245,236,226,0.07);
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    overflow: hidden;
+  }
+
+  
+  #stars {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+  }
+
+  
+  .petal {
+    position: fixed;
+    width: 10px; height: 14px;
+    border-radius: 50% 10% 50% 10%;
+    background: linear-gradient(135deg, #e8a0b8, #c47a9b66);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-40px) rotate(0deg) scale(0.8); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(110vh) rotate(720deg) scale(1.1); opacity: 0; }
+  }
+
+  
+  .page {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 10;
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  .page.hidden {
+    opacity: 0; pointer-events: none; transform: translateY(30px);
+  }
+
+  
+  #p1 .seal {
+    width: 110px; height: 110px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 36px;
+    position: relative;
+    animation: pulse 3s ease-in-out infinite;
+    cursor: pointer;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.15), 0 0 40px rgba(201,168,76,0.05); }
+    50%       { box-shadow: 0 0 0 18px rgba(201,168,76,0), 0 0 60px rgba(201,168,76,0.12); }
+  }
+  #p1 .seal svg { width: 48px; height: 48px; fill: var(--gold); opacity: 0.9; }
+  #p1 h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  #p1 .sub {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 52px;
+    opacity: 0.8;
+  }
+  #p1 .open-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold-light);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 14px 44px;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+    border-radius: 0;
+  }
+  #p1 .open-btn:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  
+  #p2 { padding: 0 20px; gap: 32px; }
+  #p2 .label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+  #p2 .frame-wrap {
+    position: relative;
+    width: min(380px, 88vw);
+    aspect-ratio: 1;
+  }
+  
+  #p2 .frame-wrap::before, #p2 .frame-wrap::after {
+    content: '';
+    position: absolute;
+    width: 28px; height: 28px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.45;
+    z-index: 2;
+  }
+  #p2 .frame-wrap::before { top: -6px; left: -6px; border-width: 1px 0 0 1px; }
+  #p2 .frame-wrap::after  { bottom: -6px; right: -6px; border-width: 0 1px 1px 0; }
+  #p2 .frame-wrap .corner2 { position: absolute; width: 28px; height: 28px; border-color: var(--gold); border-style: solid; opacity: 0.45; z-index: 2; }
+  #p2 .frame-wrap .corner2.tr { top: -6px; right: -6px; border-width: 1px 1px 0 0; }
+  #p2 .frame-wrap .corner2.bl { bottom: -6px; left: -6px; border-width: 0 0 1px 1px; }
+  .gallery {
+    position: relative;
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    background: #1a1020;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(201,168,76,0.2);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  .slide.active { opacity: 1; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
+  
+  .slide-num {
+    position: absolute;
+    bottom: 12px; right: 16px;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,236,226,0.35);
+    font-family: 'Jost', sans-serif;
+    z-index: 3;
+  }
+  .nav-dots {
+    display: flex; gap: 8px;
+  }
+  .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(201,168,76,0.25);
+    transition: background 0.4s, transform 0.4s;
+    cursor: pointer;
+  }
+  .dot.on { background: var(--gold); transform: scale(1.3); }
+
+  
+  #p3 {
+    padding: 40px 24px;
+    text-align: center;
+    gap: 0;
+    justify-content: center;
+  }
+  #p3 .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 24px;
+  }
+  #p3 .title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 9vw, 4.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  #p3 .script-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    color: var(--gold-light);
+    margin-bottom: 36px;
+    display: block;
+  }
+  #p3 .divider {
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 32px;
+  }
+  #p3 .body {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+    line-height: 1.9;
+    color: rgba(245,236,226,0.75);
+    max-width: 420px;
+    margin: 0 auto 40px;
+  }
+  #p3 .sign {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    color: var(--rose);
+    opacity: 0.9;
+    margin-bottom: 40px;
+  }
+  #p3 .again-btn {
+    background: transparent;
+    border: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(245,236,226,0.25);
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: color 0.3s;
+  }
+  #p3 .again-btn:hover { color: rgba(245,236,226,0.5); }
+
+  
+  #progress {
+    position: fixed;
+    bottom: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+    width: 0%;
+    z-index: 50;
+    transition: width 0.6s ease;
+  }
+
+  
+  .swipe-hint {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.35);
+    font-family: 'Jost', sans-serif;
+    animation: blink 2.5s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+
+
+
+<div id="progress"></div>
+
+
+<div class="page" id="p1">
+  <div class="seal" onclick="goto(2)">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      
+      <path d="M32 52 C32 52 8 36 8 20 A12 12 0 0 1 32 16 A12 12 0 0 1 56 20 C56 36 32 52 32 52Z"/>
+    </svg>
+  </div>
+  <h1>For Someone<br>Irreplaceable</h1>
+  <p class="sub">A letter just for you</p>
+  <button class="open-btn" onclick="goto(2)">Open</button>
+</div>
+
+
+<div class="page hidden" id="p2">
+  <p class="label">memories</p>
+
+  <div class="frame-wrap">
+    <span class="corner2 tr"></span>
+    <span class="corner2 bl"></span>
+    <div class="gallery" id="gallery">
+      
+      <div class="slide active"><img src="img1.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 1 goes here'"/></div>
+      <div class="slide"><img src="img2.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 2 goes here'"/></div>
+      <div class="slide"><img src="img3.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 3 goes here'"/></div>
+      <div class="slide"><img src="img4.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 4 goes here'"/></div>
+      <div class="slide"><img src="img5.jpg" alt="" onerror="this.parentNode.removeAttribute('src');this.parentNode.innerHTML='photo 5 goes here'"/></div>
+    </div>
+    <div class="slide-num" id="snum">01 / 05</div>
+  </div>
+
+  <div class="nav-dots" id="dots"></div>
+  <p class="swipe-hint" style="margin-top:4px;">tap to continue</p>
+</div>
+
+
+<div class="page hidden" id="p3">
+  <p class="eyebrow">with all my heart</p>
+  <h2 class="title">Happy Birthday,</h2>
+  <span class="script-name">my love</span>
+  <div class="divider"></div>
+  <p class="body">
+    Every good thing in my days has your fingerprints on it.
+    Today the world gets to celebrate the person who makes my world
+    worth celebrating — and I get to love you a little louder than usual.
+  </p>
+  <p class="sign">Always yours ♡</p>
+  <button class="again-btn" onclick="restart()">← play again</button>
+</div>
+
+<script>
+
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [];
+function resize() {
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+}
+resize(); window.addEventListener('resize', resize);
+for (let i = 0; i < 160; i++) {
+  stars.push({ x: Math.random(), y: Math.random(), r: Math.random() * 1.1 + 0.2, a: Math.random(), da: (Math.random() - 0.5) * 0.005 });
+}
+function drawStars() {
+  ctx.clearRect(0, 0, W, H);
+  stars.forEach(s => {
+    s.a = Math.max(0.05, Math.min(0.9, s.a + s.da));
+    if (Math.random() < 0.005) s.da *= -1;
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.r, 0, 2 * Math.PI);
+    ctx.fillStyle = `rgba(232,212,168,${s.a})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+
+function spawnPetal() {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const size = 7 + Math.random() * 9;
+  p.style.cssText = `
+    left:${Math.random() * 110 - 5}vw;
+    top:${-size}px;
+    width:${size}px;
+    height:${size * 1.4}px;
+    animation-duration:${6 + Math.random() * 7}s;
+    animation-delay:${Math.random() * 3}s;
+    opacity:0;
+    transform:rotate(${Math.random() * 360}deg);
+  `;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 13000);
+}
+let petalTimer;
+
+
+const TOTAL = 5;
+const dotsEl = document.getElementById('dots');
+for (let i = 0; i < TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  d.onclick = () => showSlide(i);
+  dotsEl.appendChild(d);
+}
+let cur = 0, slideTimer;
+const slides = document.querySelectorAll('.slide');
+const numEl = document.getElementById('snum');
+const dotEls = document.querySelectorAll('.dot');
+
+function showSlide(n) {
+  slides[cur].classList.remove('active');
+  dotEls[cur].classList.remove('on');
+  cur = (n + TOTAL) % TOTAL;
+  slides[cur].classList.add('active');
+  dotEls[cur].classList.add('on');
+  numEl.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+}
+
+
+let currentPage = 1;
+const pages = { 1: document.getElementById('p1'), 2: document.getElementById('p2'), 3: document.getElementById('p3') };
+const prog = document.getElementById('progress');
+
+function goto(n) {
+  pages[currentPage].classList.add('hidden');
+  pages[n].classList.remove('hidden');
+  currentPage = n;
+
+  if (n === 2) {
+    prog.style.width = '50%';
+    petalTimer = setInterval(spawnPetal, 800);
+    slideTimer = setInterval(() => {
+      if (cur === TOTAL - 1) { clearInterval(slideTimer); setTimeout(() => goto(3), 2000); return; }
+      showSlide(cur + 1);
+    }, 3200);
+    
+    pages[2].addEventListener('click', function once() {
+      clearInterval(slideTimer);
+      goto(3);
+      pages[2].removeEventListener('click', once);
+    });
+  }
+
+  if (n === 3) {
+    prog.style.width = '100%';
+    clearInterval(slideTimer);
+    petalTimer = petalTimer || setInterval(spawnPetal, 400);
+    clearInterval(petalTimer);
+    petalTimer = setInterval(spawnPetal, 350);
+  }
+}
+
+function restart() {
+  clearInterval(petalTimer);
+  clearInterval(slideTimer);
+  cur = 0;
+  slides.forEach((s, i) => { s.classList.toggle('active', i === 0); });
+  dotEls.forEach((d, i) => { d.classList.toggle('on', i === 0); });
+  numEl.textContent = '01 / 05';
+  prog.style.width = '0%';
+  goto(1);
+}
+</script>
+</body>
+</html>
