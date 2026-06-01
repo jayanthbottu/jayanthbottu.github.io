@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,8 +43,8 @@
     /* Background Grids */
     .bg-grid {
       background-image: 
-        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
       background-size: 40px 40px;
     }
     .dark .bg-grid {
@@ -115,7 +115,7 @@
   </div>
 
   <!-- NAVBAR -->
-  <nav class="fixed top-0 left-0 right-0 h-20 z-50 flex items-center justify-between px-6 md:px-12 backdrop-blur-xl bg-white/70 dark:bg-[#0a0a0a]/70 border-b border-slate-200 dark:border-zinc-800 transition-colors duration-500">
+  <nav class="fixed top-0 left-0 right-0 h-20 z-50 flex items-center justify-between px-6 md:px-12 backdrop-blur-xl bg-white/80 dark:bg-[#0a0a0a]/80 border-b border-slate-200/80 dark:border-zinc-800/80 transition-colors duration-500 shadow-sm">
     <a href="#home" class="font-head font-black text-2xl tracking-tighter text-slate-900 dark:text-zinc-100 transition-colors z-50">
       Jayanth<span class="text-accent text-3xl">.</span>
     </a>
@@ -127,14 +127,10 @@
       <a href="#projects" class="hover:text-slate-900 dark:hover:text-zinc-100 transition-colors">Projects</a>
     </div>
     <div class="flex items-center gap-3 z-50">
-      <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-[#0a0a0a] border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-accent dark:hover:text-accent transition-all duration-300">
-        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon hidden"></i>
-        <i id="theme-toggle-light-icon" class="fa-solid fa-sun hidden"></i>
-      </button>
       <button class="open-resume hidden sm:flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 transition-all transform hover:-translate-y-0.5">
         <i class="fa-solid fa-file-lines"></i> Resume
       </button>
-      <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 bg-slate-100 dark:bg-[#0a0a0a] border border-slate-200 dark:border-zinc-800 rounded-lg">
+      <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-lg">
         <span class="w-5 h-0.5 bg-slate-800 dark:bg-zinc-100 rounded-full"></span>
         <span class="w-5 h-0.5 bg-slate-800 dark:bg-zinc-100 rounded-full"></span>
         <span class="w-5 h-0.5 bg-slate-800 dark:bg-zinc-100 rounded-full"></span>
@@ -155,7 +151,7 @@
     </button>
   </div>
 
-  <!-- HERO SECTION - Typography Focused, No Profile Pic Here -->
+  <!-- HERO SECTION -->
   <section id="home" class="relative min-h-screen flex items-center pt-28 pb-12 overflow-hidden px-6 md:px-12 transition-colors duration-500">
     <div class="absolute inset-0 bg-grid pointer-events-none transition-colors duration-500 opacity-60"></div>
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,69,0,0.06)_0%,transparent_50%)] pointer-events-none"></div>
@@ -188,12 +184,6 @@
       </div>
 
     </div>
-    
-    <!-- Scroll Down Indicator -->
-    <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 dark:text-zinc-500 hover:text-accent dark:hover:text-accent transition-colors">
-      <span class="text-xs font-bold tracking-widest uppercase writing-vertical-rl">Scroll</span>
-      <i class="fa-solid fa-arrow-down animate-bounce text-sm"></i>
-    </a>
   </section>
 
   <!-- MARQUEE -->
@@ -206,15 +196,15 @@
     </div>
   </div>
 
-  <!-- ABOUT ME (Showcasing Passport Photo with max Vibe) -->
+  <!-- ABOUT ME -->
   <section id="about" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto scroll-reveal transition-colors duration-500">
     <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative z-10">
       
       <!-- Premium ID Card Profile Showcase -->
       <div class="w-full max-w-[320px] md:max-w-[400px] shrink-0 relative group perspective-1000">
         <!-- Glow Backdrops -->
-        <div class="absolute -inset-4 bg-gradient-to-tr from-accent via-orange-500 to-yellow-500 rounded-[2.5rem] opacity-30 dark:opacity-20 blur-xl group-hover:opacity-60 dark:group-hover:opacity-40 transition-opacity duration-700"></div>
-        <div class="absolute inset-0 bg-gradient-to-tr from-accent/80 to-transparent rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 shadow-xl opacity-50 dark:opacity-100"></div>
+        <div class="absolute -inset-4 bg-gradient-to-tr from-accent via-orange-500 to-yellow-500 rounded-[2.5rem] opacity-20 dark:opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-700"></div>
+        <div class="absolute inset-0 bg-gradient-to-tr from-accent/60 to-transparent rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 shadow-xl opacity-30 dark:opacity-80"></div>
         
         <!-- Main Card -->
         <div class="relative bg-white dark:bg-zinc-900 rounded-[2rem] border border-slate-200 dark:border-zinc-700/50 overflow-hidden shadow-2xl z-10 pt-10 px-6 flex flex-col items-center h-[460px] md:h-[500px] transition-all duration-500 group-hover:-translate-y-2">
@@ -227,11 +217,11 @@
             </div>
           </div>
 
-          <!-- Formal Image with transparent bg -->
-          <img src="dp.JPG" alt="Jayanth Bottu" class="absolute bottom-0 w-[110%] object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)] transform origin-bottom transition-transform duration-700 ease-out group-hover:scale-105 z-10" onerror="this.style.display='none'" />
+          <!-- Formal Image -->
+          <img src="dp.JPG" alt="Jayanth Bottu" class="absolute bottom-0 w-[110%] object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)] transform origin-bottom transition-transform duration-700 ease-out group-hover:scale-105 z-10" onerror="this.style.display='none'" />
           
-          <!-- Cyber overlay details (Optional cool factor) -->
-          <div class="absolute bottom-6 left-6 z-20 bg-white/70 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/40 dark:border-zinc-700" style="opacity: 0; animation: fadein 1s 1s forwards;">
+          <!-- Cyber overlay details -->
+          <div class="absolute bottom-6 left-6 z-20 bg-white/80 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200 dark:border-zinc-700" style="opacity: 0; animation: fadein 1s 1s forwards;">
             <p class="font-mono text-[10px] text-slate-800 dark:text-zinc-300 tracking-widest">ID: J-BOTTU</p>
             <p class="font-mono text-[10px] text-accent font-bold mt-1 tracking-widest">ENG // SEC</p>
           </div>
@@ -253,7 +243,7 @@
             I am <strong class="text-slate-900 dark:text-zinc-100 font-bold border-b-2 border-accent/20">Jayanth Bottu</strong>, an AI Engineer and Cybersecurity Enthusiast based in Warangal, India. My passion lies in building systems that aren't just intelligent, but rock-solid against tomorrow's threats.
           </p>
           <p>
-            With a "Zero Trust" mindset, I engineer full-stack solutions — from Retrieval-Augmented Generation (RAG) pipelines for dense institutional data, to advanced deepfake attribution models. I don't just write scripts; I build end-to-end architectures designed for production.
+            With a "Zero Trust" mindset, I engineer full-stack solutions from Retrieval-Augmented Generation (RAG) pipelines for dense institutional data, to advanced deepfake attribution models. I don't just write scripts; I build end-to-end architectures designed for production.
           </p>
         </div>
         
@@ -370,7 +360,7 @@
       <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 first:border-0 hover:pl-6 transition-all duration-300">
         <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
         <div class="pt-1">
-          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Jan – Feb 2026</div>
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Jan / Feb 2026</div>
           <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Internship</div>
         </div>
         <div>
@@ -385,7 +375,7 @@
       <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 hover:pl-6 transition-all duration-300">
         <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
         <div class="pt-1">
-          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Apr – Oct 2025</div>
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Apr / Oct 2025</div>
           <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Virtual Internship</div>
         </div>
         <div>
@@ -400,13 +390,13 @@
       <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 hover:pl-6 transition-all duration-300">
         <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
         <div class="pt-1">
-          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Jul – Sep 2024</div>
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Jul / Sep 2024</div>
           <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Internship</div>
         </div>
         <div>
           <h3 class="font-head text-2xl font-black tracking-tight text-slate-900 dark:text-zinc-100 mb-2">Generative AI Intern</h3>
           <div class="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-zinc-500 mb-4 flex items-center gap-2">
-            <i class="fa-regular fa-building"></i> Google Cloud – AICTE
+            <i class="fa-regular fa-building"></i> Google Cloud / AICTE
           </div>
           <p class="text-slate-600 dark:text-zinc-400 text-base leading-relaxed max-w-3xl font-medium">Specialized in NLP and Image Recognition. Developed and deployed scalable AI models using TensorFlow, Keras, and PyTorch, gaining deep insights into Generative AI workflows.</p>
         </div>
@@ -415,13 +405,13 @@
       <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 hover:pl-6 transition-all duration-300">
         <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
         <div class="pt-1">
-          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Apr – Jun 2024</div>
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Apr / Jun 2024</div>
           <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Internship</div>
         </div>
         <div>
           <h3 class="font-head text-2xl font-black tracking-tight text-slate-900 dark:text-zinc-100 mb-2">Cybersecurity Intern</h3>
           <div class="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-zinc-500 mb-4 flex items-center gap-2">
-            <i class="fa-regular fa-building"></i> Palo Alto – AICTE
+            <i class="fa-regular fa-building"></i> Palo Alto / AICTE
           </div>
           <p class="text-slate-600 dark:text-zinc-400 text-base leading-relaxed max-w-3xl font-medium">Analyzed simulated security threats and investigated incidents. Enhanced understanding of network security protocols and advanced threat mitigation strategies.</p>
         </div>
@@ -450,7 +440,7 @@
             </div>
           </div>
           <div class="p-8 flex flex-col flex-1">
-            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">CIRA — Campus Information Retrieval</h3>
+            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">CIRA Focus Campus Information Retrieval</h3>
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Python</span>
               <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">RAG / FAISS</span>
@@ -477,7 +467,7 @@
             </div>
           </div>
           <div class="p-8 flex flex-col flex-1">
-            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">DFDA — Deepfake Detection</h3>
+            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">DFDA Focus Deepfake Detection</h3>
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Python</span>
               <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">PyTorch</span>
@@ -556,43 +546,51 @@
       <h2 class="font-head text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-zinc-100">Certifications</h2>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
-          <i class="fa-solid fa-money-bill-transfer"></i>
+    <!-- CERTIFICATES WITH WHITE BACKGROUND -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <div class="bg-white rounded-3xl p-6 flex flex-col items-center gap-6 shadow-sm border border-slate-200 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+        <div class="w-full h-40 flex items-center justify-center bg-white p-4">
+          <img src="certs/AI-for-Fintech-Security.svg" alt="AI for Fintech Security" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500">
         </div>
-        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">AI for Fintech Security</h3>
+        <h3 class="font-head font-bold text-slate-900 text-base text-center w-full border-t border-slate-100 pt-5 mt-auto">AI for Fintech Security</h3>
       </div>
-      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
-          <i class="fa-solid fa-microchip"></i>
+      
+      <div class="bg-white rounded-3xl p-6 flex flex-col items-center gap-6 shadow-sm border border-slate-200 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+        <div class="w-full h-40 flex items-center justify-center bg-white p-4">
+          <img src="certs/Prompt-Engineering-Research-and-Integration-Remote-Internship.svg" alt="Prompt Engineering" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500">
         </div>
-        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">Prompt Engineering – Excelerate</h3>
+        <h3 class="font-head font-bold text-slate-900 text-base text-center w-full border-t border-slate-100 pt-5 mt-auto">Prompt Engineering</h3>
       </div>
-      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
-          <i class="fa-solid fa-shield-cat"></i>
+      
+      <div class="bg-white rounded-3xl p-6 flex flex-col items-center gap-6 shadow-sm border border-slate-200 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+        <div class="w-full h-40 flex items-center justify-center bg-white p-4">
+          <img src="certs/Zero-Trust-Cyber-Associate-_ZTCA.svg" alt="Zero Trust Cyber Associate" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500">
         </div>
-        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">Zero Trust Cyber Associate</h3>
+        <h3 class="font-head font-bold text-slate-900 text-base text-center w-full border-t border-slate-100 pt-5 mt-auto">Zero Trust Cyber Associate</h3>
       </div>
-      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
-          <i class="fa-solid fa-graduation-cap"></i>
+
+      <div class="bg-white rounded-3xl p-6 flex flex-col items-center gap-6 shadow-sm border border-slate-200 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+        <div class="w-full h-40 flex items-center justify-center bg-white p-4">
+          <img src="certs/AIML Learning Track - GenAI Academy 2.0.png" alt="GenAI AIML" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">
         </div>
-        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">GenAI Academy 2.0 – AI/ML</h3>
+        <h3 class="font-head font-bold text-slate-900 text-base text-center w-full border-t border-slate-100 pt-5 mt-auto">GenAI Academy 2.0 AI/ML</h3>
       </div>
-      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
-          <i class="fa-solid fa-user-shield"></i>
+
+      <div class="bg-white rounded-3xl p-6 flex flex-col items-center gap-6 shadow-sm border border-slate-200 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+        <div class="w-full h-40 flex items-center justify-center bg-white p-4">
+          <img src="certs/Security Learning Track - GenAI Academy 2.0.png" alt="GenAI Security" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">
         </div>
-        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">GenAI Academy 2.0 – Security</h3>
+        <h3 class="font-head font-bold text-slate-900 text-base text-center w-full border-t border-slate-100 pt-5 mt-auto">GenAI Academy 2.0 Security</h3>
       </div>
-      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
-          <i class="fa-brands fa-servicestack"></i>
+
+      <div class="bg-white rounded-3xl p-6 flex flex-col items-center gap-6 shadow-sm border border-slate-200 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+        <div class="w-full h-40 flex items-center justify-center bg-white p-4">
+          <img src="certs/ServiceNow-Certified-System-Administrator.svg" alt="ServiceNow CSA" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500">
         </div>
-        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">ServiceNow CSA</h3>
+        <h3 class="font-head font-bold text-slate-900 text-base text-center w-full border-t border-slate-100 pt-5 mt-auto">ServiceNow CSA</h3>
       </div>
+
     </div>
   </section>
 
@@ -624,28 +622,18 @@
   </footer>
 
   <script>
-    /* THEME TOGGLE */
-    const tbtn = document.getElementById('theme-toggle');
-    const dIcon = document.getElementById('theme-toggle-dark-icon');
-    const lIcon = document.getElementById('theme-toggle-light-icon');
-    const html = document.documentElement;
-    
-    function applyTheme(t) {
-      if (t === 'dark') {
+    /* THEME AUTOMATION: Use prefers-color-scheme dynamically */
+    function applySystemTheme() {
+      const html = document.documentElement;
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (isDark) {
         html.classList.add('dark');
-        dIcon.classList.add('hidden');
-        lIcon.classList.remove('hidden');
       } else {
         html.classList.remove('dark');
-        dIcon.classList.remove('hidden');
-        lIcon.classList.add('hidden');
       }
-      localStorage.setItem('theme', t);
     }
-    
-    const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-    applyTheme(saved);
-    tbtn.addEventListener('click', () => applyTheme(html.classList.contains('dark') ? 'light' : 'dark'));
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySystemTheme);
+    applySystemTheme();
 
     /* MOBILE MENU */
     const hb = document.getElementById('mobile-menu-btn');
@@ -745,4 +733,3 @@
   </script>
 </body>
 </html>
-
