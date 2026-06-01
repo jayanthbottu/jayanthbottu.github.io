@@ -1,838 +1,748 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jayanth Bottu</title>
-  <meta name="description" content="AI & Software Engineer — Hyderabad">
+  <title>Jayanth Bottu - AI Engineer & Cybersecurity</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
-
-  <style>
-    /* ─── THEME ─── */
-    :root {
-      color-scheme: light dark;
-      --bg:      #f0ede6;
-      --bg2:     #e8e4db;
-      --text:    #131110;
-      --text2:   #7a7368;
-      --text3:   #b0a898;
-      --accent:  #c94c0a;
-      --line:    #d4cfc5;
-      --inv:     #131110;
-      --inv-txt: #f0ede6;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:      #111010;
-        --bg2:     #1a1918;
-        --text:    #eeebe4;
-        --text2:   #7a7770;
-        --text3:   #454340;
-        --accent:  #f47829;
-        --line:    #2a2826;
-        --inv:     #eeebe4;
-        --inv-txt: #111010;
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: '#ff4500',
+            'accent-h': '#e03a00'
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            head: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
       }
     }
+  </script>
 
-    /* ─── RESET ─── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+  <style>
+    /* Sleek Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #ff4500; border-radius: 4px; }
 
-    body {
-      font-family: 'Chakra Petch', monospace;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+    /* Background Grids */
+    .bg-grid {
+      background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; }
-
-    /* ─── LAYOUT ─── */
-    .wrap {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 0 2rem;
+    .dark .bg-grid {
+      background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
     }
 
-    /* ─── NAV ─── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-      padding: .9rem 0;
-    }
-    nav .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-name {
-      font-size: .82rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: .75rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text2);
-      font-weight: 500;
-      transition: color .15s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-resume {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--inv-txt);
-      background: var(--inv);
-      padding: .42rem .95rem;
-      border: 1.5px solid var(--inv);
-      cursor: pointer;
-      transition: background .15s, color .15s;
-    }
-    .nav-resume:hover {
-      background: transparent;
-      color: var(--text);
-      border-color: var(--text);
-    }
-
-    /* ─── RESUME DIALOG ─── */
-    dialog {
-      border: 2px solid var(--line);
-      background: var(--bg);
-      color: var(--text);
-      padding: 0;
-      width: min(900px, 95vw);
-      max-height: 94vh;
-      box-shadow: 8px 8px 0 var(--line);
-    }
-    dialog::backdrop {
-      background: rgba(0,0,0,.5);
-      backdrop-filter: blur(3px);
-    }
-    .dg-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .8rem 1.1rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .dg-title {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .dg-close {
-      font-family: 'Chakra Petch', monospace;
-      background: none;
-      border: 1.5px solid var(--line);
-      padding: .25rem .6rem;
-      font-size: .8rem;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--text2);
-      letter-spacing: .08em;
-      transition: border-color .15s, color .15s;
-    }
-    .dg-close:hover { border-color: var(--text); color: var(--text); }
-    .dg-body {
-      padding: 1.1rem;
-    }
-    .dg-body iframe {
-      width: 100%;
-      height: 78vh;
-      border: none;
-      background: var(--bg2);
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      padding: 5.5rem 0 4rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .hero-avatar-name {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.4rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-avatar {
-      width: 72px;
-      height: 72px;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 1.5px solid var(--line);
-      margin-top: .35rem;
-    }
-    .hero-name {
-      font-size: clamp(2.6rem, 7vw, 4.8rem);
-      font-weight: 700;
-      line-height: .95;
-      letter-spacing: -.02em;
-    }
-    .hero-name span { color: var(--accent); }
-
-    .hero-meta {
-      font-size: .78rem;
-      color: var(--text2);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: 1.4rem;
-      padding-top: .1rem;
-      display: flex;
-      gap: 1.4rem;
-      flex-wrap: wrap;
-    }
-    .hero-meta .dot { color: var(--text3); }
-
-    .hero-bio {
-      font-size: 1.02rem;
-      color: var(--text2);
-      max-width: 560px;
-      line-height: 1.75;
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-    .hero-bio strong { color: var(--text); font-weight: 600; }
-
-    .hero-links {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-    }
-    .hlink {
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text2);
-      padding: .5rem 1.1rem;
-      border: 1.5px solid var(--line);
-      border-right-width: 0;
-      transition: color .15s, border-color .15s, background .15s;
-    }
-    .hlink:last-child { border-right-width: 1.5px; }
-    .hlink:hover {
-      color: var(--text);
-      border-color: var(--text);
-      background: var(--bg2);
-      position: relative;
-      z-index: 1;
-    }
-    .hlink.primary {
-      background: var(--inv);
-      color: var(--inv-txt);
-      border-color: var(--inv);
-    }
-    .hlink.primary:hover {
-      background: transparent;
-      color: var(--text);
-      border-color: var(--text);
-    }
-
-    /* ─── SECTION STRUCTURE ─── */
-    .sec {
-      padding: 3.5rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .sec-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-    .sec-label {
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--text3);
-      padding-top: .15rem;
-      position: sticky;
-      top: 3.4rem;
-    }
-    .sec-num {
-      display: block;
-      font-size: .62rem;
-      color: var(--text3);
-      margin-bottom: .2rem;
-    }
-
-    /* ─── ABOUT ─── */
-    .about-text {
-      font-size: .97rem;
-      color: var(--text2);
-      line-height: 1.8;
-      font-weight: 300;
-    }
-    .about-text strong { color: var(--text); font-weight: 600; }
-    .about-text + .about-text { margin-top: 1rem; }
-
-    /* ─── SKILLS ─── */
-    .skill-rows { width: 100%; }
-    .skill-row {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 1rem;
-      padding: .7rem 0;
-      border-top: 1px solid var(--line);
-      align-items: baseline;
-    }
-    .skill-row:last-child { border-bottom: 1px solid var(--line); }
-    .skill-cat {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text3);
-    }
-    .skill-vals {
-      font-size: .88rem;
-      color: var(--text2);
-      font-weight: 400;
-      line-height: 1.6;
-    }
-    .skill-dot { color: var(--accent); margin: 0 .35rem; }
-
-    /* ─── EXPERIENCE ─── */
-    .exp-items { display: flex; flex-direction: column; gap: 0; }
-    .exp-item {
-      padding: 1.4rem 0;
-      border-top: 1px solid var(--line);
-    }
-    .exp-item:last-child { border-bottom: 1px solid var(--line); }
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: .5rem;
-      margin-bottom: .25rem;
-    }
-    .exp-role {
-      font-size: .97rem;
-      font-weight: 700;
-      letter-spacing: -.01em;
-    }
-    .exp-date {
-      font-size: .72rem;
-      color: var(--text3);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .exp-co {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .65rem;
-    }
-    .exp-desc {
-      font-size: .88rem;
-      color: var(--text2);
-      font-weight: 300;
-      line-height: 1.75;
-    }
-
-    /* ─── PROJECTS ─── */
-    .proj-items { display: flex; flex-direction: column; }
-    .proj-item {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 1.4rem;
-      padding: 1.4rem 0;
-      border-top: 1px solid var(--line);
-      align-items: start;
-      transition: opacity .15s;
-    }
-    .proj-item:last-child { border-bottom: 1px solid var(--line); }
-    .proj-item:hover { opacity: .85; }
-    .proj-img {
-      width: 130px;
-      height: 88px;
-      object-fit: cover;
-      border: 1px solid var(--line);
-    }
-    .proj-body {}
-    .proj-title {
-      font-size: .97rem;
-      font-weight: 700;
-      letter-spacing: -.01em;
-      margin-bottom: .35rem;
-    }
-    .proj-desc {
-      font-size: .84rem;
-      color: var(--text2);
-      font-weight: 300;
-      line-height: 1.7;
-      margin-bottom: .7rem;
-    }
-    .proj-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: .5rem;
-    }
-    .proj-stack {
-      font-size: .7rem;
-      color: var(--text3);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-    .proj-gh {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: .3rem;
-      transition: gap .15s;
-    }
-    .proj-gh:hover { gap: .5rem; }
-
-    /* ─── CERTS ─── */
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-    .cert-cell {
-      background: var(--bg);
-      padding: 1.4rem 1.2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .7rem;
-      text-align: center;
-      transition: background .15s;
-    }
-    .cert-cell:hover { background: var(--bg2); }
-    .cert-img {
-      width: auto;
-      height: 54px;
-      object-fit: contain;
-    }
-    .cert-name {
-      font-size: .73rem;
-      font-weight: 600;
-      color: var(--text2);
-      line-height: 1.4;
-      letter-spacing: .02em;
-    }
-
-    /* ─── CONTACT ─── */
-    .contact-block {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .contact-email {
-      font-size: clamp(1.1rem, 3vw, 1.6rem);
-      font-weight: 700;
-      letter-spacing: -.01em;
-      color: var(--text);
-      transition: color .15s;
-      display: inline-block;
-    }
-    .contact-email:hover { color: var(--accent); }
-    .contact-row {
-      display: flex;
-      gap: 0;
-      flex-wrap: wrap;
-    }
-    .clink {
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text2);
-      padding: .42rem .9rem;
-      border: 1px solid var(--line);
-      border-right-width: 0;
-      transition: color .15s, border-color .15s;
-    }
-    .clink:last-child { border-right-width: 1px; }
-    .clink:hover { color: var(--text); border-color: var(--text); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      padding: 1.8rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: .5rem;
-    }
-    footer p {
-      font-size: .7rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text3);
-    }
-
-    /* ─── FADE IN ─── */
-    .fade {
+    /* REVEAL TEXT BLUR EFFECT */
+    .reveal-text {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity .6s ease, transform .6s ease;
+      filter: blur(8px);
+      transform: translateY(20px);
+      animation: blurReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .fade.in { opacity: 1; transform: none; }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-500 { animation-delay: 500ms; }
+    @keyframes blurReveal {
+      to { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 600px) {
-      .wrap { padding: 0 1.2rem; }
-      .nav-links { display: none; }
-      .sec-row { grid-template-columns: 1fr; gap: 1rem; }
-      .sec-label { position: static; }
-      .proj-item { grid-template-columns: 1fr; }
-      .proj-img { width: 100%; height: 160px; }
-      .cert-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-avatar-name { gap: 1rem; }
-      .hero-name { font-size: 2.6rem; }
+    /* Marquee Animation */
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
+    .animate-marquee { display: flex; width: max-content; animation: scroll 35s linear infinite; }
+    .marquee-container:hover .animate-marquee { animation-play-state: paused; }
+    
+    /* Scroll Reveal Transition */
+    .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .scroll-reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* Modals & Menus */
+    .modal-bg { opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+    .modal-bg.on { opacity: 1; pointer-events: all; }
+    .modal-content { transform: scale(0.95); opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .modal-bg.on .modal-content { transform: scale(1); opacity: 1; }
+
+    .mob-menu { opacity: 0; pointer-events: none; transition: all 0.3s; }
+    .mob-menu.open { opacity: 1; pointer-events: all; }
+    .mob-menu-panel { transform: translateY(-10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .mob-menu.open .mob-menu-panel { transform: translateY(0); }
+
+    /* Typing cursor */
+    .typing-cursor { display: inline-block; width: 2px; height: 1.1em; background-color: #ff4500; animation: blink 0.85s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
   </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden selection:bg-accent selection:text-white bg-slate-50 dark:bg-[#0a0a0a] text-slate-800 dark:text-zinc-100 transition-colors duration-500 cursor-default">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="wrap">
-      <span class="nav-name">Jayanth Bottu</span>
-      <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><button class="nav-resume" id="openResume">Resume ↗</button></li>
-      </ul>
+  <!-- RESUME MODAL -->
+  <div id="resume-modal" class="modal-bg fixed inset-0 z-[100] bg-slate-900/40 dark:bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-8">
+    <div class="modal-content relative w-full max-w-5xl h-[85vh] bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-2xl flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-[#0a0a0a]">
+        <h3 class="font-head font-bold text-lg text-slate-800 dark:text-zinc-100 flex items-center gap-2">
+          <i class="fa-solid fa-file-lines text-accent"></i> Jayanth's Resume
+        </h3>
+        <button id="close-modal" class="text-slate-500 hover:text-accent transition-colors w-8 h-8 flex justify-center items-center rounded-full hover:bg-slate-200 dark:hover:bg-zinc-800">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      <div class="flex-1 w-full bg-slate-100 dark:bg-zinc-950">
+        <iframe src="https://drive.google.com/file/d/157_LmsRYkTv2rwh4E-yFykJiZsLv02qe/preview" class="w-full h-full border-none" allow="autoplay"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 h-20 z-50 flex items-center justify-between px-6 md:px-12 backdrop-blur-xl bg-white/70 dark:bg-[#0a0a0a]/70 border-b border-slate-200 dark:border-zinc-800 transition-colors duration-500">
+    <a href="#home" class="font-head font-black text-2xl tracking-tighter text-slate-900 dark:text-zinc-100 transition-colors z-50">
+      Jayanth<span class="text-accent text-3xl">.</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-10 text-sm font-bold tracking-wide text-slate-500 dark:text-zinc-400">
+      <a href="#home" class="hover:text-slate-900 dark:hover:text-zinc-100 transition-colors">Home</a>
+      <a href="#about" class="hover:text-slate-900 dark:hover:text-zinc-100 transition-colors">About</a>
+      <a href="#skills" class="hover:text-slate-900 dark:hover:text-zinc-100 transition-colors">Skills</a>
+      <a href="#experience" class="hover:text-slate-900 dark:hover:text-zinc-100 transition-colors">Experience</a>
+      <a href="#projects" class="hover:text-slate-900 dark:hover:text-zinc-100 transition-colors">Projects</a>
+    </div>
+    <div class="flex items-center gap-3 z-50">
+      <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-[#0a0a0a] border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-accent dark:hover:text-accent transition-all duration-300">
+        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon hidden"></i>
+        <i id="theme-toggle-light-icon" class="fa-solid fa-sun hidden"></i>
+      </button>
+      <button class="open-resume hidden sm:flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-accent/30 hover:shadow-accent/50 transition-all transform hover:-translate-y-0.5">
+        <i class="fa-solid fa-file-lines"></i> Resume
+      </button>
+      <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 bg-slate-100 dark:bg-[#0a0a0a] border border-slate-200 dark:border-zinc-800 rounded-lg">
+        <span class="w-5 h-0.5 bg-slate-800 dark:bg-zinc-100 rounded-full"></span>
+        <span class="w-5 h-0.5 bg-slate-800 dark:bg-zinc-100 rounded-full"></span>
+        <span class="w-5 h-0.5 bg-slate-800 dark:bg-zinc-100 rounded-full"></span>
+      </button>
     </div>
   </nav>
 
-  <!-- ── RESUME DIALOG ── -->
-  <dialog id="resumeDlg">
-    <div class="dg-head">
-      <span class="dg-title">Resume — Jayanth Bottu</span>
-      <button class="dg-close" id="closeResume">Close ✕</button>
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mob-menu-bg" class="mob-menu fixed inset-0 z-40 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm lg:hidden"></div>
+  <div id="mob-menu-panel" class="mob-menu fixed top-20 left-0 right-0 z-40 bg-white dark:bg-[#0a0a0a] border-b border-slate-200 dark:border-zinc-800 p-4 flex flex-col gap-2 shadow-2xl lg:hidden">
+    <a href="#home" class="mob-link px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-900/50 font-bold text-slate-800 dark:text-zinc-100 tracking-wide">Home</a>
+    <a href="#about" class="mob-link px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-900/50 font-bold text-slate-800 dark:text-zinc-100 tracking-wide">About</a>
+    <a href="#skills" class="mob-link px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-900/50 font-bold text-slate-800 dark:text-zinc-100 tracking-wide">Skills</a>
+    <a href="#experience" class="mob-link px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-900/50 font-bold text-slate-800 dark:text-zinc-100 tracking-wide">Experience</a>
+    <a href="#projects" class="mob-link px-4 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-900/50 font-bold text-slate-800 dark:text-zinc-100 tracking-wide">Projects</a>
+    <button class="open-resume sm:hidden mt-2 flex justify-center items-center gap-2 bg-accent text-white px-5 py-3 rounded-full text-base font-bold shadow-lg shadow-accent/30">
+      <i class="fa-solid fa-file-lines"></i> View Resume
+    </button>
+  </div>
+
+  <!-- HERO SECTION - Typography Focused, No Profile Pic Here -->
+  <section id="home" class="relative min-h-screen flex items-center pt-28 pb-12 overflow-hidden px-6 md:px-12 transition-colors duration-500">
+    <div class="absolute inset-0 bg-grid pointer-events-none transition-colors duration-500 opacity-60"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,69,0,0.06)_0%,transparent_50%)] pointer-events-none"></div>
+
+    <div class="w-full max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+      
+      <div class="reveal-text inline-flex items-center gap-3 px-4 py-2 rounded-full bg-accent/5 lg:bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-[0.2em] w-fit shadow-sm backdrop-blur-sm mb-10 transition-all duration-500">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(255,69,0,0.8)]"></span>
+        Available for Opportunities
+      </div>
+
+      <h1 class="font-head text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] font-black leading-[0.95] tracking-tighter text-slate-900 dark:text-zinc-100 transition-colors duration-500">
+        <span class="reveal-text delay-100 block">BUILDING THE</span>
+        <span class="reveal-text delay-300 block text-transparent bg-clip-text bg-gradient-to-r from-accent to-orange-400 font-style-italic italic relative inline-block pb-4">
+          FUTURE WITH AI.
+        </span>
+      </h1>
+
+      <p class="reveal-text delay-500 mt-6 text-slate-600 dark:text-zinc-400 text-lg md:text-2xl max-w-2xl font-medium leading-relaxed transition-colors duration-500 h-[64px] md:h-auto">
+        <span id="tyel"></span><span class="typing-cursor"></span>
+      </p>
+
+      <div class="reveal-text delay-500 flex flex-wrap justify-center items-center gap-4 mt-10">
+        <button class="open-resume inline-flex items-center gap-2 px-8 py-4 rounded-full bg-accent text-white font-black text-sm tracking-widest uppercase shadow-xl shadow-accent/20 hover:shadow-2xl hover:shadow-accent/40 transition-all hover:-translate-y-1">
+          <i class="fa-solid fa-file-lines"></i> View Resume
+        </button>
+        <a href="https://www.linkedin.com/in/jayanthbottu" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-200 font-bold text-sm tracking-widest uppercase transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:border-zinc-700">
+          <i class="fa-brands fa-linkedin text-[#0077b5] dark:text-current"></i> Connect
+        </a>
+      </div>
+
     </div>
-    <div class="dg-body">
-      <iframe
-        src="https://drive.google.com/file/d/157_LmsRYkTv2rwh4E-yFykJiZsLv02qe/preview"
-        title="Resume">
-      </iframe>
+    
+    <!-- Scroll Down Indicator -->
+    <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 dark:text-zinc-500 hover:text-accent dark:hover:text-accent transition-colors">
+      <span class="text-xs font-bold tracking-widest uppercase writing-vertical-rl">Scroll</span>
+      <i class="fa-solid fa-arrow-down animate-bounce text-sm"></i>
+    </a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="py-5 border-y border-slate-200 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-xl overflow-hidden flex relative z-20 marquee-container transition-colors duration-500 shadow-sm">
+    <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-50 dark:from-[#0a0a0a] to-transparent z-10 pointer-events-none transition-colors duration-500"></div>
+    <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-50 dark:from-[#0a0a0a] to-transparent z-10 pointer-events-none transition-colors duration-500"></div>
+    <div class="animate-marquee gap-4 px-4 items-center">
+      <div id="marquee-content" class="flex gap-4"></div>
+      <div id="marquee-content-clone" class="flex gap-4"></div>
     </div>
-  </dialog>
+  </div>
 
-  <main>
+  <!-- ABOUT ME (Showcasing Passport Photo with max Vibe) -->
+  <section id="about" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto scroll-reveal transition-colors duration-500">
+    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative z-10">
+      
+      <!-- Premium ID Card Profile Showcase -->
+      <div class="w-full max-w-[320px] md:max-w-[400px] shrink-0 relative group perspective-1000">
+        <!-- Glow Backdrops -->
+        <div class="absolute -inset-4 bg-gradient-to-tr from-accent via-orange-500 to-yellow-500 rounded-[2.5rem] opacity-30 dark:opacity-20 blur-xl group-hover:opacity-60 dark:group-hover:opacity-40 transition-opacity duration-700"></div>
+        <div class="absolute inset-0 bg-gradient-to-tr from-accent/80 to-transparent rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 shadow-xl opacity-50 dark:opacity-100"></div>
+        
+        <!-- Main Card -->
+        <div class="relative bg-white dark:bg-zinc-900 rounded-[2rem] border border-slate-200 dark:border-zinc-700/50 overflow-hidden shadow-2xl z-10 pt-10 px-6 flex flex-col items-center h-[460px] md:h-[500px] transition-all duration-500 group-hover:-translate-y-2">
+          
+          <div class="w-full flex justify-between items-start mb-6 z-20">
+            <i class="fa-solid fa-fingerprint text-3xl text-slate-300 dark:text-zinc-700"></i>
+            <div class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse"></span>
+              <span class="text-[10px] font-bold text-slate-700 dark:text-zinc-300 tracking-widest uppercase">Sys Online</span>
+            </div>
+          </div>
 
-    <!-- ── HERO ── -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-avatar-name">
-          <img src="darkbg.jpg" alt="Jayanth Bottu" class="hero-avatar">
-          <h1 class="hero-name">Jayanth<br><span>Bottu</span></h1>
-        </div>
-
-        <div class="hero-meta">
-          <span>AI &amp; Software Engineer</span>
-          <span class="dot">·</span>
-          <span>Hyderabad, India</span>
-          <span class="dot">·</span>
-          <span>Available 2026</span>
-        </div>
-
-        <p class="hero-bio">
-          I build <strong>practical AI systems</strong> — assistants that actually understand you,
-          tools that catch deepfakes, models that learn from faces in real time.
-          Final-year CS student at SR University, graduating with a <strong>9.31 CGPA</strong>.
-        </p>
-
-        <div class="hero-links">
-          <button class="hlink primary" id="openResume2">View Resume ↗</button>
-          <a href="https://jynth.me" target="_blank" class="hlink">Portfolio</a>
-          <a href="https://github.com/jayanthbottu" target="_blank" class="hlink">GitHub</a>
-          <a href="https://linkedin.com/in/jayanthbottu" target="_blank" class="hlink">LinkedIn</a>
+          <!-- Formal Image with transparent bg -->
+          <img src="dp.jpg" alt="Jayanth Bottu" class="absolute bottom-0 w-[110%] object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)] transform origin-bottom transition-transform duration-700 ease-out group-hover:scale-105 z-10" onerror="this.style.display='none'" />
+          
+          <!-- Cyber overlay details (Optional cool factor) -->
+          <div class="absolute bottom-6 left-6 z-20 bg-white/70 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/40 dark:border-zinc-700" style="opacity: 0; animation: fadein 1s 1s forwards;">
+            <p class="font-mono text-[10px] text-slate-800 dark:text-zinc-300 tracking-widest">ID: J-BOTTU</p>
+            <p class="font-mono text-[10px] text-accent font-bold mt-1 tracking-widest">ENG // SEC</p>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- ── ABOUT ── -->
-    <section class="sec fade" id="about">
-      <div class="wrap">
-        <div class="sec-row">
-          <div class="sec-label">
-            <span class="sec-num">01</span>
-            About
+      <!-- About Text -->
+      <div class="flex-1 flex flex-col">
+        <div class="text-xs font-black tracking-[0.2em] uppercase text-accent mb-4 flex items-center gap-3">
+          <span class="w-8 h-px bg-accent"></span> About Me
+        </div>
+        <h2 class="font-head text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-zinc-100 mb-6 transition-colors duration-500 leading-tight">
+          Bridging the gap between<br />
+          <em class="text-accent font-style-italic italic">Intelligence</em> and <em class="text-accent font-style-italic italic">Security.</em>
+        </h2>
+        
+        <div class="space-y-6 text-slate-600 dark:text-zinc-400 text-lg leading-relaxed font-medium transition-colors duration-500">
+          <p>
+            I am <strong class="text-slate-900 dark:text-zinc-100 font-bold border-b-2 border-accent/20">Jayanth Bottu</strong>, an AI Engineer and Cybersecurity Enthusiast based in Warangal, India. My passion lies in building systems that aren't just intelligent, but rock-solid against tomorrow's threats.
+          </p>
+          <p>
+            With a "Zero Trust" mindset, I engineer full-stack solutions — from Retrieval-Augmented Generation (RAG) pipelines for dense institutional data, to advanced deepfake attribution models. I don't just write scripts; I build end-to-end architectures designed for production.
+          </p>
+        </div>
+        
+        <!-- Stats / Quick Info -->
+        <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-zinc-800 transition-colors duration-500">
+          <div>
+            <div class="font-head font-black text-3xl text-slate-900 dark:text-zinc-100 mb-1">4+</div>
+            <div class="text-xs text-slate-500 dark:text-zinc-500 font-bold uppercase tracking-widest">Internships</div>
           </div>
           <div>
-            <p class="about-text">
-              I'm a final-year Computer Science student from Hyderabad who genuinely
-              loves making AI do useful things. My work spans <strong>generative AI, computer vision,
-              and retrieval systems</strong> — but the through-line is always the same: build things
-              that actually work for real people.
+            <div class="font-head font-black text-3xl text-slate-900 dark:text-zinc-100 mb-1">6</div>
+            <div class="text-xs text-slate-500 dark:text-zinc-500 font-bold uppercase tracking-widest">Certifications</div>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <div class="font-head font-black text-3xl text-slate-900 dark:text-zinc-100 mb-1">HQ</div>
+            <div class="text-xs text-slate-500 dark:text-zinc-500 font-bold uppercase tracking-widest">Warangal, IN</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="py-24 px-6 md:px-12 bg-white dark:bg-zinc-900/40 border-y border-slate-200 dark:border-zinc-800/60 scroll-reveal transition-colors duration-500">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16">
+        <div class="text-xs font-black tracking-[0.2em] uppercase text-accent mb-4 flex items-center gap-3">
+          <span class="w-8 h-px bg-accent"></span> What I Know
+        </div>
+        <h2 class="font-head text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-zinc-100 transition-colors duration-500">Technical Arsenal</h2>
+        <p class="mt-4 text-slate-600 dark:text-zinc-400 max-w-2xl text-lg font-medium">The tools, languages, and frameworks I leverage to ship secure AI platforms.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:border-accent/40 hover:bg-white dark:hover:bg-zinc-900 transition-all duration-300 group shadow-sm">
+          <div class="w-14 h-14 rounded-2xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-accent mb-8 group-hover:bg-accent group-hover:text-white transition-colors duration-300 shadow-sm text-xl">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h3 class="font-head font-black text-2xl tracking-tight text-slate-900 dark:text-zinc-100 mb-5">Languages</h3>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Python</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Java</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">JavaScript</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">SQL</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">HTML/CSS</span>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:border-accent/40 hover:bg-white dark:hover:bg-zinc-900 transition-all duration-300 group shadow-sm">
+          <div class="w-14 h-14 rounded-2xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-accent mb-8 group-hover:bg-accent group-hover:text-white transition-colors duration-300 shadow-sm text-xl">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3 class="font-head font-black text-2xl tracking-tight text-slate-900 dark:text-zinc-100 mb-5">AI & ML</h3>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">TensorFlow</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">PyTorch</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">OpenCV</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Deepfake Det.</span>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:border-accent/40 hover:bg-white dark:hover:bg-zinc-900 transition-all duration-300 group shadow-sm">
+          <div class="w-14 h-14 rounded-2xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-accent mb-8 group-hover:bg-accent group-hover:text-white transition-colors duration-300 shadow-sm text-xl">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3 class="font-head font-black text-2xl tracking-tight text-slate-900 dark:text-zinc-100 mb-5">Cybersecurity</h3>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Zero Trust</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Threat Analysis</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Incident Response</span>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:border-accent/40 hover:bg-white dark:hover:bg-zinc-900 transition-all duration-300 group shadow-sm lg:col-span-1">
+           <div class="w-14 h-14 rounded-2xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-accent mb-8 group-hover:bg-accent group-hover:text-white transition-colors duration-300 shadow-sm text-xl">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <h3 class="font-head font-black text-2xl tracking-tight text-slate-900 dark:text-zinc-100 mb-5">Generative AI</h3>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">LLMs</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Prompt Eng.</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">NLP</span>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:border-accent/40 hover:bg-white dark:hover:bg-zinc-900 transition-all duration-300 group shadow-sm lg:col-span-2">
+           <div class="w-14 h-14 rounded-2xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-accent mb-8 group-hover:bg-accent group-hover:text-white transition-colors duration-300 shadow-sm text-xl">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3 class="font-head font-black text-2xl tracking-tight text-slate-900 dark:text-zinc-100 mb-5">Cloud & Infrastructure</h3>
+          <div class="flex flex-wrap gap-2.5">
+             <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Google Cloud</span>
+             <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">ServiceNow</span>
+             <span class="px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-xs font-bold tracking-wide text-slate-600 dark:text-zinc-300">Git / Linux / Streamlit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SECTION -->
+  <section id="experience" class="py-32 px-6 md:px-12 max-w-7xl mx-auto scroll-reveal">
+    <div class="mb-16">
+      <div class="text-xs font-black tracking-[0.2em] uppercase text-accent mb-4 flex items-center gap-3">
+        <span class="w-8 h-px bg-accent"></span> Career Path
+      </div>
+      <h2 class="font-head text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-zinc-100">My Journey</h2>
+    </div>
+
+    <div class="flex flex-col">
+      <!-- Exp 1 -->
+      <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 first:border-0 hover:pl-6 transition-all duration-300">
+        <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+        <div class="pt-1">
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Jan – Feb 2026</div>
+          <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Internship</div>
+        </div>
+        <div>
+          <h3 class="font-head text-2xl font-black tracking-tight text-slate-900 dark:text-zinc-100 mb-2">Prompt Engineering Intern</h3>
+          <div class="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-zinc-500 mb-4 flex items-center gap-2">
+            <i class="fa-regular fa-building"></i> Excelerate
+          </div>
+          <p class="text-slate-600 dark:text-zinc-400 text-base leading-relaxed max-w-3xl font-medium">Researched Prompt Engineering methodologies and evaluated large language model performance. Recommended AI integration strategies for automation and virtual learning environments.</p>
+        </div>
+      </div>
+      <!-- Exp 2 -->
+      <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 hover:pl-6 transition-all duration-300">
+        <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+        <div class="pt-1">
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Apr – Oct 2025</div>
+          <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Virtual Internship</div>
+        </div>
+        <div>
+          <h3 class="font-head text-2xl font-black tracking-tight text-slate-900 dark:text-zinc-100 mb-2">ServiceNow Virtual Intern</h3>
+          <div class="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-zinc-500 mb-4 flex items-center gap-2">
+            <i class="fa-regular fa-building"></i> SmartBridge & AICTE
+          </div>
+          <p class="text-slate-600 dark:text-zinc-400 text-base leading-relaxed max-w-3xl font-medium">Applied ServiceNow Administration fundamentals to manage test instances, configure user permissions, and ensure the health of automated processes at scale.</p>
+        </div>
+      </div>
+      <!-- Exp 3 -->
+      <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 hover:pl-6 transition-all duration-300">
+        <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+        <div class="pt-1">
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Jul – Sep 2024</div>
+          <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Internship</div>
+        </div>
+        <div>
+          <h3 class="font-head text-2xl font-black tracking-tight text-slate-900 dark:text-zinc-100 mb-2">Generative AI Intern</h3>
+          <div class="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-zinc-500 mb-4 flex items-center gap-2">
+            <i class="fa-regular fa-building"></i> Google Cloud – AICTE
+          </div>
+          <p class="text-slate-600 dark:text-zinc-400 text-base leading-relaxed max-w-3xl font-medium">Specialized in NLP and Image Recognition. Developed and deployed scalable AI models using TensorFlow, Keras, and PyTorch, gaining deep insights into Generative AI workflows.</p>
+        </div>
+      </div>
+      <!-- Exp 4 -->
+      <div class="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-slate-200 dark:border-zinc-800/80 hover:pl-6 transition-all duration-300">
+        <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+        <div class="pt-1">
+          <div class="text-sm font-black tracking-widest text-[11px] uppercase bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 w-fit px-3 py-1.5 rounded-md">Apr – Jun 2024</div>
+          <div class="text-[10px] text-accent mt-3 font-bold tracking-[0.2em] uppercase w-fit px-2 py-1 bg-accent/10 rounded-full border border-accent/20">Internship</div>
+        </div>
+        <div>
+          <h3 class="font-head text-2xl font-black tracking-tight text-slate-900 dark:text-zinc-100 mb-2">Cybersecurity Intern</h3>
+          <div class="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-zinc-500 mb-4 flex items-center gap-2">
+            <i class="fa-regular fa-building"></i> Palo Alto – AICTE
+          </div>
+          <p class="text-slate-600 dark:text-zinc-400 text-base leading-relaxed max-w-3xl font-medium">Analyzed simulated security threats and investigated incidents. Enhanced understanding of network security protocols and advanced threat mitigation strategies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="py-32 px-6 md:px-12 bg-slate-100 dark:bg-zinc-900/20 border-y border-slate-200 dark:border-zinc-800/50 scroll-reveal transition-colors duration-500">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16">
+        <div class="text-xs font-black tracking-[0.2em] uppercase text-accent mb-4 flex items-center gap-3">
+          <span class="w-8 h-px bg-accent"></span> What I Built
+        </div>
+        <h2 class="font-head text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-zinc-100 transition-colors duration-500">Featured Projects</h2>
+        <p class="mt-4 text-slate-600 dark:text-zinc-400 max-w-2xl text-lg font-medium">Built to solve real problems. Deployed and functional.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Proj 1 -->
+        <div class="group flex flex-col bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] overflow-hidden hover:border-accent/50 dark:hover:border-accent/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-2">
+          <div class="h-48 bg-slate-50 dark:bg-[#0a0a0a] relative overflow-hidden flex items-center justify-center border-b border-slate-200 dark:border-zinc-800">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+            <div class="relative text-slate-300 dark:text-zinc-800 group-hover:scale-125 group-hover:text-accent/20 transition-all duration-700 ease-out text-6xl">
+              <i class="fa-solid fa-code"></i>
+            </div>
+          </div>
+          <div class="p-8 flex flex-col flex-1">
+            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">CIRA — Campus Information Retrieval</h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Python</span>
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">RAG / FAISS</span>
+            </div>
+            <p class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed flex-1 mb-8 font-medium">
+              AI campus assistant using Retrieval-Augmented Generation. Combines FAISS semantic search with a lightweight LLM for context-aware responses from institutional data.
             </p>
-            <p class="about-text" style="margin-top:1rem">
-              I've interned across AI research, Google Cloud, Palo Alto Networks, and enterprise
-              platforms. Outside code, I'm always exploring what's next — in cloud, security,
-              or whatever catches my eye that week.
+            <div class="flex gap-3">
+              <a href="https://github.com/jayanthbottu/Campus-Information-Retrieval-Assistant" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-zinc-800 text-xs font-bold tracking-widest uppercase text-slate-700 dark:text-zinc-200 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
+              <a href="https://jayanthbottu.github.io/CIRA/" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-xs font-bold tracking-widest uppercase text-white hover:bg-accent-h transition-colors">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Proj 2 -->
+        <div class="group flex flex-col bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] overflow-hidden hover:border-accent/50 dark:hover:border-accent/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-2">
+          <div class="h-48 bg-slate-50 dark:bg-[#0a0a0a] relative overflow-hidden flex items-center justify-center border-b border-slate-200 dark:border-zinc-800">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+            <div class="relative text-slate-300 dark:text-zinc-800 group-hover:scale-125 group-hover:text-accent/20 transition-all duration-700 ease-out text-6xl">
+              <i class="fa-solid fa-user-secret"></i>
+            </div>
+          </div>
+          <div class="p-8 flex flex-col flex-1">
+            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">DFDA — Deepfake Detection</h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Python</span>
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">PyTorch</span>
+            </div>
+            <p class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed flex-1 mb-8 font-medium">
+              Capstone project detecting manipulated media. Analyzes images, videos, and audio using advanced deep learning ensembles to attribute deepfakes with high accuracy.
             </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── SKILLS ── -->
-    <section class="sec fade" id="skills">
-      <div class="wrap">
-        <div class="sec-row">
-          <div class="sec-label">
-            <span class="sec-num">02</span>
-            Skills
-          </div>
-          <div class="skill-rows">
-            <div class="skill-row">
-              <span class="skill-cat">AI &amp; ML</span>
-              <span class="skill-vals">Machine Learning<span class="skill-dot">·</span>Deep Learning<span class="skill-dot">·</span>Generative AI<span class="skill-dot">·</span>LLMs<span class="skill-dot">·</span>RAG<span class="skill-dot">·</span>Computer Vision<span class="skill-dot">·</span>NLP</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-cat">Frameworks</span>
-              <span class="skill-vals">PyTorch<span class="skill-dot">·</span>TensorFlow<span class="skill-dot">·</span>Keras<span class="skill-dot">·</span>Hugging Face<span class="skill-dot">·</span>OpenCV<span class="skill-dot">·</span>FAISS<span class="skill-dot">·</span>Scikit-learn</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-cat">Languages</span>
-              <span class="skill-vals">Python<span class="skill-dot">·</span>Java<span class="skill-dot">·</span>JavaScript<span class="skill-dot">·</span>SQL</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-cat">Cloud &amp; Tools</span>
-              <span class="skill-vals">AWS<span class="skill-dot">·</span>Google Cloud<span class="skill-dot">·</span>Docker<span class="skill-dot">·</span>Git<span class="skill-dot">·</span>Linux<span class="skill-dot">·</span>ServiceNow</span>
+            <div class="flex gap-3">
+              <a href="https://github.com/jayanthbottu/Deepfake-Detection-And-Attribution" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-zinc-800 text-xs font-bold tracking-widest uppercase text-slate-700 dark:text-zinc-200 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
+              <a href="https://huggingface.co/spaces/jayanthbottu/DFDA" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-xs font-bold tracking-widest uppercase text-white hover:bg-accent-h transition-colors">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ── EXPERIENCE ── -->
-    <section class="sec fade" id="experience">
-      <div class="wrap">
-        <div class="sec-row">
-          <div class="sec-label">
-            <span class="sec-num">03</span>
-            Experience
-          </div>
-          <div class="exp-items">
-
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Prompt Engineering Intern</span>
-                <span class="exp-date">Jan – Feb 2026</span>
-              </div>
-              <p class="exp-co">Excelerate</p>
-              <p class="exp-desc">Researched how to write better prompts for AI, benchmarked language models side by side, and helped design workflows that made AI actually useful for business.</p>
-            </div>
-
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">ServiceNow Virtual Intern</span>
-                <span class="exp-date">Apr – Oct 2025</span>
-              </div>
-              <p class="exp-co">SmartBridge × AICTE</p>
-              <p class="exp-desc">Managed enterprise IT platforms, configured user roles and automation workflows, and got hands-on with how large organisations run their IT operations.</p>
-            </div>
-
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Generative AI Intern</span>
-                <span class="exp-date">Jul – Sep 2024</span>
-              </div>
-              <p class="exp-co">Google Cloud × AICTE EduSkills</p>
-              <p class="exp-desc">Built AI solutions on Google Cloud — image recognition, text understanding, generative models — using PyTorch and TensorFlow on scalable cloud pipelines.</p>
-            </div>
-
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Cybersecurity Intern</span>
-                <span class="exp-date">Apr – Jun 2024</span>
-              </div>
-              <p class="exp-co">Palo Alto Networks × AICTE</p>
-              <p class="exp-desc">Investigated simulated cyber attacks, analysed network traffic, and learned how enterprises protect themselves — digital detective work, essentially.</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── PROJECTS ── -->
-    <section class="sec fade" id="projects">
-      <div class="wrap">
-        <div class="sec-row">
-          <div class="sec-label">
-            <span class="sec-num">04</span>
-            Projects
-          </div>
-          <div class="proj-items">
-
-            <div class="proj-item">
-              <img src="proj/cira.png" alt="CIRA" class="proj-img">
-              <div class="proj-body">
-                <p class="proj-title">Campus Info Assistant</p>
-                <p class="proj-desc">An AI assistant that searches institutional knowledge and gives you clear, context-aware answers — instead of making you scroll through a hundred pages.</p>
-                <div class="proj-footer">
-                  <span class="proj-stack">Python · RAG · FAISS · LLMs</span>
-                  <a href="https://github.com/jayanthbottu/Campus-Information-Retrieval-Assistant" target="_blank" class="proj-gh">GitHub ↗</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="proj-item">
-              <img src="proj/dfda.png" alt="DFDA" class="proj-img">
-              <div class="proj-body">
-                <p class="proj-title">Deepfake Detector</p>
-                <p class="proj-desc">Spots AI-generated fakes in images, videos, and audio. Tell it something looks off and it'll say whether it's real — and trace where the manipulation came from.</p>
-                <div class="proj-footer">
-                  <span class="proj-stack">Python · PyTorch · Streamlit</span>
-                  <a href="https://github.com/jayanthbottu/Deepfake-Detection-And-Attribution" target="_blank" class="proj-gh">GitHub ↗</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="proj-item">
-              <img src="proj/facerec.png" alt="Face Attendance" class="proj-img">
-              <div class="proj-body">
-                <p class="proj-title">Face Recognition Attendance</p>
-                <p class="proj-desc">Just walk in — the camera recognises your face and marks attendance automatically. No cards, no sign-ins, no fuss whatsoever.</p>
-                <div class="proj-footer">
-                  <span class="proj-stack">Python · OpenCV · LBPH</span>
-                  <a href="https://github.com/jayanthbottu/AIML-PROJECT" target="_blank" class="proj-gh">GitHub ↗</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="proj-item">
-              <img src="proj/lcad.png" alt="Crypto Anomaly" class="proj-img">
-              <div class="proj-body">
-                <p class="proj-title">Crypto Anomaly Detector</p>
-                <p class="proj-desc">Live dashboard watching cryptocurrency markets and flagging anything weird — unexplained spikes, unusual patterns, the kind of thing you'd miss if you blinked.</p>
-                <div class="proj-footer">
-                  <span class="proj-stack">Python · Dash · Plotly</span>
-                  <a href="https://github.com/jayanthbottu/Live-Cryptocurrency-Anomaly-Detection" target="_blank" class="proj-gh">GitHub ↗</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CERTIFICATIONS ── -->
-    <section class="sec fade" id="certifications">
-      <div class="wrap">
-        <div class="sec-row">
-          <div class="sec-label">
-            <span class="sec-num">05</span>
-            Certs
-          </div>
-          <div class="cert-grid">
-            <div class="cert-cell">
-              <img src="certs/ServiceNow-Certified-System-Administrator.svg" alt="ServiceNow CSA" class="cert-img">
-              <p class="cert-name">ServiceNow Certified System Administrator</p>
-            </div>
-            <div class="cert-cell">
-              <img src="certs/Zero-Trust-Cyber-Associate-_ZTCA.svg" alt="ZTCA" class="cert-img">
-              <p class="cert-name">Zero Trust Cyber Associate</p>
-            </div>
-            <div class="cert-cell">
-              <img src="certs/AI-for-Fintech-Security.svg" alt="AI Fintech" class="cert-img">
-              <p class="cert-name">AI for Fintech Security</p>
-            </div>
-            <div class="cert-cell">
-              <img src="certs/Prompt-Engineering-Research-and-Integration-Remote-Internship.svg" alt="Prompt Engineering" class="cert-img">
-              <p class="cert-name">Prompt Engineering Internship</p>
-            </div>
-            <div class="cert-cell">
-              <img src="certs/AIML Learning Track – GenAI Academy 2.0.png" alt="GenAI AI/ML" class="cert-img">
-              <p class="cert-name">GenAI Academy 2.0 — AI/ML Track</p>
-            </div>
-            <div class="cert-cell">
-              <img src="certs/Security Learning Track – GenAI Academy 2.0.png" alt="GenAI Security" class="cert-img">
-              <p class="cert-name">GenAI Academy 2.0 — Security Track</p>
+        <!-- Proj 3 -->
+        <div class="group flex flex-col bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] overflow-hidden hover:border-accent/50 dark:hover:border-accent/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-2">
+          <div class="h-48 bg-slate-50 dark:bg-[#0a0a0a] relative overflow-hidden flex items-center justify-center border-b border-slate-200 dark:border-zinc-800">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+            <div class="relative text-slate-300 dark:text-zinc-800 group-hover:scale-125 group-hover:text-accent/20 transition-all duration-700 ease-out text-6xl">
+              <i class="fa-brands fa-bitcoin"></i>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CONTACT ── -->
-    <section class="sec fade" id="contact">
-      <div class="wrap">
-        <div class="sec-row">
-          <div class="sec-label">
-            <span class="sec-num">06</span>
-            Contact
-          </div>
-          <div class="contact-block">
-            <p style="font-size:.88rem;color:var(--text2);font-weight:300;max-width:440px;line-height:1.75">
-              Open to roles as an AI/ML Engineer or Software Engineer.
-              Drop me a line — I reply to everything.
+          <div class="p-8 flex flex-col flex-1">
+            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">Live Crypto Anomaly Detection</h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Python</span>
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Dash</span>
+            </div>
+            <p class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed flex-1 mb-8 font-medium">
+              Real-time cryptocurrency analytics platform. Visualizes market trends and price anomalies with interactive graphs and live-feed anomaly detection models.
             </p>
-            <a href="mailto:jayanthbottu@gmail.com" class="contact-email">jayanthbottu@gmail.com</a>
-            <div class="contact-row">
-              <a href="https://jynth.me" target="_blank" class="clink">jynth.me</a>
-              <a href="https://linkedin.com/in/jayanthbottu" target="_blank" class="clink">LinkedIn</a>
-              <a href="https://github.com/jayanthbottu" target="_blank" class="clink">GitHub</a>
-              <a href="tel:+919676081957" class="clink">+91 96760 81957</a>
+            <div class="flex gap-3">
+              <a href="https://github.com/jayanthbottu/Live-Cryptocurrency-Anomaly-Detection" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-zinc-800 text-xs font-bold tracking-widest uppercase text-slate-700 dark:text-zinc-200 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Proj 4 -->
+        <div class="group flex flex-col bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-[2rem] overflow-hidden hover:border-accent/50 dark:hover:border-accent/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-2">
+          <div class="h-48 bg-slate-50 dark:bg-[#0a0a0a] relative overflow-hidden flex items-center justify-center border-b border-slate-200 dark:border-zinc-800">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+            <div class="relative text-slate-300 dark:text-zinc-800 group-hover:scale-125 group-hover:text-accent/20 transition-all duration-700 ease-out text-6xl">
+              <i class="fa-solid fa-id-badge"></i>
+            </div>
+          </div>
+          <div class="p-8 flex flex-col flex-1">
+            <h3 class="font-head font-black tracking-tight text-xl text-slate-900 dark:text-zinc-100 mb-4">Face Recognition Framework</h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">OpenCV</span>
+              <span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-[10px] font-bold tracking-widest uppercase text-slate-600 dark:text-zinc-400 rounded-md">Python</span>
+            </div>
+            <p class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed flex-1 mb-8 font-medium">
+              Automated attendance system using real-time face detection. Eliminates manual entry by recognizing registered faces instantly via webcam using the LBPH algorithm.
+            </p>
+            <div class="flex gap-3">
+              <a href="https://github.com/jayanthbottu/AIML-PROJECT" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-zinc-800 text-xs font-bold tracking-widest uppercase text-slate-700 dark:text-zinc-200 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- CERTIFICATIONS SECTION -->
+  <section id="certifications" class="py-32 px-6 md:px-12 max-w-7xl mx-auto scroll-reveal transition-colors duration-500">
+    <div class="mb-16">
+      <div class="text-xs font-black tracking-[0.2em] uppercase text-accent mb-4 flex items-center gap-3">
+        <span class="w-8 h-px bg-accent"></span> Credentials
+      </div>
+      <h2 class="font-head text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-zinc-100">Certifications</h2>
+    </div>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;width:100%">
-      <p>Jayanth Bottu · Hyderabad, India</p>
-      <p>B.Tech CSE · SR University · 2026</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
+          <i class="fa-solid fa-money-bill-transfer"></i>
+        </div>
+        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">AI for Fintech Security</h3>
+      </div>
+      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
+          <i class="fa-solid fa-microchip"></i>
+        </div>
+        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">Prompt Engineering – Excelerate</h3>
+      </div>
+      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
+          <i class="fa-solid fa-shield-cat"></i>
+        </div>
+        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">Zero Trust Cyber Associate</h3>
+      </div>
+      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">GenAI Academy 2.0 – AI/ML</h3>
+      </div>
+      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">GenAI Academy 2.0 – Security</h3>
+      </div>
+      <div class="bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex items-center gap-4 hover:border-accent transition-colors group shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center text-slate-400 dark:text-zinc-500 group-hover:text-accent shadow-sm border border-slate-100 dark:border-zinc-700">
+          <i class="fa-brands fa-servicestack"></i>
+        </div>
+        <h3 class="font-head font-bold text-slate-900 dark:text-zinc-100 text-sm">ServiceNow CSA</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / FOOTER -->
+  <footer id="contact" class="bg-slate-900 dark:bg-[#080808] text-zinc-100 pt-32 pb-12 border-t border-slate-800 dark:border-zinc-900">
+    <div class="max-w-4xl mx-auto px-6 text-center scroll-reveal">
+      <h2 class="font-head text-5xl md:text-7xl font-black tracking-tighter mb-6">Let's <em class="text-accent font-style-italic italic">Connect.</em></h2>
+      <p class="text-zinc-400 text-lg mb-12 max-w-lg mx-auto">Always open to discussing high-impact engineering roles, AI system architecture, or network security.</p>
+      
+      <div class="flex flex-wrap justify-center gap-4 mb-20">
+        <a href="mailto:talktojayanth@gmail.com" class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl hover:bg-accent hover:border-accent hover:scale-110 transition-all">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="https://github.com/jayanthbottu" target="_blank" class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl hover:bg-accent hover:border-accent hover:scale-110 transition-all">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/jayanthbottu" target="_blank" class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl hover:bg-[#0077b5] hover:border-[#0077b5] hover:scale-110 transition-all">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="https://instagram.com/jayanthbottu" target="_blank" class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent hover:scale-110 transition-all">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <div class="text-zinc-600 text-sm font-bold tracking-widest uppercase">
+        Designed & Built by <span class="text-accent">Jayanth Bottu</span> &copy; <span id="yr"></span>
+      </div>
     </div>
   </footer>
 
   <script>
-    // Resume dialog
-    const dlg = document.getElementById('resumeDlg');
-    document.getElementById('openResume').addEventListener('click',  () => dlg.showModal());
-    document.getElementById('openResume2').addEventListener('click', () => dlg.showModal());
-    document.getElementById('closeResume').addEventListener('click', () => dlg.close());
-    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    /* THEME TOGGLE */
+    const tbtn = document.getElementById('theme-toggle');
+    const dIcon = document.getElementById('theme-toggle-dark-icon');
+    const lIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    
+    function applyTheme(t) {
+      if (t === 'dark') {
+        html.classList.add('dark');
+        dIcon.classList.add('hidden');
+        lIcon.classList.remove('hidden');
+      } else {
+        html.classList.remove('dark');
+        dIcon.classList.remove('hidden');
+        lIcon.classList.add('hidden');
+      }
+      localStorage.setItem('theme', t);
+    }
+    
+    const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+    applyTheme(saved);
+    tbtn.addEventListener('click', () => applyTheme(html.classList.contains('dark') ? 'light' : 'dark'));
 
-    // Scroll fade-in
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }});
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+    /* MOBILE MENU */
+    const hb = document.getElementById('mobile-menu-btn');
+    const mm = document.getElementById('mob-menu-panel');
+    const mmBg = document.getElementById('mob-menu-bg');
+    
+    function closeMenu() {
+      mm.classList.remove('open');
+      mmBg.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    
+    hb.addEventListener('click', () => {
+      const isOp = mm.classList.toggle('open');
+      mmBg.classList.toggle('open', isOp);
+      document.body.style.overflow = isOp ? 'hidden' : '';
+    });
+    
+    mmBg.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', closeMenu));
+
+    /* TYPING TEXT */
+    const phrases = ['AI Engineer building intelligent systems.', 'Full-Stack architectures & RAG pipelines.', 'Cybersecurity enthusiast protecting data.'];
+    const tel = document.getElementById('tyel');
+    let pi=0, ci=0, isDel=false;
+    function typeText() {
+      const p = phrases[pi];
+      if(!isDel) {
+        tel.textContent = p.slice(0, ++ci);
+        if(ci === p.length) { setTimeout(()=>isDel=true, 2500); setTimeout(typeText, 60); return; }
+      } else {
+        tel.textContent = p.slice(0, --ci);
+        if(ci === 0) { isDel=false; pi=(pi+1)%phrases.length; setTimeout(typeText, 600); return; }
+      }
+      setTimeout(typeText, isDel ? 30 : 60);
+    }
+    setTimeout(typeText, 1000);
+
+    /* MARQUEE GENERATOR */
+    const mChips = [
+      { i: 'fab fa-python', t: 'Python' },
+      { i: 'fas fa-brain', t: 'Deep Learning' },
+      { i: 'fas fa-fire', t: 'PyTorch' },
+      { i: 'fas fa-robot', t: 'Generative AI' },
+      { i: 'fas fa-shield-halved', t: 'Cybersecurity' },
+      { i: 'fab fa-java', t: 'Java' },
+      { i: 'fab fa-js', t: 'JavaScript' },
+      { i: 'fas fa-database', t: 'SQL' },
+      { i: 'fab fa-linux', t: 'Linux' },
+      { i: 'fas fa-eye', t: 'Computer Vision' }
+    ];
+    function buildMarquee() {
+      let html = '';
+      mChips.forEach(c => {
+        html += `<div class="flex items-center gap-2 px-5 py-2 rounded-full border border-slate-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-sm font-bold text-slate-600 dark:text-zinc-400 whitespace-nowrap backdrop-blur-sm"><i class="${c.i} text-accent"></i> ${c.t}</div>`;
+      });
+      document.getElementById('marquee-content').innerHTML = html;
+      document.getElementById('marquee-content-clone').innerHTML = html;
+    }
+    buildMarquee();
+
+    /* SCROLL REVEAL OBSERVER */
+    const rvEls = document.querySelectorAll('.scroll-reveal');
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    }), { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    rvEls.forEach(el => io.observe(el));
+
+    /* SCROLL SPY FOR NAV */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav .hidden a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if(window.scrollY >= s.offsetTop - 200) cur = s.getAttribute('id'); });
+      navLinks.forEach(l => {
+        l.classList.remove('text-slate-900', 'dark:text-zinc-100');
+        if(l.getAttribute('href') === '#'+cur) {
+          l.classList.add('text-slate-900', 'dark:text-zinc-100');
+        }
+      });
+    }, { passive: true });
+
+    /* MODAL */
+    const modal = document.getElementById('resume-modal');
+    function opM() { modal.classList.add('on'); document.body.style.overflow='hidden'; }
+    function clM() { modal.classList.remove('on'); document.body.style.overflow=''; }
+    document.querySelectorAll('.open-resume').forEach(b => b.addEventListener('click', opM));
+    document.getElementById('close-modal').addEventListener('click', clM);
+    modal.addEventListener('click', e => { if(e.target === modal) clM(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') clM(); });
+
+    /* YEAR */
+    document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
