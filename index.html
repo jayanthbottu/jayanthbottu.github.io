@@ -39,7 +39,7 @@
     --radius-sm:2px;
     --pad: clamp(1.25rem, 5vw, 3rem);
     --gap-section: clamp(4rem, 9vw, 7.5rem);
-    --maxw: 1180px;
+    --maxw: 1220px;
   }
 
   html[data-theme="dark"]{
@@ -74,6 +74,18 @@
     *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
   }
 
+  /* Scale the whole rem-based type/spacing system up slightly on larger
+     screens. Almost everything in this file is sized in rem, so bumping
+     the root size reproduces the "zoomed-in" look the design was tuned
+     at, but only where there's room for it — small screens are untouched
+     so mobile sizing stays exactly as designed. */
+  @media (min-width: 1024px){
+    html{ font-size:107%; }
+  }
+  @media (min-width: 1440px){
+    html{ font-size:113%; }
+  }
+
   body{
     background:var(--bg);
     color:var(--ink);
@@ -82,7 +94,9 @@
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
     transition:background .25s ease, color .25s ease;
+    overflow-x:hidden;
   }
+  html{ overflow-x:hidden; }
 
   :focus-visible{
     outline:2px solid var(--clay);
@@ -99,9 +113,8 @@
 
   .container{
     max-width:var(--maxw);
-    margin:0 auto
+    margin:0 auto;
     padding-inline:var(--pad);
-  
   }
 
   .eyebrow{
@@ -290,7 +303,7 @@
   }
   html[data-theme="dark"] .hero-watermark{ opacity:0.12; }
 
-  .hero-inner{ position:relative; max-width:760px; }
+  .hero-inner{ position:relative; max-width:840px; }
   .badge{
     display:inline-flex; align-items:center; gap:0.55rem;
     font-family:var(--font-display);
@@ -305,7 +318,7 @@
 
   .hero h1{
     text-transform:uppercase;
-    font-size:clamp(2.4rem, 7vw, 4.4rem);
+    font-size:clamp(2.4rem, 7vw, 4.8rem);
     line-height:1.05;
     margin-bottom:1.5rem;
   }
@@ -331,7 +344,7 @@
   ============================================================ */
   .about-grid{
     display:grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px 1fr;
     gap: clamp(2.5rem, 6vw, 5rem);
     align-items:start;
   }
@@ -385,6 +398,15 @@
     .stat-row{ grid-template-columns:repeat(3,1fr); gap:1rem; }
   }
 
+  @media (max-width: 420px){
+    .stat-row{
+      grid-template-columns:repeat(2, 1fr);
+      row-gap:1.4rem;
+    }
+    .stat:nth-child(3){ grid-column:1 / -1; }
+    .hero-actions .btn{ flex:1 1 auto; justify-content:center; }
+  }
+
   /* ============================================================
      SKILLS
   ============================================================ */
@@ -423,7 +445,7 @@
   .timeline{ display:flex; flex-direction:column; }
   .tl-item{
     display:grid;
-    grid-template-columns:200px 1fr;
+    grid-template-columns:220px 1fr;
     gap:clamp(1.5rem, 4vw, 3rem);
     padding-block:2rem;
     border-top:1px solid var(--line);
@@ -658,7 +680,7 @@
     <div class="container about-grid">
       <div class="id-card">
         <div class="photo-wrap">
-          <img src="dp.JPG" alt="Portrait of Jayanth Bottu" loading="lazy" decoding="async" width="280" height="350" />
+          <img src="dp.jpg" alt="Portrait of Jayanth Bottu" loading="lazy" decoding="async" width="280" height="350" />
         </div>
         <div class="id-meta">
           <span>ID: JYNTH</span>
@@ -675,7 +697,7 @@
         <div class="stat-row">
           <div class="stat">
             <div class="num">4+</div>
-            <div class="label">Virtual Internships</div>
+            <div class="label">virtual Internships</div>
           </div>
           <div class="stat">
             <div class="num">6</div>
@@ -731,7 +753,7 @@
         <div class="skill-card">
           <h3>Cloud &amp; Infrastructure</h3>
           <div class="tag-list">
-            <span class="tag">Google Cloud</span><span class="tag">ServiceNow</span><span class="tag">Salesforce</span><span class="tag">Git</span><span class="tag">Linux</span><span class="tag">Streamlit</span>
+            <span class="tag">Google Cloud</span><span class="tag">ServiceNow</span><span class="tag">Git</span><span class="tag">Linux</span><span class="tag">Streamlit</span>
           </div>
         </div>
       </div>
@@ -864,7 +886,7 @@
 
         <article class="project-card">
           <div class="project-thumb">
-            <img src="proj/facerec.png" alt="Face Recognition Framework project preview" loading="lazy" decoding="async" width="600" height="375" />
+            <img src="facerec.png" alt="Face Recognition Framework project preview" loading="lazy" decoding="async" width="600" height="375" />
           </div>
           <div class="project-body">
             <h3>Face Recognition Framework</h3>
