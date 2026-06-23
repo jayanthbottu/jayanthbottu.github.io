@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Jayanth Bottu</title>
+<title>Jayanth Bottu — AI Engineer &amp; Cybersecurity</title>
 <meta name="description" content="Portfolio of Jayanth Bottu, an AI Engineer and Cybersecurity enthusiast building secure, production-ready AI systems — RAG pipelines, deepfake attribution, and zero-trust architectures." />
 <meta name="theme-color" content="#EDE6D6" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#1C1710" media="(prefers-color-scheme: dark)" />
@@ -11,7 +11,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <style>
   /* ============================================================
@@ -34,12 +34,13 @@
 
     --font-display:'Space Grotesk', 'Segoe UI', sans-serif;
     --font-body:'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-mono:'JetBrains Mono', 'SF Mono', Consolas, monospace;
 
     --radius:5px;
     --radius-sm:2px;
     --pad: clamp(1.25rem, 5vw, 3rem);
     --gap-section: clamp(4rem, 9vw, 7.5rem);
-    --maxw: 1220px;
+    --maxw: 1180px;
   }
 
   html[data-theme="dark"]{
@@ -69,21 +70,10 @@
   h1,h2,h3,p{ margin:0; }
   a{ color:inherit; text-decoration:none; }
   button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+  code{ font-family:var(--font-mono); }
 
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
-  }
-
-  /* Scale the whole rem-based type/spacing system up slightly on larger
-     screens. Almost everything in this file is sized in rem, so bumping
-     the root size reproduces the "zoomed-in" look the design was tuned
-     at, but only where there's room for it — small screens are untouched
-     so mobile sizing stays exactly as designed. */
-  @media (min-width: 1024px){
-    html{ font-size:107%; }
-  }
-  @media (min-width: 1440px){
-    html{ font-size:113%; }
   }
 
   body{
@@ -94,9 +84,7 @@
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
     transition:background .25s ease, color .25s ease;
-    overflow-x:hidden;
   }
-  html{ overflow-x:hidden; }
 
   :focus-visible{
     outline:2px solid var(--clay);
@@ -117,22 +105,26 @@
     padding-inline:var(--pad);
   }
 
+  /* ---- eyebrow / numbered section index ---- */
   .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:0.7rem;
     font-family:var(--font-display);
-    font-size:0.78rem;
-    letter-spacing:0.18em;
+    font-size:0.8rem;
+    letter-spacing:0.12em;
     text-transform:uppercase;
     color:var(--clay-text);
-    display:flex;
-    align-items:center;
-    gap:0.6rem;
   }
-  .eyebrow::before{
-    content:"";
-    width:7px; height:7px;
-    background:var(--clay);
-    display:inline-block;
-    flex-shrink:0;
+  .idx{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    padding:0.18rem 0.45rem;
   }
 
   h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em; }
@@ -151,8 +143,6 @@
 
   /* ============================================================
      SIGNATURE MOTIF — contour / signal divider
-     (used as the page's one recurring graphic device:
-      a survey line that reads as both terrain contour and signal trace)
   ============================================================ */
   .contour{
     display:block;
@@ -224,7 +214,7 @@
     border-color:var(--clay);
   }
 
-  .nav-controls{ display:flex; align-items:center; gap:0.6rem; }
+  .nav-controls{ display:flex; align-items:center; gap:0.7rem; }
 
   .icon-btn{
     width:40px; height:40px;
@@ -237,9 +227,28 @@
   .icon-btn:hover{ border-color:var(--clay); color:var(--clay-text); }
   .icon-btn svg{ width:18px; height:18px; }
 
-  .theme-toggle .icon-moon{ display:none; }
-  html[data-theme="dark"] .theme-toggle .icon-sun{ display:none; }
-  html[data-theme="dark"] .theme-toggle .icon-moon{ display:block; }
+  /* ---- theme switch ---- */
+  .switch{ position:relative; display:inline-flex; align-items:center; cursor:pointer; flex-shrink:0; }
+  .switch input{ position:absolute; opacity:0; width:1px; height:1px; }
+  .switch-track{
+    width:50px; height:26px;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:999px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 6px;
+    position:relative;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .switch input:focus-visible ~ .switch-track{ outline:2px solid var(--clay); outline-offset:2px; }
+  .switch-icon{ width:12px; height:12px; color:var(--ink-soft); position:relative; z-index:1; }
+  .switch-thumb{
+    position:absolute; top:2px; left:2px;
+    width:20px; height:20px; border-radius:50%;
+    background:var(--clay);
+    transition:transform .2s ease;
+  }
+  .switch input:checked ~ .switch-track .switch-thumb{ transform:translateX(23px); }
 
   .nav-resume-btn{ display:inline-flex; }
 
@@ -292,6 +301,16 @@
     padding-block: clamp(3.5rem, 11vw, 6.5rem) clamp(3rem, 8vw, 5rem);
     overflow:hidden;
   }
+  .hero-index{
+    position:absolute;
+    left:var(--pad); top:1.6rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    z-index:1;
+  }
   .hero-watermark{
     position:absolute;
     left:50%; top:46%;
@@ -303,7 +322,7 @@
   }
   html[data-theme="dark"] .hero-watermark{ opacity:0.12; }
 
-  .hero-inner{ position:relative; max-width:840px; }
+  .hero-inner{ position:relative; max-width:760px; }
   .badge{
     display:inline-flex; align-items:center; gap:0.55rem;
     font-family:var(--font-display);
@@ -318,7 +337,7 @@
 
   .hero h1{
     text-transform:uppercase;
-    font-size:clamp(2.4rem, 7vw, 4.8rem);
+    font-size:clamp(2.4rem, 7vw, 4.4rem);
     line-height:1.05;
     margin-bottom:1.5rem;
   }
@@ -327,6 +346,14 @@
     color:var(--clay-text);
   }
   .hero-actions{ display:flex; flex-wrap:wrap; gap:0.9rem; margin-top:0.5rem; }
+
+  .hero-geo{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-top:2.4rem;
+    letter-spacing:0.01em;
+  }
 
   .scroll-cue{
     position:absolute;
@@ -344,7 +371,7 @@
   ============================================================ */
   .about-grid{
     display:grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: clamp(2.5rem, 6vw, 5rem);
     align-items:start;
   }
@@ -366,8 +393,8 @@
     display:flex; justify-content:space-between;
     padding:0.85rem 1rem;
     border-top:1px solid var(--line);
-    font-family:var(--font-display);
-    font-size:0.72rem; letter-spacing:0.06em;
+    font-family:var(--font-mono);
+    font-size:0.72rem; letter-spacing:0.04em;
     color:var(--ink-soft);
   }
 
@@ -390,21 +417,12 @@
     border-top:1px solid var(--line);
   }
   .stat .num{ font-family:var(--font-display); font-size:1.7rem; font-weight:700; color:var(--clay-text); }
-  .stat .label{ font-family:var(--font-display); font-size:0.78rem; color:var(--ink-soft); letter-spacing:0.03em; }
+  .stat .label{ font-family:var(--font-mono); font-size:0.74rem; color:var(--ink-soft); letter-spacing:0.02em; }
 
   @media (max-width: 760px){
     .about-grid{ grid-template-columns:1fr; }
     .id-card{ max-width:240px; }
     .stat-row{ grid-template-columns:repeat(3,1fr); gap:1rem; }
-  }
-
-  @media (max-width: 420px){
-    .stat-row{
-      grid-template-columns:repeat(2, 1fr);
-      row-gap:1.4rem;
-    }
-    .stat:nth-child(3){ grid-column:1 / -1; }
-    .hero-actions .btn{ flex:1 1 auto; justify-content:center; }
   }
 
   /* ============================================================
@@ -431,8 +449,8 @@
   }
   .tag-list{ display:flex; flex-wrap:wrap; gap:0.5rem; }
   .tag{
-    font-family:var(--font-display);
-    font-size:0.78rem;
+    font-family:var(--font-mono);
+    font-size:0.76rem;
     color:var(--ink-soft);
     border:1px solid var(--line);
     border-radius:var(--radius-sm);
@@ -440,41 +458,72 @@
   }
 
   /* ============================================================
-     EXPERIENCE / TIMELINE
+     EXPERIENCE / ACCORDION TIMELINE
   ============================================================ */
   .timeline{ display:flex; flex-direction:column; }
   .tl-item{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    gap:clamp(1.5rem, 4vw, 3rem);
-    padding-block:2rem;
     border-top:1px solid var(--line);
   }
-  .tl-item:first-child{ border-top:1px solid var(--line); }
-  .tl-when .range{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:0.95rem;
-    margin-bottom:0.4rem;
-  }
-  .tl-when .type{
-    font-family:var(--font-display);
-    font-size:0.75rem;
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    color:var(--moss-text);
-  }
-  .tl-body h3{ font-size:1.15rem; margin-bottom:0.3rem; }
-  .tl-body .org{
-    font-family:var(--font-display);
-    font-size:0.88rem;
-    color:var(--clay-text);
-    margin-bottom:0.7rem;
-  }
-  .tl-body p{ color:var(--ink-soft); max-width:620px; }
+  .tl-item:last-child{ border-bottom:1px solid var(--line); }
 
-  @media (max-width: 700px){
-    .tl-item{ grid-template-columns:1fr; gap:0.6rem; }
+  .tl-summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:flex-start;
+    gap:clamp(1rem, 3vw, 1.8rem);
+    padding-block:1.7rem;
+  }
+  .tl-summary::-webkit-details-marker{ display:none; }
+  .tl-summary::marker{ display:none; content:""; }
+
+  .tl-idx{
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    width:2.2ch;
+    flex-shrink:0;
+    padding-top:0.2rem;
+  }
+  .tl-summary-text{ flex:1; min-width:0; }
+  .tl-meta{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:0.74rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--moss-text);
+    margin-bottom:0.45rem;
+  }
+  .tl-summary-text h3{ font-size:1.12rem; margin-bottom:0.25rem; }
+  .tl-org{
+    font-family:var(--font-display);
+    font-size:0.86rem;
+    color:var(--clay-text);
+  }
+
+  .tl-chevron{
+    width:24px; height:24px; flex-shrink:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    position:relative;
+    margin-top:0.15rem;
+  }
+  .tl-chevron::before, .tl-chevron::after{
+    content:""; position:absolute;
+    top:50%; left:50%;
+    background:var(--ink-soft);
+    transform:translate(-50%,-50%);
+  }
+  .tl-chevron::before{ width:9px; height:1.5px; }
+  .tl-chevron::after{ width:1.5px; height:9px; transition:transform .15s ease; }
+  .tl-item[open] .tl-chevron::after{ transform:translate(-50%,-50%) scaleY(0); }
+
+  .tl-detail{ padding:0 0 1.9rem calc(2.2ch + clamp(1rem, 3vw, 1.8rem)); }
+  .tl-detail p{ color:var(--ink-soft); max-width:620px; }
+
+  @media (max-width: 640px){
+    .tl-detail{ padding-left:0; }
   }
 
   /* ============================================================
@@ -501,17 +550,33 @@
   }
   .project-thumb img{ width:100%; height:100%; object-fit:cover; }
   .project-body{ padding:1.4rem; display:flex; flex-direction:column; flex:1; }
-  .project-body h3{ font-size:1.1rem; margin-bottom:0.2rem; }
+  .project-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:0.6rem; }
+  .project-body h3{ font-size:1.1rem; }
   .project-body .full-name{
     font-family:var(--font-body);
     font-style:italic;
     font-size:0.88rem;
     color:var(--ink-soft);
-    margin-bottom:0.8rem;
+    margin:0.2rem 0 0.8rem;
   }
   .project-body p{ color:var(--ink-soft); font-size:0.96rem; margin-bottom:1rem; }
   .project-tags{ display:flex; flex-wrap:wrap; gap:0.45rem; margin-bottom:1.1rem; }
   .project-links{ display:flex; gap:0.7rem; margin-top:auto; }
+
+  .status-pill{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:0.28rem 0.6rem;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .status-dot{ width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .status-pill.is-live .status-dot{ background:var(--moss); }
+  .status-pill.is-code .status-dot{ background:var(--clay); }
 
   /* ============================================================
      CERTIFICATIONS
@@ -540,6 +605,52 @@
   .cert-card h3{ font-size:0.98rem; line-height:1.4; font-weight:500; }
 
   /* ============================================================
+     TERMINAL
+  ============================================================ */
+  .terminal{
+    background:#1C1710;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:0.45rem;
+    padding:0.7rem 1rem;
+    background:#261F15;
+    border-bottom:1px solid #3A2F1F;
+  }
+  .terminal-dot{ width:9px; height:9px; border-radius:50%; }
+  .terminal-dot:nth-child(1){ background:#A8512E; }
+  .terminal-dot:nth-child(2){ background:#D9B36C; }
+  .terminal-dot:nth-child(3){ background:#7C8A5C; }
+  .terminal-title{ margin-left:0.6rem; font-family:var(--font-mono); font-size:0.78rem; color:#B6A88C; }
+  .terminal-output{
+    padding:1.1rem 1.2rem;
+    font-family:var(--font-mono);
+    font-size:0.86rem; line-height:1.75;
+    color:#EDE3CF;
+    max-height:300px;
+    overflow-y:auto;
+  }
+  .terminal-output p{ margin:0 0 0.55rem; word-break:break-word; }
+  .terminal-output p:last-child{ margin-bottom:0; }
+  .cmd-echo{ color:#D9B36C; }
+  .cmd-error{ color:#E08552; }
+  .terminal-line{
+    display:flex; align-items:center; gap:0.6rem;
+    padding:0.85rem 1.2rem;
+    border-top:1px solid #3A2F1F;
+  }
+  .terminal-prompt{ font-family:var(--font-mono); font-size:0.85rem; color:#93A06A; white-space:nowrap; }
+  .terminal-line input{
+    flex:1; background:transparent; border:0; outline:none;
+    color:#EDE3CF; font-family:var(--font-mono); font-size:0.88rem;
+  }
+  .terminal-hint{ margin-top:0.9rem; font-family:var(--font-mono); font-size:0.78rem; color:var(--ink-soft); }
+  .terminal-hint code{ color:var(--clay-text); }
+
+  /* ============================================================
      FOOTER
   ============================================================ */
   .footer{
@@ -549,6 +660,9 @@
   }
   html[data-theme="dark"] .footer{ background:var(--bg-alt); color:var(--ink); }
   .footer-inner{ max-width:640px; }
+  .footer .eyebrow{ color:var(--clay); margin-bottom:1.3rem; }
+  .footer .eyebrow .idx{ border-color:rgba(247,242,231,0.25); color:#C9BFA9; }
+  html[data-theme="dark"] .footer .eyebrow .idx{ border-color:var(--line); color:var(--ink-soft); }
   .footer h2{ font-size:clamp(2rem, 5vw, 3rem); margin-bottom:1.1rem; }
   .footer h2 em{ font-style:normal; color:var(--clay); }
   .footer p{ color:#C9BFA9; margin-bottom:2rem; max-width:520px; }
@@ -558,8 +672,8 @@
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
     padding-top:1.6rem;
     border-top:1px solid rgba(247,242,231,0.18);
-    font-family:var(--font-display);
-    font-size:0.82rem;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
     color:#A99C84;
   }
   html[data-theme="dark"] .footer-bottom{ border-top-color:var(--line); color:var(--ink-soft); }
@@ -628,10 +742,14 @@
     </ul>
 
     <div class="nav-controls">
-      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M3.8 12H6.4M17.6 12h2.6M5.8 5.8l1.8 1.8M16.4 16.4l1.8 1.8M18.2 5.8l-1.8 1.8M7.6 16.4l-1.8 1.8"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 7 7 0 0 0 20 14.5Z"/></svg>
-      </button>
+      <label class="switch" title="Toggle dark mode">
+        <input type="checkbox" id="themeSwitch" aria-label="Toggle dark mode" />
+        <span class="switch-track">
+          <svg class="switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M3.8 12H6.4M17.6 12h2.6M5.8 5.8l1.8 1.8M16.4 16.4l1.8 1.8M18.2 5.8l-1.8 1.8M7.6 16.4l-1.8 1.8"/></svg>
+          <svg class="switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 7 7 0 0 0 20 14.5Z"/></svg>
+          <span class="switch-thumb"></span>
+        </span>
+      </label>
 
       <button class="btn btn--outline btn--sm nav-resume-btn js-resume-trigger" type="button">View Résumé</button>
 
@@ -657,6 +775,8 @@
        HERO
   ============================================================ -->
   <section id="home" class="hero" aria-labelledby="hero-heading">
+    <span class="hero-index">01 — Home</span>
+
     <svg class="hero-watermark" viewBox="0 0 1200 220" aria-hidden="true">
       <path d="M0,140 C90,60 160,60 240,130 C300,182 360,182 420,118 L470,118 L500,40 L530,118 L580,118 C650,60 730,60 800,128 C870,190 950,190 1020,110 L1080,110 L1110,170 L1140,110 L1200,128" fill="none" stroke="currentColor" stroke-width="3"/>
     </svg>
@@ -668,6 +788,7 @@
         <button class="btn btn--solid js-resume-trigger" type="button">View Résumé</button>
         <a class="btn btn--outline" href="https://www.linkedin.com/in/jayanthbottu" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a>
       </div>
+      <p class="hero-geo">Warangal, India · 17.9689° N, 79.5941° E</p>
     </div>
 
     <a href="#about" class="scroll-cue">Scroll</a>
@@ -680,16 +801,16 @@
     <div class="container about-grid">
       <div class="id-card">
         <div class="photo-wrap">
-          <img src="dp.JPG" alt="Portrait of Jayanth Bottu" loading="lazy" decoding="async" width="280" height="350" />
+          <img src="dp.png" alt="Portrait of Jayanth Bottu" loading="lazy" decoding="async" width="280" height="350" />
         </div>
         <div class="id-meta">
-          <span>ID: JYNTH</span>
-          <span>AI - SWE</span>
+          <span>ID: JYTNH</span>
+          <span>AI <span style="font-size:24px; color:red;">&#10006;</span> SWE</span>
         </div>
       </div>
 
       <div class="about-copy">
-        <p class="eyebrow">About Me</p>
+        <p class="eyebrow"><span class="idx">02</span>About Me</p>
         <h2 id="about-heading">Bridging the gap between <em>Intelligence</em> and <em>Security.</em></h2>
         <p>I am <strong>Jayanth Bottu</strong>, an AI Engineer and Cybersecurity enthusiast based in Warangal, India. My passion lies in building systems that aren't just intelligent, but rock-solid against tomorrow's threats.</p>
         <p>With a "Zero Trust" mindset, I engineer full-stack solutions — from Retrieval-Augmented Generation (RAG) pipelines for dense institutional data, to advanced deepfake attribution models. I don't just write scripts; I build end-to-end architectures designed for production.</p>
@@ -697,7 +818,7 @@
         <div class="stat-row">
           <div class="stat">
             <div class="num">4+</div>
-            <div class="label">virtual Internships</div>
+            <div class="label">Virtual Internships</div>
           </div>
           <div class="stat">
             <div class="num">6</div>
@@ -720,7 +841,7 @@
   <section id="skills" class="section section--alt" aria-labelledby="skills-heading">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">What I Know</p>
+        <p class="eyebrow"><span class="idx">03</span>What I Know</p>
         <h2 id="skills-heading">Technical Arsenal</h2>
         <p>The tools, languages, and frameworks I leverage to ship secure AI platforms.</p>
       </div>
@@ -761,63 +882,76 @@
   </section>
 
   <!-- ============================================================
-       EXPERIENCE
+       EXPERIENCE — accordion timeline
   ============================================================ -->
   <section id="experience" class="section" aria-labelledby="exp-heading">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Career Path</p>
+        <p class="eyebrow"><span class="idx">04</span>Career Path</p>
         <h2 id="exp-heading">My Journey</h2>
+        <p>Four roles, one throughline: making AI systems smarter and the people relying on them safer.</p>
       </div>
 
       <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-when">
-            <div class="range">Jan – Feb 2026</div>
-            <div class="type">Internship</div>
-          </div>
-          <div class="tl-body">
-            <h3>Prompt Engineering Intern</h3>
-            <div class="org">Excelerate</div>
+        <details class="tl-item" open>
+          <summary class="tl-summary">
+            <span class="tl-idx">01</span>
+            <span class="tl-summary-text">
+              <span class="tl-meta">Jan – Feb 2026 · Internship</span>
+              <h3>Prompt Engineering Intern</h3>
+              <span class="tl-org">Excelerate</span>
+            </span>
+            <span class="tl-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="tl-detail">
             <p>Researched prompt engineering methodologies and evaluated large language model performance. Recommended AI integration strategies for automation and virtual learning environments.</p>
           </div>
-        </div>
+        </details>
 
-        <div class="tl-item">
-          <div class="tl-when">
-            <div class="range">Apr – Oct 2025</div>
-            <div class="type">Virtual Internship</div>
-          </div>
-          <div class="tl-body">
-            <h3>ServiceNow Virtual Intern</h3>
-            <div class="org">SmartBridge &amp; AICTE</div>
+        <details class="tl-item">
+          <summary class="tl-summary">
+            <span class="tl-idx">02</span>
+            <span class="tl-summary-text">
+              <span class="tl-meta">Apr – Oct 2025 · Virtual Internship</span>
+              <h3>ServiceNow Virtual Intern</h3>
+              <span class="tl-org">SmartBridge &amp; AICTE</span>
+            </span>
+            <span class="tl-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="tl-detail">
             <p>Applied ServiceNow administration fundamentals to manage test instances, configure user permissions, and ensure the health of automated processes at scale.</p>
           </div>
-        </div>
+        </details>
 
-        <div class="tl-item">
-          <div class="tl-when">
-            <div class="range">Jul – Sep 2024</div>
-            <div class="type">Internship</div>
-          </div>
-          <div class="tl-body">
-            <h3>Generative AI Intern</h3>
-            <div class="org">Google Cloud — AICTE (All India Council for Technical Education)</div>
+        <details class="tl-item">
+          <summary class="tl-summary">
+            <span class="tl-idx">03</span>
+            <span class="tl-summary-text">
+              <span class="tl-meta">Jul – Sep 2024 · Internship</span>
+              <h3>Generative AI Intern</h3>
+              <span class="tl-org">Google Cloud — AICTE (All India Council for Technical Education)</span>
+            </span>
+            <span class="tl-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="tl-detail">
             <p>Specialized in NLP and image recognition. Developed and deployed scalable AI models using TensorFlow, Keras, and PyTorch, gaining deep insight into generative AI workflows.</p>
           </div>
-        </div>
+        </details>
 
-        <div class="tl-item">
-          <div class="tl-when">
-            <div class="range">Apr – Jun 2024</div>
-            <div class="type">Internship</div>
-          </div>
-          <div class="tl-body">
-            <h3>Cybersecurity Intern</h3>
-            <div class="org">Palo Alto — AICTE</div>
+        <details class="tl-item">
+          <summary class="tl-summary">
+            <span class="tl-idx">04</span>
+            <span class="tl-summary-text">
+              <span class="tl-meta">Apr – Jun 2024 · Internship</span>
+              <h3>Cybersecurity Intern</h3>
+              <span class="tl-org">Palo Alto — AICTE</span>
+            </span>
+            <span class="tl-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="tl-detail">
             <p>Analyzed simulated security threats and investigated incidents. Strengthened understanding of network security protocols and advanced threat mitigation strategies.</p>
           </div>
-        </div>
+        </details>
       </div>
     </div>
   </section>
@@ -830,7 +964,7 @@
   <section id="projects" class="section section--alt" aria-labelledby="proj-heading">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">What I Built</p>
+        <p class="eyebrow"><span class="idx">05</span>What I Built</p>
         <h2 id="proj-heading">Featured Projects</h2>
         <p>Built to solve real problems. Deployed and functional.</p>
       </div>
@@ -842,7 +976,10 @@
             <img src="proj/cira.png" alt="CIRA project preview" loading="lazy" decoding="async" width="600" height="375" />
           </div>
           <div class="project-body">
-            <h3>CIRA</h3>
+            <div class="project-head">
+              <h3>CIRA</h3>
+              <span class="status-pill is-live"><span class="status-dot"></span>Live</span>
+            </div>
             <div class="full-name">Campus Information Retrieval Assistant</div>
             <p>AI campus assistant using Retrieval-Augmented Generation. Combines FAISS semantic search with a lightweight large language model for context-aware answers drawn from institutional data.</p>
             <div class="project-tags"><span class="tag">Python</span><span class="tag">RAG</span><span class="tag">FAISS</span></div>
@@ -858,7 +995,10 @@
             <img src="proj/dfda.png" alt="DFDA project preview" loading="lazy" decoding="async" width="600" height="375" />
           </div>
           <div class="project-body">
-            <h3>DFDA</h3>
+            <div class="project-head">
+              <h3>DFDA</h3>
+              <span class="status-pill is-live"><span class="status-dot"></span>Live</span>
+            </div>
             <div class="full-name">Deepfake Detection and Attribution</div>
             <p>Capstone project detecting manipulated media. Analyzes images, video, and audio using deep learning ensembles to attribute deepfakes with high accuracy.</p>
             <div class="project-tags"><span class="tag">Python</span><span class="tag">PyTorch</span></div>
@@ -874,7 +1014,10 @@
             <img src="proj/lcad.png" alt="LCAD project preview" loading="lazy" decoding="async" width="600" height="375" />
           </div>
           <div class="project-body">
-            <h3>LCAD</h3>
+            <div class="project-head">
+              <h3>LCAD</h3>
+              <span class="status-pill is-code"><span class="status-dot"></span>Code Available</span>
+            </div>
             <div class="full-name">Live Cryptocurrency Anomaly Detection</div>
             <p>Real-time cryptocurrency analytics platform. Visualizes market trends and price anomalies with interactive graphs and a live-feed anomaly detection model.</p>
             <div class="project-tags"><span class="tag">Python</span><span class="tag">Dash</span></div>
@@ -886,10 +1029,13 @@
 
         <article class="project-card">
           <div class="project-thumb">
-            <img src="facerec.png" alt="Face Recognition Framework project preview" loading="lazy" decoding="async" width="600" height="375" />
+            <img src="proj/facerec.png" alt="Face Recognition Framework project preview" loading="lazy" decoding="async" width="600" height="375" />
           </div>
           <div class="project-body">
-            <h3>Face Recognition Framework</h3>
+            <div class="project-head">
+              <h3>Face Recognition Framework</h3>
+              <span class="status-pill is-code"><span class="status-dot"></span>Code Available</span>
+            </div>
             <div class="full-name">Automated Attendance via Real-Time Face Detection</div>
             <p>Automated attendance system using real-time face detection. Eliminates manual entry by recognizing registered faces instantly via webcam using the LBPH algorithm.</p>
             <div class="project-tags"><span class="tag">OpenCV</span><span class="tag">Python</span></div>
@@ -909,7 +1055,7 @@
   <section id="certifications" class="section" aria-labelledby="cert-heading">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Credentials</p>
+        <p class="eyebrow"><span class="idx">06</span>Credentials</p>
         <h2 id="cert-heading">Certifications</h2>
       </div>
 
@@ -942,6 +1088,36 @@
     </div>
   </section>
 
+  <svg class="contour container" viewBox="0 0 1180 28" aria-hidden="true"><path d="M0,18 C60,4 120,4 180,18 C240,30 300,30 360,16 L420,16 C480,2 540,2 600,18 C660,30 720,30 780,16 L840,16 C900,2 960,2 1020,18 C1080,30 1140,30 1180,16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+
+  <!-- ============================================================
+       TERMINAL
+  ============================================================ -->
+  <section id="terminal" class="section section--alt" aria-labelledby="terminal-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow"><span class="idx">07</span>Open a Session</p>
+        <h2 id="terminal-heading">$ whoami</h2>
+        <p>A faster way to look around. Type <code>help</code> to see what's available.</p>
+      </div>
+
+      <div class="terminal" id="terminalWrap">
+        <div class="terminal-bar">
+          <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
+          <span class="terminal-title">guest@jayanth — zsh</span>
+        </div>
+        <div class="terminal-output" id="terminalOutput" aria-live="polite">
+          <p>Welcome. Type <strong>help</strong> to see available commands.</p>
+        </div>
+        <form class="terminal-line" id="terminalForm">
+          <label for="terminalInput" class="terminal-prompt">guest@jayanth:~$</label>
+          <input id="terminalInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input" />
+        </form>
+      </div>
+      <p class="terminal-hint">Try <code>about</code>, <code>projects</code>, <code>experience</code>, <code>contact</code>, or <code>resume</code>.</p>
+    </div>
+  </section>
+
 </main>
 
 <!-- ============================================================
@@ -949,6 +1125,7 @@
 ============================================================ -->
 <footer class="footer" id="contact" aria-labelledby="footer-heading">
   <div class="container footer-inner">
+    <p class="eyebrow"><span class="idx">08</span>Connect</p>
     <h2 id="footer-heading">Let's <em>Connect.</em></h2>
     <p>Always open to discussing high-impact engineering roles, AI system architecture, or network security.</p>
 
@@ -958,7 +1135,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>Designed &amp; built by Jayanth Bottu © <span id="year"></span></span>
+      <span>Designed &amp; built by Jayanth Bottu © <span id="year"></span> · Warangal, IN</span>
       <div class="footer-social">
         <a href="https://github.com/jayanthbottu" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/jayanthbottu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -995,12 +1172,11 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---- theme toggle (session only, no persistence) ---- */
+  /* ---- theme switch (session only, no persistence) ---- */
   var root = document.documentElement;
-  var themeBtn = document.getElementById('themeToggle');
-  themeBtn.addEventListener('click', function(){
-    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
+  var themeSwitch = document.getElementById('themeSwitch');
+  themeSwitch.addEventListener('change', function(){
+    root.setAttribute('data-theme', themeSwitch.checked ? 'dark' : 'light');
   });
 
   /* ---- mobile menu ---- */
@@ -1059,6 +1235,82 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach(function(s){ observer.observe(s); });
   }
+
+  /* ---- terminal ---- */
+  var termOutput = document.getElementById('terminalOutput');
+  var termForm = document.getElementById('terminalForm');
+  var termInput = document.getElementById('terminalInput');
+  var termWrap = document.getElementById('terminalWrap');
+
+  function escapeHtml(s){
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+  function printLine(html){
+    var p = document.createElement('p');
+    p.innerHTML = html;
+    termOutput.appendChild(p);
+    termOutput.scrollTop = termOutput.scrollHeight;
+  }
+
+  var commands = {
+    help: function(){
+      return "Available commands: about, skills, projects, experience, contact, resume, whoami, clear";
+    },
+    whoami: function(){
+      return "guest — but you could be looking at your next AI engineer.";
+    },
+    about: function(){
+      return "Jayanth Bottu — AI Engineer &amp; Cybersecurity enthusiast based in Warangal, India. Builds systems that are intelligent and hard to break.";
+    },
+    skills: function(){
+      return "Python, TensorFlow, PyTorch, OpenCV, Zero Trust, Threat Analysis, LLMs, Prompt Engineering, Google Cloud, ServiceNow.";
+    },
+    projects: function(){
+      return "CIRA (live), DFDA (live), LCAD (code available), Face Recognition Framework (code available) — see 05 / Projects above.";
+    },
+    experience: function(){
+      return "Excelerate &middot; SmartBridge &amp; AICTE &middot; Google Cloud &amp; AICTE &middot; Palo Alto &amp; AICTE — four internships across AI and cybersecurity.";
+    },
+    contact: function(){
+      return "LinkedIn: linkedin.com/in/jayanthbottu &middot; GitHub: github.com/jayanthbottu";
+    },
+    resume: function(){
+      openModal();
+      return "Opening r&eacute;sum&eacute;&hellip;";
+    },
+    sudo: function(arg){
+      return (arg && arg.toLowerCase().indexOf('hire') > -1)
+        ? "permission granted. fast-tracking the interview process&hellip;"
+        : "permission denied. nice try.";
+    }
+  };
+
+  termForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var raw = termInput.value.trim();
+    if (!raw) return;
+    printLine('<span class="cmd-echo">guest@jayanth:~$ </span>' + escapeHtml(raw));
+
+    var parts = raw.split(/\s+/);
+    var cmd = parts[0].toLowerCase();
+    var rest = parts.slice(1).join(' ');
+
+    if (cmd === 'clear'){
+      termOutput.innerHTML = '';
+    } else if (Object.prototype.hasOwnProperty.call(commands, cmd)){
+      var res = commands[cmd](rest);
+      if (res) printLine(res);
+    } else {
+      printLine('<span class="cmd-error">command not found: ' + escapeHtml(cmd) + ' — type \'help\' to see available commands.</span>');
+    }
+    termInput.value = '';
+  });
+
+  termWrap.addEventListener('click', function(e){
+    if (e.target.tagName !== 'INPUT') termInput.focus();
+  });
 })();
 </script>
 </body>
